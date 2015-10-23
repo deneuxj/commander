@@ -1,0 +1,217 @@
+Group
+{
+  Name = "RussianAT";
+  Index = 711;
+  Desc = "";
+  Vehicle
+  {
+    Name = "AT";
+    Index = 712;
+    LinkTrId = 713;
+    XPos = 132856.614;
+    YPos = 82.420;
+    ZPos = 187767.338;
+    XOri = 0.00;
+    YOri = 354.90;
+    ZOri = 0.00;
+    Script = "LuaScripts\WorldObjects\vehicles\zis3gun.txt";
+    Model = "graphics\artillery\zis3gun\zis3gun.mgm";
+    Desc = "";
+    Country = 101;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  MCU_TR_Entity
+  {
+    Index = 713;
+    Name = "AT entity";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 132856.614;
+    YPos = 82.620;
+    ZPos = 187767.338;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Enabled = 1;
+    MisObjID = 712;
+  }
+  
+
+  Vehicle
+  {
+    Name = "Leader";
+    Index = 715;
+    LinkTrId = 716;
+    XPos = 132845.801;
+    YPos = 82.420;
+    ZPos = 187746.562;
+    XOri = 0.00;
+    YOri = 354.90;
+    ZOri = 0.00;
+    Script = "LuaScripts\WorldObjects\vehicles\zis3gun.txt";
+    Model = "graphics\artillery\zis3gun\zis3gun.mgm";
+    Desc = "";
+    Country = 101;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  MCU_TR_Entity
+  {
+    Index = 716;
+    Name = "AT entity";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 132845.801;
+    YPos = 82.620;
+    ZPos = 187746.562;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Enabled = 1;
+    MisObjID = 715;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AT";
+    Index = 718;
+    LinkTrId = 719;
+    XPos = 132846.252;
+    YPos = 82.420;
+    ZPos = 187722.332;
+    XOri = 0.00;
+    YOri = 354.90;
+    ZOri = 0.00;
+    Script = "LuaScripts\WorldObjects\vehicles\zis3gun.txt";
+    Model = "graphics\artillery\zis3gun\zis3gun.mgm";
+    Desc = "";
+    Country = 101;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  MCU_TR_Entity
+  {
+    Index = 719;
+    Name = "AT entity";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 132846.252;
+    YPos = 82.620;
+    ZPos = 187722.332;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Enabled = 1;
+    MisObjID = 718;
+  }
+  
+
+  Block
+  {
+    Name = "Block";
+    Index = 721;
+    LinkTrId = 0;
+    XPos = 132856.412;
+    YPos = 82.420;
+    ZPos = 187767.234;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Model = "graphics\blocks\art_position_at.mgm";
+    Script = "LuaScripts\WorldObjects\Blocks\art_position_at.txt";
+    Country = 0;
+    Desc = "";
+    Durability = 25000;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+  }
+  
+
+  Block
+  {
+    Name = "Block";
+    Index = 722;
+    LinkTrId = 0;
+    XPos = 132845.883;
+    YPos = 82.420;
+    ZPos = 187746.647;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Model = "graphics\blocks\art_position_at.mgm";
+    Script = "LuaScripts\WorldObjects\Blocks\art_position_at.txt";
+    Country = 0;
+    Desc = "";
+    Durability = 25000;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+  }
+  
+
+  Block
+  {
+    Name = "Block";
+    Index = 723;
+    LinkTrId = 0;
+    XPos = 132846.462;
+    YPos = 82.420;
+    ZPos = 187722.189;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Model = "graphics\blocks\art_position_at.mgm";
+    Script = "LuaScripts\WorldObjects\Blocks\art_position_at.txt";
+    Country = 0;
+    Desc = "";
+    Durability = 25000;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+  }
+  
+
+}
+

@@ -1,0 +1,143 @@
+Group
+{
+  Name = "Russian61k";
+  Index = 724;
+  Desc = "";
+  Vehicle
+  {
+    Name = "Leader";
+    Index = 725;
+    LinkTrId = 726;
+    XPos = 132792.728;
+    YPos = 82.420;
+    ZPos = 187753.666;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Script = "LuaScripts\WorldObjects\vehicles\61k.txt";
+    Model = "graphics\artillery\61k\61k.mgm";
+    Desc = "";
+    Country = 101;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  MCU_TR_Entity
+  {
+    Index = 726;
+    Name = "61k entity";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 132792.728;
+    YPos = 82.620;
+    ZPos = 187753.666;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Enabled = 1;
+    MisObjID = 725;
+    OnReports
+    {
+      OnReport
+      {
+        Type = 2;
+        CmdId = 728;
+        TarId = 728;
+      }
+    }
+  }
+  
+
+  Block
+  {
+    Name = "Block";
+    Index = 729;
+    LinkTrId = 0;
+    XPos = 132792.890;
+    YPos = 82.420;
+    ZPos = 187753.386;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Model = "graphics\blocks\art_position_big.mgm";
+    Script = "LuaScripts\WorldObjects\Blocks\art_position_big.txt";
+    Country = 0;
+    Desc = "";
+    Durability = 25000;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+  }
+  
+
+  MCU_CMD_AttackArea
+  {
+    Index = 728;
+    Name = "command AttackArea";
+    Desc = "";
+    Targets = [];
+    Objects = [726];
+    XPos = 132791.920;
+    YPos = 82.420;
+    ZPos = 187752.392;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    AttackGround = 0;
+    AttackAir = 1;
+    AttackGTargets = 0;
+    AttackArea = 3000;
+    Time = 3600;
+    Priority = 1;
+  }
+  
+
+  MCU_Timer
+  {
+    Index = 731;
+    Name = "1min";
+    Desc = "";
+    Targets = [728];
+    Objects = [];
+    XPos = 132790.880;
+    YPos = 82.420;
+    ZPos = 187751.920;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Time = 60;
+    Random = 100;
+  }
+  
+
+  MCU_TR_MissionBegin
+  {
+    Index = 732;
+    Name = "";
+    Desc = "";
+    Targets = [731];
+    Objects = [];
+    XPos = 132789.547;
+    YPos = 82.420;
+    ZPos = 187751.863;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Enabled = 1;
+  }
+  
+
+}
+

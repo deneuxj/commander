@@ -1,0 +1,77 @@
+Group
+{
+  Name = "Russian52k";
+  Index = 733;
+  Desc = "";
+  Vehicle
+  {
+    Name = "Leader";
+    Index = 734;
+    LinkTrId = 735;
+    XPos = 132743.036;
+    YPos = 82.420;
+    ZPos = 187754.942;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Script = "LuaScripts\WorldObjects\vehicles\52k.txt";
+    Model = "graphics\artillery\52k\52k.mgm";
+    Desc = "";
+    Country = 101;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  MCU_TR_Entity
+  {
+    Index = 735;
+    Name = "61k entity";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 132743.036;
+    YPos = 82.620;
+    ZPos = 187754.942;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Enabled = 1;
+    MisObjID = 734;
+  }
+  
+
+  Block
+  {
+    Name = "Block";
+    Index = 738;
+    LinkTrId = 0;
+    XPos = 132743.198;
+    YPos = 82.420;
+    ZPos = 187754.662;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Model = "graphics\blocks\art_position_big.mgm";
+    Script = "LuaScripts\WorldObjects\Blocks\art_position_big.txt";
+    Country = 0;
+    Desc = "";
+    Durability = 25000;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+  }
+  
+
+}
+

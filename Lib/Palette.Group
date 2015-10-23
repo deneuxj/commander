@@ -1,0 +1,118 @@
+Group
+{
+  Name = "Palette";
+  Index = 403;
+  Desc = "";
+  MCU_TR_ServerInput
+  {
+    Index = 404;
+    Name = "AnInput";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 118773.433;
+    YPos = 117.424;
+    ZPos = 128236.092;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Enabled = 1;
+  }
+  
+
+  MCU_Waypoint
+  {
+    Index = 405;
+    Name = "AWaypoint";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 118745.466;
+    YPos = 118.138;
+    ZPos = 128235.618;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Area = 20;
+    Speed = 100;
+    Priority = 1;
+  }
+  
+
+  MCU_Icon
+  {
+    Index = 406;
+    Targets = [];
+    Objects = [];
+    XPos = 118705.312;
+    YPos = 90.103;
+    ZPos = 128235.505;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Enabled = 1;
+    LCName = 3;
+    LCDesc = 4;
+    IconId = 0;
+    RColor = 0;
+    GColor = 0;
+    BColor = 0;
+    LineType = 0;
+    Coalitions = [1, 2, 0];
+  }
+  
+
+  MCU_TR_Subtitle
+  {
+    Index = 407;
+    Name = "ASubtitle";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 118668.716;
+    YPos = 86.804;
+    ZPos = 128236.312;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Enabled = 1;
+    SubtitleInfo
+    {
+      Duration = 1;
+      FontSize = 20;
+      HAlign = 1;
+      VAlign = 2;
+      RColor = 255;
+      GColor = 255;
+      BColor = 255;
+      LCText = 5;
+    }
+    
+    Coalitions = [0, 1, 2];
+  }
+  
+
+  MCU_CMD_AttackArea
+  {
+    Index = 635;
+    Name = "AnAttackArea";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 118622.049;
+    YPos = 84.900;
+    ZPos = 128236.251;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    AttackGround = 0;
+    AttackAir = 1;
+    AttackGTargets = 0;
+    AttackArea = 3000;
+    Time = 59940;
+    Priority = 1;
+  }
+  
+
+}
+

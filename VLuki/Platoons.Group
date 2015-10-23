@@ -1,0 +1,367 @@
+Group
+{
+  Name = "Platoons";
+  Index = 10;
+  Desc = "";
+  Vehicle
+  {
+    Name = "Pz3-1";
+    Index = 11;
+    LinkTrId = 0;
+    XPos = 55205.908;
+    YPos = 97.404;
+    ZPos = 43536.981;
+    XOri = 358.55;
+    YOri = 107.52;
+    ZOri = 359.96;
+    Script = "LuaScripts\WorldObjects\vehicles\pziii-l.txt";
+    Model = "graphics\vehicles\pziii-l\pziii-l.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "Pz4-1";
+    Index = 12;
+    LinkTrId = 0;
+    XPos = 55224.247;
+    YPos = 97.404;
+    ZPos = 43435.467;
+    XOri = 358.55;
+    YOri = 107.52;
+    ZOri = 359.96;
+    Script = "LuaScripts\WorldObjects\vehicles\pziv-g.txt";
+    Model = "graphics\vehicles\pziv-g\pziv-g.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "Pz4-2";
+    Index = 13;
+    LinkTrId = 0;
+    XPos = 55234.018;
+    YPos = 91.534;
+    ZPos = 43352.963;
+    XOri = 1.15;
+    YOri = 107.52;
+    ZOri = 2.14;
+    Script = "LuaScripts\WorldObjects\vehicles\pziv-g.txt";
+    Model = "graphics\vehicles\pziv-g\pziv-g.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "1c-1";
+    Index = 14;
+    LinkTrId = 0;
+    XPos = 54737.053;
+    YPos = 94.746;
+    ZPos = 43562.687;
+    XOri = 358.91;
+    YOri = 0.00;
+    ZOri = 0.58;
+    Script = "LuaScripts\WorldObjects\vehicles\sdkfz251-1c.txt";
+    Model = "graphics\vehicles\sdkfz251\sdkfz251-1c.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "1c-2";
+    Index = 15;
+    LinkTrId = 0;
+    XPos = 54685.383;
+    YPos = 94.746;
+    ZPos = 43559.735;
+    XOri = 358.91;
+    YOri = 0.00;
+    ZOri = 0.58;
+    Script = "LuaScripts\WorldObjects\vehicles\sdkfz251-1c.txt";
+    Model = "graphics\vehicles\sdkfz251\sdkfz251-1c.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "Szf-1";
+    Index = 16;
+    LinkTrId = 0;
+    XPos = 54638.061;
+    YPos = 98.417;
+    ZPos = 43557.705;
+    XOri = 2.41;
+    YOri = 0.00;
+    ZOri = 0.43;
+    Script = "LuaScripts\WorldObjects\vehicles\sdkfz251-szf.txt";
+    Model = "graphics\vehicles\sdkfz251\sdkfz251-szf.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "T34-1";
+    Index = 17;
+    LinkTrId = 0;
+    XPos = 53777.270;
+    YPos = 76.071;
+    ZPos = 63179.680;
+    XOri = 358.82;
+    YOri = 0.00;
+    ZOri = 353.20;
+    Script = "LuaScripts\WorldObjects\vehicles\t34-76stz.txt";
+    Model = "graphics\vehicles\t34-76stz\t34-76stz.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "T70-1";
+    Index = 18;
+    LinkTrId = 0;
+    XPos = 53674.804;
+    YPos = 79.894;
+    ZPos = 63178.110;
+    XOri = 348.03;
+    YOri = 0.00;
+    ZOri = 359.44;
+    Script = "LuaScripts\WorldObjects\vehicles\t70.txt";
+    Model = "graphics\vehicles\t70\t70.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "T70-2";
+    Index = 19;
+    LinkTrId = 0;
+    XPos = 53588.224;
+    YPos = 71.300;
+    ZPos = 63090.145;
+    XOri = 358.88;
+    YOri = 0.00;
+    ZOri = 356.68;
+    Script = "LuaScripts\WorldObjects\vehicles\t70.txt";
+    Model = "graphics\vehicles\t70\t70.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "ba10m-1";
+    Index = 20;
+    LinkTrId = 0;
+    XPos = 54048.486;
+    YPos = 72.473;
+    ZPos = 63338.515;
+    XOri = 356.92;
+    YOri = 178.47;
+    ZOri = 1.49;
+    Script = "LuaScripts\WorldObjects\vehicles\ba10m.txt";
+    Model = "graphics\vehicles\ba10m\ba10m.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "ba10m-2";
+    Index = 21;
+    LinkTrId = 0;
+    XPos = 54155.395;
+    YPos = 74.234;
+    ZPos = 63342.968;
+    XOri = 359.24;
+    YOri = 178.47;
+    ZOri = 358.22;
+    Script = "LuaScripts\WorldObjects\vehicles\ba10m.txt";
+    Model = "graphics\vehicles\ba10m\ba10m.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "bm13-1";
+    Index = 22;
+    LinkTrId = 0;
+    XPos = 54079.751;
+    YPos = 73.545;
+    ZPos = 62899.752;
+    XOri = 1.24;
+    YOri = 180.63;
+    ZOri = 359.09;
+    Script = "LuaScripts\WorldObjects\vehicles\bm13.txt";
+    Model = "graphics\vehicles\zis\bm13.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+}
+

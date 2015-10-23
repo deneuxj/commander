@@ -1,0 +1,419 @@
+Group
+{
+  Name = "GerMechanizedInfantry";
+  Index = 483;
+  Desc = "";
+  Vehicle
+  {
+    Name = "Leader";
+    Index = 484;
+    LinkTrId = 485;
+    XPos = 118400.180;
+    YPos = 99.636;
+    ZPos = 129264.362;
+    XOri = 357.93;
+    YOri = 0.00;
+    ZOri = 359.85;
+    Script = "LuaScripts\WorldObjects\vehicles\sdkfz251-1c.txt";
+    Model = "graphics\vehicles\sdkfz251\sdkfz251-1c.mgm";
+    Desc = "";
+    Country = 201;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 25;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  MCU_TR_Entity
+  {
+    Index = 485;
+    Name = "Pz3 entity";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 118400.180;
+    YPos = 99.836;
+    ZPos = 129264.362;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Enabled = 1;
+    MisObjID = 484;
+  }
+  
+
+  MCU_CMD_Formation
+  {
+    Index = 487;
+    Name = "OnRoad";
+    Desc = "";
+    Targets = [];
+    Objects = [485];
+    XPos = 118433.915;
+    YPos = 114.201;
+    ZPos = 129194.614;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+  FormationType = 4;
+  FormationDensity = 1;
+  }
+  
+
+  MCU_CMD_Formation
+  {
+    Index = 488;
+    Name = "Column";
+    Desc = "";
+    Targets = [];
+    Objects = [485];
+    XPos = 118401.995;
+    YPos = 114.201;
+    ZPos = 129195.266;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+  FormationType = 5;
+  FormationDensity = 1;
+  }
+  
+
+  MCU_CMD_Formation
+  {
+    Index = 489;
+    Name = "Attack";
+    Desc = "";
+    Targets = [];
+    Objects = [485];
+    XPos = 118368.373;
+    YPos = 114.201;
+    ZPos = 129194.542;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+  FormationType = 6;
+  FormationDensity = 0;
+  }
+  
+
+  MCU_CMD_Formation
+  {
+    Index = 490;
+    Name = "Stop";
+    Desc = "";
+    Targets = [];
+    Objects = [485];
+    XPos = 118329.422;
+    YPos = 114.201;
+    ZPos = 129194.521;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+  FormationType = 9;
+  FormationDensity = 1;
+  }
+  
+
+  MCU_CMD_Formation
+  {
+    Index = 491;
+    Name = "Continue";
+    Desc = "";
+    Targets = [];
+    Objects = [485];
+    XPos = 118295.894;
+    YPos = 114.201;
+    ZPos = 129195.240;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+  FormationType = 11;
+  FormationDensity = 1;
+  }
+  
+
+  Vehicle
+  {
+    Name = "1c";
+    Index = 492;
+    LinkTrId = 493;
+    XPos = 118391.631;
+    YPos = 99.636;
+    ZPos = 129296.878;
+    XOri = 359.06;
+    YOri = 0.00;
+    ZOri = 1.62;
+    Script = "LuaScripts\WorldObjects\vehicles\sdkfz251-1c.txt";
+    Model = "graphics\vehicles\sdkfz251\sdkfz251-1c.mgm";
+    Desc = "";
+    Country = 201;
+    NumberInFormation = 1;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 25;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  MCU_TR_Entity
+  {
+    Index = 493;
+    Name = "Pz3 entity";
+    Desc = "";
+    Targets = [485];
+    Objects = [];
+    XPos = 118391.631;
+    YPos = 99.836;
+    ZPos = 129296.878;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Enabled = 1;
+    MisObjID = 492;
+  }
+  
+
+  Vehicle
+  {
+    Name = "flak38";
+    Index = 495;
+    LinkTrId = 496;
+    XPos = 118353.940;
+    YPos = 103.772;
+    ZPos = 129440.180;
+    XOri = 357.86;
+    YOri = 0.00;
+    ZOri = 3.48;
+    Script = "LuaScripts\WorldObjects\vehicles\sdkfz10-flak38.txt";
+    Model = "graphics\vehicles\sdkfz10-flak38\sdkfz10-flak38.mgm";
+    Desc = "";
+    Country = 201;
+    NumberInFormation = 5;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 25;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = 3000;
+    BeaconChannel = 1;
+    Callsign = 43;
+  }
+  
+
+  MCU_TR_Entity
+  {
+    Index = 496;
+    Name = "Pz3 entity";
+    Desc = "";
+    Targets = [485];
+    Objects = [];
+    XPos = 118353.940;
+    YPos = 103.972;
+    ZPos = 129440.180;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Enabled = 1;
+    MisObjID = 495;
+  }
+  
+
+  Vehicle
+  {
+    Name = "1c";
+    Index = 498;
+    LinkTrId = 499;
+    XPos = 118382.830;
+    YPos = 99.636;
+    ZPos = 129334.252;
+    XOri = 359.06;
+    YOri = 0.00;
+    ZOri = 1.62;
+    Script = "LuaScripts\WorldObjects\vehicles\sdkfz251-1c.txt";
+    Model = "graphics\vehicles\sdkfz251\sdkfz251-1c.mgm";
+    Desc = "";
+    Country = 201;
+    NumberInFormation = 2;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 25;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  MCU_TR_Entity
+  {
+    Index = 499;
+    Name = "Pz3 entity";
+    Desc = "";
+    Targets = [485];
+    Objects = [];
+    XPos = 118382.830;
+    YPos = 99.836;
+    ZPos = 129334.252;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Enabled = 1;
+    MisObjID = 498;
+  }
+  
+
+  Vehicle
+  {
+    Name = "1c";
+    Index = 501;
+    LinkTrId = 502;
+    XPos = 118374.002;
+    YPos = 99.636;
+    ZPos = 129363.743;
+    XOri = 359.06;
+    YOri = 0.00;
+    ZOri = 1.62;
+    Script = "LuaScripts\WorldObjects\vehicles\sdkfz251-1c.txt";
+    Model = "graphics\vehicles\sdkfz251\sdkfz251-1c.mgm";
+    Desc = "";
+    Country = 201;
+    NumberInFormation = 3;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 25;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  MCU_TR_Entity
+  {
+    Index = 502;
+    Name = "Pz3 entity";
+    Desc = "";
+    Targets = [485];
+    Objects = [];
+    XPos = 118374.002;
+    YPos = 99.836;
+    ZPos = 129363.743;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Enabled = 1;
+    MisObjID = 501;
+  }
+  
+
+  Vehicle
+  {
+    Name = "1c";
+    Index = 504;
+    LinkTrId = 505;
+    XPos = 118363.570;
+    YPos = 99.636;
+    ZPos = 129398.451;
+    XOri = 359.06;
+    YOri = 0.00;
+    ZOri = 1.62;
+    Script = "LuaScripts\WorldObjects\vehicles\sdkfz251-1c.txt";
+    Model = "graphics\vehicles\sdkfz251\sdkfz251-1c.mgm";
+    Desc = "";
+    Country = 201;
+    NumberInFormation = 4;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 25;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  MCU_TR_Entity
+  {
+    Index = 505;
+    Name = "Pz3 entity";
+    Desc = "";
+    Targets = [485];
+    Objects = [];
+    XPos = 118363.570;
+    YPos = 99.836;
+    ZPos = 129398.451;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Enabled = 1;
+    MisObjID = 504;
+  }
+  
+
+  MCU_CMD_Flare
+  {
+    Index = 666;
+    Name = "GreenFlare";
+    Desc = "";
+    Targets = [];
+    Objects = [485];
+    XPos = 118254.853;
+    YPos = 109.921;
+    ZPos = 129196.216;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Color = 1;
+  }
+  
+
+  MCU_CMD_Flare
+  {
+    Index = 668;
+    Name = "RedFlare";
+    Desc = "";
+    Targets = [];
+    Objects = [485];
+    XPos = 118221.418;
+    YPos = 109.921;
+    ZPos = 129196.045;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Color = 0;
+  }
+  
+
+}
+

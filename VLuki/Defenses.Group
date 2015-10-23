@@ -1,0 +1,1237 @@
+Group
+{
+  Name = "Defenses";
+  Index = 88;
+  Desc = "";
+  Vehicle
+  {
+    Name = "AT";
+    Index = 89;
+    LinkTrId = 0;
+    XPos = 55450.137;
+    YPos = 118.857;
+    ZPos = 62849.164;
+    XOri = 1.69;
+    YOri = 273.87;
+    ZOri = 359.43;
+    Script = "LuaScripts\WorldObjects\vehicles\zis3gun.txt";
+    Model = "graphics\artillery\zis3gun\zis3gun.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AT";
+    Index = 90;
+    LinkTrId = 0;
+    XPos = 54384.815;
+    YPos = 118.857;
+    ZPos = 63297.710;
+    XOri = 4.27;
+    YOri = 309.39;
+    ZOri = 358.68;
+    Script = "LuaScripts\WorldObjects\vehicles\zis3gun.txt";
+    Model = "graphics\artillery\zis3gun\zis3gun.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AT";
+    Index = 91;
+    LinkTrId = 0;
+    XPos = 55065.130;
+    YPos = 118.857;
+    ZPos = 63728.978;
+    XOri = 0.17;
+    YOri = 273.87;
+    ZOri = 0.89;
+    Script = "LuaScripts\WorldObjects\vehicles\zis3gun.txt";
+    Model = "graphics\artillery\zis3gun\zis3gun.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AT";
+    Index = 92;
+    LinkTrId = 0;
+    XPos = 53032.825;
+    YPos = 118.857;
+    ZPos = 61398.557;
+    XOri = 359.54;
+    YOri = 273.87;
+    ZOri = 358.05;
+    Script = "LuaScripts\WorldObjects\vehicles\zis3gun.txt";
+    Model = "graphics\artillery\zis3gun\zis3gun.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AT";
+    Index = 93;
+    LinkTrId = 0;
+    XPos = 53351.672;
+    YPos = 118.857;
+    ZPos = 61275.706;
+    XOri = 359.72;
+    YOri = 273.87;
+    ZOri = 358.73;
+    Script = "LuaScripts\WorldObjects\vehicles\zis3gun.txt";
+    Model = "graphics\artillery\zis3gun\zis3gun.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AT";
+    Index = 94;
+    LinkTrId = 0;
+    XPos = 53845.078;
+    YPos = 118.857;
+    ZPos = 61241.751;
+    XOri = 358.53;
+    YOri = 256.40;
+    ZOri = 0.85;
+    Script = "LuaScripts\WorldObjects\vehicles\zis3gun.txt";
+    Model = "graphics\artillery\zis3gun\zis3gun.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AT";
+    Index = 95;
+    LinkTrId = 0;
+    XPos = 59540.915;
+    YPos = 118.857;
+    ZPos = 54255.690;
+    XOri = 356.98;
+    YOri = 317.84;
+    ZOri = 359.98;
+    Script = "LuaScripts\WorldObjects\vehicles\zis3gun.txt";
+    Model = "graphics\artillery\zis3gun\zis3gun.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AT";
+    Index = 96;
+    LinkTrId = 0;
+    XPos = 60036.131;
+    YPos = 118.857;
+    ZPos = 54532.352;
+    XOri = 1.31;
+    YOri = 250.64;
+    ZOri = 358.85;
+    Script = "LuaScripts\WorldObjects\vehicles\zis3gun.txt";
+    Model = "graphics\artillery\zis3gun\zis3gun.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AT";
+    Index = 97;
+    LinkTrId = 0;
+    XPos = 60636.056;
+    YPos = 118.857;
+    ZPos = 54330.229;
+    XOri = 357.94;
+    YOri = 273.87;
+    ZOri = 0.52;
+    Script = "LuaScripts\WorldObjects\vehicles\zis3gun.txt";
+    Model = "graphics\artillery\zis3gun\zis3gun.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AT";
+    Index = 98;
+    LinkTrId = 0;
+    XPos = 49920.018;
+    YPos = 118.857;
+    ZPos = 57588.638;
+    XOri = 356.91;
+    YOri = 255.05;
+    ZOri = 0.27;
+    Script = "LuaScripts\WorldObjects\vehicles\zis3gun.txt";
+    Model = "graphics\artillery\zis3gun\zis3gun.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AT";
+    Index = 99;
+    LinkTrId = 0;
+    XPos = 50088.292;
+    YPos = 118.857;
+    ZPos = 57140.703;
+    XOri = 0.82;
+    YOri = 230.42;
+    ZOri = 359.21;
+    Script = "LuaScripts\WorldObjects\vehicles\zis3gun.txt";
+    Model = "graphics\artillery\zis3gun\zis3gun.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AT";
+    Index = 100;
+    LinkTrId = 0;
+    XPos = 51029.345;
+    YPos = 118.857;
+    ZPos = 57151.334;
+    XOri = 358.30;
+    YOri = 221.07;
+    ZOri = 357.23;
+    Script = "LuaScripts\WorldObjects\vehicles\zis3gun.txt";
+    Model = "graphics\artillery\zis3gun\zis3gun.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AT";
+    Index = 101;
+    LinkTrId = 0;
+    XPos = 32608.622;
+    YPos = 133.449;
+    ZPos = 42054.989;
+    XOri = 357.91;
+    YOri = 150.64;
+    ZOri = 357.61;
+    Script = "LuaScripts\WorldObjects\vehicles\pak40.txt";
+    Model = "graphics\artillery\pak40\pak40.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AT";
+    Index = 102;
+    LinkTrId = 0;
+    XPos = 32111.107;
+    YPos = 128.635;
+    ZPos = 41873.852;
+    XOri = 0.34;
+    YOri = 75.57;
+    ZOri = 358.70;
+    Script = "LuaScripts\WorldObjects\vehicles\pak40.txt";
+    Model = "graphics\artillery\pak40\pak40.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AT";
+    Index = 103;
+    LinkTrId = 0;
+    XPos = 29579.953;
+    YPos = 123.420;
+    ZPos = 39453.082;
+    XOri = 359.90;
+    YOri = 75.76;
+    ZOri = 0.37;
+    Script = "LuaScripts\WorldObjects\vehicles\pak40.txt";
+    Model = "graphics\artillery\pak40\pak40.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AT";
+    Index = 104;
+    LinkTrId = 0;
+    XPos = 37923.404;
+    YPos = 176.746;
+    ZPos = 43374.223;
+    XOri = 359.00;
+    YOri = 65.09;
+    ZOri = 0.79;
+    Script = "LuaScripts\WorldObjects\vehicles\pak40.txt";
+    Model = "graphics\artillery\pak40\pak40.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AT";
+    Index = 105;
+    LinkTrId = 0;
+    XPos = 38612.118;
+    YPos = 178.449;
+    ZPos = 40375.789;
+    XOri = 356.64;
+    YOri = 44.84;
+    ZOri = 354.74;
+    Script = "LuaScripts\WorldObjects\vehicles\pak40.txt";
+    Model = "graphics\artillery\pak40\pak40.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AT";
+    Index = 106;
+    LinkTrId = 0;
+    XPos = 41806.459;
+    YPos = 156.417;
+    ZPos = 36539.283;
+    XOri = 358.30;
+    YOri = 25.15;
+    ZOri = 356.22;
+    Script = "LuaScripts\WorldObjects\vehicles\pak40.txt";
+    Model = "graphics\artillery\pak40\pak40.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AT";
+    Index = 107;
+    LinkTrId = 0;
+    XPos = 41254.656;
+    YPos = 167.700;
+    ZPos = 37955.142;
+    XOri = 1.10;
+    YOri = 14.78;
+    ZOri = 0.38;
+    Script = "LuaScripts\WorldObjects\vehicles\pak40.txt";
+    Model = "graphics\artillery\pak40\pak40.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AT";
+    Index = 108;
+    LinkTrId = 0;
+    XPos = 54598.439;
+    YPos = 120.719;
+    ZPos = 45153.542;
+    XOri = 359.00;
+    YOri = 109.33;
+    ZOri = 351.26;
+    Script = "LuaScripts\WorldObjects\vehicles\pak40.txt";
+    Model = "graphics\artillery\pak40\pak40.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AT";
+    Index = 109;
+    LinkTrId = 0;
+    XPos = 54241.834;
+    YPos = 105.980;
+    ZPos = 45204.017;
+    XOri = 359.66;
+    YOri = 82.03;
+    ZOri = 0.06;
+    Script = "LuaScripts\WorldObjects\vehicles\pak40.txt";
+    Model = "graphics\artillery\pak40\pak40.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AT";
+    Index = 110;
+    LinkTrId = 0;
+    XPos = 53358.108;
+    YPos = 109.705;
+    ZPos = 44695.965;
+    XOri = 2.24;
+    YOri = 78.14;
+    ZOri = 358.88;
+    Script = "LuaScripts\WorldObjects\vehicles\pak40.txt";
+    Model = "graphics\artillery\pak40\pak40.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AT";
+    Index = 111;
+    LinkTrId = 0;
+    XPos = 56385.692;
+    YPos = 87.448;
+    ZPos = 43590.260;
+    XOri = 359.35;
+    YOri = 28.22;
+    ZOri = 359.15;
+    Script = "LuaScripts\WorldObjects\vehicles\pak40.txt";
+    Model = "graphics\artillery\pak40\pak40.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AAA";
+    Index = 112;
+    LinkTrId = 0;
+    XPos = 55256.158;
+    YPos = 64.667;
+    ZPos = 63006.367;
+    XOri = 2.42;
+    YOri = 0.00;
+    ZOri = 357.87;
+    Script = "LuaScripts\WorldObjects\vehicles\61k.txt";
+    Model = "graphics\artillery\61k\61k.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AAA";
+    Index = 113;
+    LinkTrId = 0;
+    XPos = 53127.419;
+    YPos = 104.686;
+    ZPos = 61885.364;
+    XOri = 0.13;
+    YOri = 0.00;
+    ZOri = 1.57;
+    Script = "LuaScripts\WorldObjects\vehicles\61k.txt";
+    Model = "graphics\artillery\61k\61k.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AAA";
+    Index = 114;
+    LinkTrId = 0;
+    XPos = 50694.822;
+    YPos = 114.536;
+    ZPos = 58562.106;
+    XOri = 3.21;
+    YOri = 0.19;
+    ZOri = 357.95;
+    Script = "LuaScripts\WorldObjects\vehicles\61k.txt";
+    Model = "graphics\artillery\61k\61k.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AAA";
+    Index = 115;
+    LinkTrId = 0;
+    XPos = 60710.580;
+    YPos = 127.938;
+    ZPos = 55641.958;
+    XOri = 359.10;
+    YOri = 0.00;
+    ZOri = 359.37;
+    Script = "LuaScripts\WorldObjects\vehicles\61k.txt";
+    Model = "graphics\artillery\61k\61k.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AA";
+    Index = 116;
+    LinkTrId = 0;
+    XPos = 52703.769;
+    YPos = 88.162;
+    ZPos = 62824.222;
+    XOri = 3.19;
+    YOri = 0.00;
+    ZOri = 358.24;
+    Script = "LuaScripts\WorldObjects\vehicles\52k.txt";
+    Model = "graphics\artillery\52k\52k.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AA";
+    Index = 117;
+    LinkTrId = 0;
+    XPos = 51890.092;
+    YPos = 85.201;
+    ZPos = 63009.515;
+    XOri = 5.23;
+    YOri = 0.00;
+    ZOri = 1.01;
+    Script = "LuaScripts\WorldObjects\vehicles\52k.txt";
+    Model = "graphics\artillery\52k\52k.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AA";
+    Index = 118;
+    LinkTrId = 0;
+    XPos = 55103.444;
+    YPos = 60.612;
+    ZPos = 64236.844;
+    XOri = 359.97;
+    YOri = 0.00;
+    ZOri = 358.81;
+    Script = "LuaScripts\WorldObjects\vehicles\52k.txt";
+    Model = "graphics\artillery\52k\52k.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AAA";
+    Index = 119;
+    LinkTrId = 0;
+    XPos = 55203.630;
+    YPos = 96.291;
+    ZPos = 43448.818;
+    XOri = 356.74;
+    YOri = 0.00;
+    ZOri = 359.03;
+    Script = "LuaScripts\WorldObjects\vehicles\flak38.txt";
+    Model = "graphics\artillery\flak38\flak38.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AAA";
+    Index = 120;
+    LinkTrId = 0;
+    XPos = 53174.562;
+    YPos = 102.623;
+    ZPos = 43678.533;
+    XOri = 358.20;
+    YOri = 0.00;
+    ZOri = 0.86;
+    Script = "LuaScripts\WorldObjects\vehicles\flak38.txt";
+    Model = "graphics\artillery\flak38\flak38.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AAA";
+    Index = 121;
+    LinkTrId = 0;
+    XPos = 57137.342;
+    YPos = 75.705;
+    ZPos = 42978.518;
+    XOri = 359.23;
+    YOri = 0.00;
+    ZOri = 0.14;
+    Script = "LuaScripts\WorldObjects\vehicles\flak38.txt";
+    Model = "graphics\artillery\flak38\flak38.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AAA";
+    Index = 122;
+    LinkTrId = 0;
+    XPos = 32344.183;
+    YPos = 121.187;
+    ZPos = 36422.939;
+    XOri = 1.23;
+    YOri = 0.00;
+    ZOri = 358.91;
+    Script = "LuaScripts\WorldObjects\vehicles\flak38.txt";
+    Model = "graphics\artillery\flak38\flak38.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AAA";
+    Index = 123;
+    LinkTrId = 0;
+    XPos = 32424.231;
+    YPos = 121.925;
+    ZPos = 36237.101;
+    XOri = 359.59;
+    YOri = 0.00;
+    ZOri = 0.75;
+    Script = "LuaScripts\WorldObjects\vehicles\flak38.txt";
+    Model = "graphics\artillery\flak38\flak38.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AAA";
+    Index = 124;
+    LinkTrId = 0;
+    XPos = 31968.990;
+    YPos = 123.033;
+    ZPos = 36703.694;
+    XOri = 359.03;
+    YOri = 0.00;
+    ZOri = 2.62;
+    Script = "LuaScripts\WorldObjects\vehicles\flak38.txt";
+    Model = "graphics\artillery\flak38\flak38.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AAA";
+    Index = 125;
+    LinkTrId = 0;
+    XPos = 32914.808;
+    YPos = 125.952;
+    ZPos = 36126.380;
+    XOri = 3.70;
+    YOri = 0.00;
+    ZOri = 359.17;
+    Script = "LuaScripts\WorldObjects\vehicles\flak38.txt";
+    Model = "graphics\artillery\flak38\flak38.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AA";
+    Index = 126;
+    LinkTrId = 0;
+    XPos = 29130.624;
+    YPos = 121.756;
+    ZPos = 38186.481;
+    XOri = 359.55;
+    YOri = 243.21;
+    ZOri = 359.11;
+    Script = "LuaScripts\WorldObjects\vehicles\flak37.txt";
+    Model = "graphics\artillery\flak37\flak37.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AA";
+    Index = 127;
+    LinkTrId = 0;
+    XPos = 32895.594;
+    YPos = 121.065;
+    ZPos = 36252.316;
+    XOri = 359.95;
+    YOri = 243.21;
+    ZOri = 359.98;
+    Script = "LuaScripts\WorldObjects\vehicles\flak37.txt";
+    Model = "graphics\artillery\flak37\flak37.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AA";
+    Index = 128;
+    LinkTrId = 0;
+    XPos = 55443.268;
+    YPos = 88.387;
+    ZPos = 42854.694;
+    XOri = 358.69;
+    YOri = 198.22;
+    ZOri = 1.51;
+    Script = "LuaScripts\WorldObjects\vehicles\flak37.txt";
+    Model = "graphics\artillery\flak37\flak37.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "AA";
+    Index = 129;
+    LinkTrId = 0;
+    XPos = 53635.994;
+    YPos = 90.691;
+    ZPos = 42719.502;
+    XOri = 1.03;
+    YOri = 243.21;
+    ZOri = 358.39;
+    Script = "LuaScripts\WorldObjects\vehicles\flak37.txt";
+    Model = "graphics\artillery\flak37\flak37.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+}
+
