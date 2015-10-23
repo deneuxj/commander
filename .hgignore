@@ -1,3 +1,4 @@
 syntax: glob
 Commander/Commander/bin/
 Commander/Commander/obj/
+Commander/packages
