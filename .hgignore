@@ -2,3 +2,6 @@ syntax: glob
 Commander/Commander/bin/
 Commander/Commander/obj/
 Commander/packages
+VLuki/send.bat
+syntax: regexp
+.*[.]msnbin$
