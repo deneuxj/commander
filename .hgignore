@@ -1,0 +1,3 @@
+syntax: glob
+Commander/Commander/bin/
+Commander/Commander/obj/
