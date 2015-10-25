@@ -48,22 +48,20 @@ let updateUserDb (client : RemoteConsole.Client) (usersDb : Users.UsersData) =
     }
 
 let agent = MailboxProcessor.Start(fun inbox ->
-    let rec loop state = async {
+    let rec loop client state = async {
         let! msg = inbox.Receive()
         match msg with
         | UpdateUserDb ->
-            use! client = connect
             let! users = updateUserDb client state.UsersDb
-            return! loop { state with UsersDb = users }
+            return! loop client { state with UsersDb = users }
         | SendOrder order ->
-            use! client = connect
             let! _ = client.ServerInput(order)
-            return! loop state
+            return! loop client state
         | GetPlayerList reply ->
             use! client = connect
             let! players = client.GetPlayerList()
             reply.Reply players
-            return! loop state
+            return! loop client state
         | TryLogin(password, ctx, reply) ->
             use! client = connect
             let! users = updateUserDb client state.UsersDb
@@ -79,11 +77,14 @@ let agent = MailboxProcessor.Start(fun inbox ->
                         return None
                     }
             reply.Reply result
-            return! loop { state with UsersDb = users }
-        return! loop state
+            return! loop client { state with UsersDb = users }
+        return! loop client state
     }
-    let state =
-        { UsersDb = Users.UsersData.Default
-        }
-    loop state
+    async {
+        let state =
+            { UsersDb = Users.UsersData.Default
+            }
+        use! client = connect
+        return! loop client state
+    }
 )
