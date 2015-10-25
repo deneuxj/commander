@@ -477,5 +477,5 @@ let buildMission(outdir, basename) =
     for lang in [ "eng"; "ger"; "pol"; "rus" ] do
         createLcFile (basename + "." + lang) allLcStrings
 
-//buildMission("VLuki", "GroundCommanderMini")
-buildMission("Kalach", "GroundCommanderKalach")
+buildMission("VLuki", "GroundCommanderMini")
+//buildMission("Kalach", "GroundCommanderKalach")

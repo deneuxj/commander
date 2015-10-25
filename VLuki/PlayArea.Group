@@ -1,0 +1,99 @@
+Group
+{
+  Name = "PlayArea";
+  Index = 2;
+  Desc = "";
+  MCU_Icon
+  {
+    Index = 3;
+    Targets = [4];
+    Objects = [];
+    XPos = 69373.956;
+    YPos = 17.795;
+    ZPos = 31986.476;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Enabled = 1;
+    LCName = 3;
+    LCDesc = 4;
+    IconId = 0;
+    RColor = 0;
+    GColor = 0;
+    BColor = 0;
+    LineType = 1;
+    Coalitions = [1, 2];
+  }
+  
+
+  MCU_Icon
+  {
+    Index = 4;
+    Targets = [6];
+    Objects = [];
+    XPos = 69373.956;
+    YPos = 17.795;
+    ZPos = 75305.514;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Enabled = 1;
+    LCName = 5;
+    LCDesc = 6;
+    IconId = 0;
+    RColor = 0;
+    GColor = 0;
+    BColor = 0;
+    LineType = 1;
+    Coalitions = [1, 2];
+  }
+  
+
+  MCU_Icon
+  {
+    Index = 6;
+    Targets = [8];
+    Objects = [];
+    XPos = 28875.692;
+    YPos = 17.795;
+    ZPos = 75104.030;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Enabled = 1;
+    LCName = 7;
+    LCDesc = 8;
+    IconId = 0;
+    RColor = 0;
+    GColor = 0;
+    BColor = 0;
+    LineType = 1;
+    Coalitions = [1, 2];
+  }
+  
+
+  MCU_Icon
+  {
+    Index = 8;
+    Targets = [3];
+    Objects = [];
+    XPos = 28875.692;
+    YPos = 17.795;
+    ZPos = 31852.154;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Enabled = 1;
+    LCName = 9;
+    LCDesc = 10;
+    IconId = 0;
+    RColor = 0;
+    GColor = 0;
+    BColor = 0;
+    LineType = 1;
+    Coalitions = [1, 2];
+  }
+  
+
+}
+

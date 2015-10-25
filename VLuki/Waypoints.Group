@@ -443,7 +443,7 @@ Group
   MCU_Waypoint
   {
     Index = 47;
-    Name = "Kuriyakovo";
+    Name = "Kuriyakovo-S";
     Desc = "";
     Targets = [];
     Objects = [];
@@ -500,7 +500,7 @@ Group
   MCU_Waypoint
   {
     Index = 50;
-    Name = "Staraya-Reka-NW";
+    Name = "Staraya-Reka-NE";
     Desc = "";
     Targets = [];
     Objects = [];
@@ -1214,6 +1214,63 @@ Group
     YOri = 0.00;
     ZOri = 0.00;
     Area = 20;
+    Speed = 100;
+    Priority = 1;
+  }
+  
+
+  MCU_Waypoint
+  {
+    Index = 236;
+    Name = "Chernozem-NW";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 43572.706;
+    YPos = 131.933;
+    ZPos = 52775.849;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Area = 10;
+    Speed = 100;
+    Priority = 1;
+  }
+  
+
+  MCU_Waypoint
+  {
+    Index = 237;
+    Name = "Chernozem-E";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 42183.664;
+    YPos = 131.933;
+    ZPos = 54563.431;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Area = 10;
+    Speed = 100;
+    Priority = 1;
+  }
+  
+
+  MCU_Waypoint
+  {
+    Index = 238;
+    Name = "Chernozem-parking";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 42395.842;
+    YPos = 131.933;
+    ZPos = 53253.173;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Area = 10;
     Speed = 100;
     Priority = 1;
   }

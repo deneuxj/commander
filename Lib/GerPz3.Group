@@ -1,19 +1,19 @@
 Group
 {
   Name = "GerPz3";
-  Index = 297;
+  Index = 2;
   Desc = "";
   Vehicle
   {
     Name = "Pz3";
-    Index = 298;
-    LinkTrId = 299;
-    XPos = 118850.440;
-    YPos = 115.268;
-    ZPos = 129277.786;
-    XOri = 358.50;
+    Index = 3;
+    LinkTrId = 4;
+    XPos = 56323.269;
+    YPos = 54.839;
+    ZPos = 67287.907;
+    XOri = 359.93;
     YOri = 0.00;
-    ZOri = 1.19;
+    ZOri = 357.44;
     Script = "LuaScripts\WorldObjects\vehicles\pziii-l.txt";
     Model = "graphics\vehicles\pziii-l\pziii-l.mgm";
     Desc = "";
@@ -35,33 +35,33 @@ Group
 
   MCU_TR_Entity
   {
-    Index = 299;
+    Index = 4;
     Name = "Pz3 entity";
     Desc = "";
-    Targets = [301];
+    Targets = [6];
     Objects = [];
-    XPos = 118850.440;
-    YPos = 115.468;
-    ZPos = 129277.786;
+    XPos = 56323.269;
+    YPos = 55.039;
+    ZPos = 67287.907;
     XOri = 0.00;
     YOri = 0.00;
     ZOri = 0.00;
     Enabled = 1;
-    MisObjID = 298;
+    MisObjID = 3;
   }
   
 
   Vehicle
   {
     Name = "Leader";
-    Index = 302;
-    LinkTrId = 301;
-    XPos = 118855.037;
-    YPos = 115.268;
-    ZPos = 129255.561;
-    XOri = 358.50;
+    Index = 7;
+    LinkTrId = 6;
+    XPos = 56327.866;
+    YPos = 54.741;
+    ZPos = 67265.682;
+    XOri = 1.11;
     YOri = 0.00;
-    ZOri = 1.19;
+    ZOri = 356.27;
     Script = "LuaScripts\WorldObjects\vehicles\pziii-l.txt";
     Model = "graphics\vehicles\pziii-l\pziii-l.mgm";
     Desc = "";
@@ -83,33 +83,33 @@ Group
 
   MCU_TR_Entity
   {
-    Index = 301;
+    Index = 6;
     Name = "Pz3 entity";
     Desc = "";
     Targets = [];
     Objects = [];
-    XPos = 118855.037;
-    YPos = 115.468;
-    ZPos = 129255.561;
+    XPos = 56327.866;
+    YPos = 54.941;
+    ZPos = 67265.682;
     XOri = 0.00;
     YOri = 0.00;
     ZOri = 0.00;
     Enabled = 1;
-    MisObjID = 302;
+    MisObjID = 7;
   }
   
 
   Vehicle
   {
     Name = "Pz3";
-    Index = 304;
-    LinkTrId = 305;
-    XPos = 118842.817;
-    YPos = 115.268;
-    ZPos = 129299.043;
-    XOri = 358.48;
+    Index = 9;
+    LinkTrId = 10;
+    XPos = 56315.646;
+    YPos = 54.722;
+    ZPos = 67309.164;
+    XOri = 2.94;
     YOri = 0.00;
-    ZOri = 1.89;
+    ZOri = 357.44;
     Script = "LuaScripts\WorldObjects\vehicles\pziii-l.txt";
     Model = "graphics\vehicles\pziii-l\pziii-l.mgm";
     Desc = "";
@@ -131,33 +131,33 @@ Group
 
   MCU_TR_Entity
   {
-    Index = 305;
+    Index = 10;
     Name = "Pz3 entity";
     Desc = "";
-    Targets = [301];
+    Targets = [6];
     Objects = [];
-    XPos = 118842.817;
-    YPos = 115.468;
-    ZPos = 129299.043;
+    XPos = 56315.646;
+    YPos = 54.922;
+    ZPos = 67309.164;
     XOri = 0.00;
     YOri = 0.00;
     ZOri = 0.00;
     Enabled = 1;
-    MisObjID = 304;
+    MisObjID = 9;
   }
   
 
   Vehicle
   {
     Name = "Pz3";
-    Index = 307;
-    LinkTrId = 308;
-    XPos = 118835.180;
-    YPos = 115.268;
-    ZPos = 129320.297;
-    XOri = 1.05;
+    Index = 12;
+    LinkTrId = 13;
+    XPos = 56308.009;
+    YPos = 53.971;
+    ZPos = 67330.418;
+    XOri = 2.94;
     YOri = 0.00;
-    ZOri = 358.92;
+    ZOri = 357.44;
     Script = "LuaScripts\WorldObjects\vehicles\pziii-l.txt";
     Model = "graphics\vehicles\pziii-l\pziii-l.mgm";
     Desc = "";
@@ -179,33 +179,33 @@ Group
 
   MCU_TR_Entity
   {
-    Index = 308;
+    Index = 13;
     Name = "Pz3 entity";
     Desc = "";
-    Targets = [301];
+    Targets = [6];
     Objects = [];
-    XPos = 118835.180;
-    YPos = 115.468;
-    ZPos = 129320.297;
+    XPos = 56308.009;
+    YPos = 54.171;
+    ZPos = 67330.418;
     XOri = 0.00;
     YOri = 0.00;
     ZOri = 0.00;
     Enabled = 1;
-    MisObjID = 307;
+    MisObjID = 12;
   }
   
 
   Vehicle
   {
     Name = "Pz3";
-    Index = 310;
-    LinkTrId = 311;
-    XPos = 118827.592;
-    YPos = 115.268;
-    ZPos = 129341.221;
-    XOri = 1.05;
+    Index = 15;
+    LinkTrId = 16;
+    XPos = 56300.421;
+    YPos = 53.378;
+    ZPos = 67351.342;
+    XOri = 358.30;
     YOri = 0.00;
-    ZOri = 358.92;
+    ZOri = 2.09;
     Script = "LuaScripts\WorldObjects\vehicles\pziii-l.txt";
     Model = "graphics\vehicles\pziii-l\pziii-l.mgm";
     Desc = "";
@@ -227,512 +227,32 @@ Group
 
   MCU_TR_Entity
   {
-    Index = 311;
+    Index = 16;
     Name = "Pz3 entity";
     Desc = "";
-    Targets = [301];
+    Targets = [6];
     Objects = [];
-    XPos = 118827.592;
-    YPos = 115.468;
-    ZPos = 129341.221;
+    XPos = 56300.421;
+    YPos = 53.578;
+    ZPos = 67351.342;
     XOri = 0.00;
     YOri = 0.00;
     ZOri = 0.00;
     Enabled = 1;
-    MisObjID = 310;
-  }
-  
-
-  Vehicle
-  {
-    Name = "Pz3";
-    Index = 313;
-    LinkTrId = 314;
-    XPos = 118843.318;
-    YPos = 115.268;
-    ZPos = 129438.172;
-    XOri = 356.78;
-    YOri = 0.00;
-    ZOri = 1.82;
-    Script = "LuaScripts\WorldObjects\vehicles\pziii-l.txt";
-    Model = "graphics\vehicles\pziii-l\pziii-l.mgm";
-    Desc = "";
-    Country = 201;
-    NumberInFormation = 6;
-    Vulnerable = 1;
-    Engageable = 1;
-    LimitAmmo = 1;
-    AILevel = 2;
-    DamageReport = 25;
-    DamageThreshold = 1;
-    DeleteAfterDeath = 1;
-    CoopStart = 0;
-    Spotter = -1;
-    BeaconChannel = 0;
-    Callsign = 0;
-  }
-  
-
-  MCU_TR_Entity
-  {
-    Index = 314;
-    Name = "Pz3 entity";
-    Desc = "";
-    Targets = [301];
-    Objects = [];
-    XPos = 118843.318;
-    YPos = 115.468;
-    ZPos = 129438.172;
-    XOri = 0.00;
-    YOri = 0.00;
-    ZOri = 0.00;
-    Enabled = 1;
-    MisObjID = 313;
-  }
-  
-
-  Vehicle
-  {
-    Name = "Pz3";
-    Index = 316;
-    LinkTrId = 317;
-    XPos = 118847.915;
-    YPos = 115.268;
-    ZPos = 129415.947;
-    XOri = 356.78;
-    YOri = 0.00;
-    ZOri = 1.82;
-    Script = "LuaScripts\WorldObjects\vehicles\pziii-l.txt";
-    Model = "graphics\vehicles\pziii-l\pziii-l.mgm";
-    Desc = "";
-    Country = 201;
-    NumberInFormation = 5;
-    Vulnerable = 1;
-    Engageable = 1;
-    LimitAmmo = 1;
-    AILevel = 2;
-    DamageReport = 25;
-    DamageThreshold = 1;
-    DeleteAfterDeath = 1;
-    CoopStart = 0;
-    Spotter = -1;
-    BeaconChannel = 0;
-    Callsign = 0;
-  }
-  
-
-  MCU_TR_Entity
-  {
-    Index = 317;
-    Name = "Pz3 entity";
-    Desc = "";
-    Targets = [301];
-    Objects = [];
-    XPos = 118847.915;
-    YPos = 115.468;
-    ZPos = 129415.947;
-    XOri = 0.00;
-    YOri = 0.00;
-    ZOri = 0.00;
-    Enabled = 1;
-    MisObjID = 316;
-  }
-  
-
-  Vehicle
-  {
-    Name = "Pz3";
-    Index = 319;
-    LinkTrId = 320;
-    XPos = 118835.695;
-    YPos = 115.268;
-    ZPos = 129459.429;
-    XOri = 359.00;
-    YOri = 0.00;
-    ZOri = 1.82;
-    Script = "LuaScripts\WorldObjects\vehicles\pziii-l.txt";
-    Model = "graphics\vehicles\pziii-l\pziii-l.mgm";
-    Desc = "";
-    Country = 201;
-    NumberInFormation = 7;
-    Vulnerable = 1;
-    Engageable = 1;
-    LimitAmmo = 1;
-    AILevel = 2;
-    DamageReport = 25;
-    DamageThreshold = 1;
-    DeleteAfterDeath = 1;
-    CoopStart = 0;
-    Spotter = -1;
-    BeaconChannel = 0;
-    Callsign = 0;
-  }
-  
-
-  MCU_TR_Entity
-  {
-    Index = 320;
-    Name = "Pz3 entity";
-    Desc = "";
-    Targets = [301];
-    Objects = [];
-    XPos = 118835.695;
-    YPos = 115.468;
-    ZPos = 129459.429;
-    XOri = 0.00;
-    YOri = 0.00;
-    ZOri = 0.00;
-    Enabled = 1;
-    MisObjID = 319;
-  }
-  
-
-  Vehicle
-  {
-    Name = "Pz3";
-    Index = 322;
-    LinkTrId = 323;
-    XPos = 118828.058;
-    YPos = 115.268;
-    ZPos = 129480.683;
-    XOri = 358.97;
-    YOri = 0.00;
-    ZOri = 1.85;
-    Script = "LuaScripts\WorldObjects\vehicles\pziii-l.txt";
-    Model = "graphics\vehicles\pziii-l\pziii-l.mgm";
-    Desc = "";
-    Country = 201;
-    NumberInFormation = 8;
-    Vulnerable = 1;
-    Engageable = 1;
-    LimitAmmo = 1;
-    AILevel = 2;
-    DamageReport = 25;
-    DamageThreshold = 1;
-    DeleteAfterDeath = 1;
-    CoopStart = 0;
-    Spotter = -1;
-    BeaconChannel = 0;
-    Callsign = 0;
-  }
-  
-
-  MCU_TR_Entity
-  {
-    Index = 323;
-    Name = "Pz3 entity";
-    Desc = "";
-    Targets = [301];
-    Objects = [];
-    XPos = 118828.058;
-    YPos = 115.468;
-    ZPos = 129480.683;
-    XOri = 0.00;
-    YOri = 0.00;
-    ZOri = 0.00;
-    Enabled = 1;
-    MisObjID = 322;
-  }
-  
-
-  Vehicle
-  {
-    Name = "Pz3";
-    Index = 325;
-    LinkTrId = 326;
-    XPos = 118820.470;
-    YPos = 115.268;
-    ZPos = 129501.607;
-    XOri = 358.93;
-    YOri = 0.00;
-    ZOri = 1.85;
-    Script = "LuaScripts\WorldObjects\vehicles\pziii-l.txt";
-    Model = "graphics\vehicles\pziii-l\pziii-l.mgm";
-    Desc = "";
-    Country = 201;
-    NumberInFormation = 9;
-    Vulnerable = 1;
-    Engageable = 1;
-    LimitAmmo = 1;
-    AILevel = 2;
-    DamageReport = 25;
-    DamageThreshold = 1;
-    DeleteAfterDeath = 1;
-    CoopStart = 0;
-    Spotter = -1;
-    BeaconChannel = 0;
-    Callsign = 0;
-  }
-  
-
-  MCU_TR_Entity
-  {
-    Index = 326;
-    Name = "Pz3 entity";
-    Desc = "";
-    Targets = [301];
-    Objects = [];
-    XPos = 118820.470;
-    YPos = 115.468;
-    ZPos = 129501.607;
-    XOri = 0.00;
-    YOri = 0.00;
-    ZOri = 0.00;
-    Enabled = 1;
-    MisObjID = 325;
-  }
-  
-
-  Vehicle
-  {
-    Name = "Pz3";
-    Index = 328;
-    LinkTrId = 329;
-    XPos = 118839.573;
-    YPos = 115.268;
-    ZPos = 129592.072;
-    XOri = 358.58;
-    YOri = 0.00;
-    ZOri = 1.90;
-    Script = "LuaScripts\WorldObjects\vehicles\pziii-l.txt";
-    Model = "graphics\vehicles\pziii-l\pziii-l.mgm";
-    Desc = "";
-    Country = 201;
-    NumberInFormation = 11;
-    Vulnerable = 1;
-    Engageable = 1;
-    LimitAmmo = 1;
-    AILevel = 2;
-    DamageReport = 25;
-    DamageThreshold = 1;
-    DeleteAfterDeath = 1;
-    CoopStart = 0;
-    Spotter = -1;
-    BeaconChannel = 0;
-    Callsign = 0;
-  }
-  
-
-  MCU_TR_Entity
-  {
-    Index = 329;
-    Name = "Pz3 entity";
-    Desc = "";
-    Targets = [301];
-    Objects = [];
-    XPos = 118839.573;
-    YPos = 115.468;
-    ZPos = 129592.072;
-    XOri = 0.00;
-    YOri = 0.00;
-    ZOri = 0.00;
-    Enabled = 1;
-    MisObjID = 328;
-  }
-  
-
-  Vehicle
-  {
-    Name = "Pz3";
-    Index = 331;
-    LinkTrId = 332;
-    XPos = 118844.170;
-    YPos = 115.268;
-    ZPos = 129569.847;
-    XOri = 358.58;
-    YOri = 0.00;
-    ZOri = 1.90;
-    Script = "LuaScripts\WorldObjects\vehicles\pziii-l.txt";
-    Model = "graphics\vehicles\pziii-l\pziii-l.mgm";
-    Desc = "";
-    Country = 201;
-    NumberInFormation = 10;
-    Vulnerable = 1;
-    Engageable = 1;
-    LimitAmmo = 1;
-    AILevel = 2;
-    DamageReport = 25;
-    DamageThreshold = 1;
-    DeleteAfterDeath = 1;
-    CoopStart = 0;
-    Spotter = -1;
-    BeaconChannel = 0;
-    Callsign = 0;
-  }
-  
-
-  MCU_TR_Entity
-  {
-    Index = 332;
-    Name = "Pz3 entity";
-    Desc = "";
-    Targets = [301];
-    Objects = [];
-    XPos = 118844.170;
-    YPos = 115.468;
-    ZPos = 129569.847;
-    XOri = 0.00;
-    YOri = 0.00;
-    ZOri = 0.00;
-    Enabled = 1;
-    MisObjID = 331;
-  }
-  
-
-  Vehicle
-  {
-    Name = "Pz3";
-    Index = 334;
-    LinkTrId = 335;
-    XPos = 118831.950;
-    YPos = 115.268;
-    ZPos = 129613.329;
-    XOri = 357.35;
-    YOri = 0.00;
-    ZOri = 1.90;
-    Script = "LuaScripts\WorldObjects\vehicles\pziii-l.txt";
-    Model = "graphics\vehicles\pziii-l\pziii-l.mgm";
-    Desc = "";
-    Country = 201;
-    NumberInFormation = 12;
-    Vulnerable = 1;
-    Engageable = 1;
-    LimitAmmo = 1;
-    AILevel = 2;
-    DamageReport = 25;
-    DamageThreshold = 1;
-    DeleteAfterDeath = 1;
-    CoopStart = 0;
-    Spotter = -1;
-    BeaconChannel = 0;
-    Callsign = 0;
-  }
-  
-
-  MCU_TR_Entity
-  {
-    Index = 335;
-    Name = "Pz3 entity";
-    Desc = "";
-    Targets = [301];
-    Objects = [];
-    XPos = 118831.950;
-    YPos = 115.468;
-    ZPos = 129613.329;
-    XOri = 0.00;
-    YOri = 0.00;
-    ZOri = 0.00;
-    Enabled = 1;
-    MisObjID = 334;
-  }
-  
-
-  Vehicle
-  {
-    Name = "Pz3";
-    Index = 337;
-    LinkTrId = 338;
-    XPos = 118824.530;
-    YPos = 115.268;
-    ZPos = 129634.800;
-    XOri = 359.40;
-    YOri = 0.00;
-    ZOri = 359.85;
-    Script = "LuaScripts\WorldObjects\vehicles\pziii-l.txt";
-    Model = "graphics\vehicles\pziii-l\pziii-l.mgm";
-    Desc = "";
-    Country = 201;
-    NumberInFormation = 13;
-    Vulnerable = 1;
-    Engageable = 1;
-    LimitAmmo = 1;
-    AILevel = 2;
-    DamageReport = 25;
-    DamageThreshold = 1;
-    DeleteAfterDeath = 1;
-    CoopStart = 0;
-    Spotter = -1;
-    BeaconChannel = 0;
-    Callsign = 0;
-  }
-  
-
-  MCU_TR_Entity
-  {
-    Index = 338;
-    Name = "Pz3 entity";
-    Desc = "";
-    Targets = [301];
-    Objects = [];
-    XPos = 118824.530;
-    YPos = 115.468;
-    ZPos = 129634.800;
-    XOri = 0.00;
-    YOri = 0.00;
-    ZOri = 0.00;
-    Enabled = 1;
-    MisObjID = 337;
-  }
-  
-
-  Vehicle
-  {
-    Name = "Flak38";
-    Index = 340;
-    LinkTrId = 341;
-    XPos = 118816.725;
-    YPos = 115.268;
-    ZPos = 129655.507;
-    XOri = 1.01;
-    YOri = 0.00;
-    ZOri = 359.85;
-    Script = "LuaScripts\WorldObjects\vehicles\sdkfz10-flak38.txt";
-    Model = "graphics\vehicles\sdkfz10-flak38\sdkfz10-flak38.mgm";
-    Desc = "";
-    Country = 201;
-    NumberInFormation = 14;
-    Vulnerable = 1;
-    Engageable = 1;
-    LimitAmmo = 1;
-    AILevel = 2;
-    DamageReport = 25;
-    DamageThreshold = 1;
-    DeleteAfterDeath = 1;
-    CoopStart = 0;
-    Spotter = 3000;
-    BeaconChannel = 1;
-    Callsign = 41;
-  }
-  
-
-  MCU_TR_Entity
-  {
-    Index = 341;
-    Name = "Pz3 entity";
-    Desc = "";
-    Targets = [301];
-    Objects = [];
-    XPos = 118816.725;
-    YPos = 115.468;
-    ZPos = 129655.507;
-    XOri = 0.00;
-    YOri = 0.00;
-    ZOri = 0.00;
-    Enabled = 1;
-    MisObjID = 340;
+    MisObjID = 15;
   }
   
 
   MCU_CMD_Formation
   {
-    Index = 343;
+    Index = 48;
     Name = "OnRoad";
     Desc = "";
     Targets = [];
-    Objects = [301];
-    XPos = 118888.772;
+    Objects = [6];
+    XPos = 56361.601;
     YPos = 114.201;
-    ZPos = 129185.813;
+    ZPos = 67195.934;
     XOri = 0.00;
     YOri = 0.00;
     ZOri = 0.00;
@@ -743,14 +263,14 @@ Group
 
   MCU_CMD_Formation
   {
-    Index = 344;
+    Index = 49;
     Name = "Column";
     Desc = "";
     Targets = [];
-    Objects = [301];
-    XPos = 118856.852;
+    Objects = [6];
+    XPos = 56329.681;
     YPos = 114.201;
-    ZPos = 129186.465;
+    ZPos = 67196.586;
     XOri = 0.00;
     YOri = 0.00;
     ZOri = 0.00;
@@ -761,14 +281,14 @@ Group
 
   MCU_CMD_Formation
   {
-    Index = 345;
+    Index = 50;
     Name = "Attack";
     Desc = "";
     Targets = [];
-    Objects = [301];
-    XPos = 118823.230;
+    Objects = [6];
+    XPos = 56296.059;
     YPos = 114.201;
-    ZPos = 129185.741;
+    ZPos = 67195.862;
     XOri = 0.00;
     YOri = 0.00;
     ZOri = 0.00;
@@ -779,14 +299,14 @@ Group
 
   MCU_CMD_Formation
   {
-    Index = 346;
+    Index = 51;
     Name = "Stop";
     Desc = "";
     Targets = [];
-    Objects = [301];
-    XPos = 118784.279;
+    Objects = [6];
+    XPos = 56257.108;
     YPos = 114.201;
-    ZPos = 129185.720;
+    ZPos = 67195.841;
     XOri = 0.00;
     YOri = 0.00;
     ZOri = 0.00;
@@ -797,14 +317,14 @@ Group
 
   MCU_CMD_Formation
   {
-    Index = 347;
+    Index = 52;
     Name = "Continue";
     Desc = "";
     Targets = [];
-    Objects = [301];
-    XPos = 118750.751;
+    Objects = [6];
+    XPos = 56223.580;
     YPos = 114.201;
-    ZPos = 129186.439;
+    ZPos = 67196.560;
     XOri = 0.00;
     YOri = 0.00;
     ZOri = 0.00;
@@ -815,14 +335,14 @@ Group
 
   MCU_CMD_Flare
   {
-    Index = 660;
+    Index = 53;
     Name = "GreenFlare";
     Desc = "";
     Targets = [];
-    Objects = [301];
-    XPos = 118721.107;
+    Objects = [6];
+    XPos = 56193.936;
     YPos = 109.921;
-    ZPos = 129186.799;
+    ZPos = 67196.920;
     XOri = 0.00;
     YOri = 0.00;
     ZOri = 0.00;
@@ -832,14 +352,14 @@ Group
 
   MCU_CMD_Flare
   {
-    Index = 661;
+    Index = 54;
     Name = "RedFlare";
     Desc = "";
     Targets = [];
-    Objects = [301];
-    XPos = 118687.672;
+    Objects = [6];
+    XPos = 56160.501;
     YPos = 109.921;
-    ZPos = 129186.628;
+    ZPos = 67196.749;
     XOri = 0.00;
     YOri = 0.00;
     ZOri = 0.00;
