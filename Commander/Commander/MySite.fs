@@ -5,54 +5,6 @@ module Commander
 open System
 open System.Net
 open System.Text
-
-/// <summary>
-/// Interaction between the web server and DServer.
-/// Provides authentication, triggering server inputs...
-/// </summary>
-type Client(address : IPAddress, port, login, password) as this =
-    inherit Sockets.TcpClient()
-
-    do base.Connect(address, port)
-    let stream = this.GetStream()
-
-    let send(buff, idx, len) = Async.FromBeginEnd((fun (cb, par) -> stream.BeginWrite(buff, idx, len, cb, par)), stream.EndWrite)
-    let receive(buff, idx, len) = Async.FromBeginEnd((fun (cb, par) -> stream.BeginRead(buff, idx, len, cb, par)), stream.EndRead)
-
-    let encode (cmd : string) =
-        let asAscii = Encoding.ASCII.GetBytes(cmd)
-        let length = [| byte((asAscii.Length + 1) % 256) ; byte((asAscii.Length + 1) / 256) |]
-        let buff = Array.concat [length ; asAscii ; [|0uy|] ]
-        buff
-
-    let getResponse(stream : Sockets.NetworkStream) =
-        async {
-            let buffer : byte[] = Array.zeroCreate 0xffff
-            let response = stream.Read(buffer, 0, 2)
-            let responseLength = (256 * int buffer.[1]) + int buffer.[0]
-            let! response = receive(buffer, 2, responseLength)
-            let data = Encoding.ASCII.GetString(buffer, 2, responseLength - 1)
-            return data
-        }
-
-    member this.Auth() =
-        async {
-            let buff = encode <| sprintf "auth %s %s" login password
-            do! send(buff, 0, buff.Length)
-            let! response = getResponse stream
-            return response
-        }
-
-    member this.ServerInput(name) =
-        async {
-            let buff =
-                sprintf "serverinput %s" name
-                |> encode
-            do! send(buff, 0, buff.Length)
-            let! response = getResponse stream
-            return response
-        }
-
 open WebSharper
 open WebSharper.UI.Next
 open WebSharper.UI.Next.Html
@@ -61,16 +13,23 @@ open WebSharper.UI.Next.Server
 
 /// Server-side code.
 module Server =
+
     [<Rpc>]
     let SendOrder cmd =
-        async {
-            let config = Configuration.values
-            let rconIP = IPAddress.Parse(config.RconAddress)
-            use client = new Client(rconIP, config.RconPort, config.RconUsername, config.RconPassword)
-            let! _ = client.Auth()
-            let! _ = client.ServerInput(cmd)
-            return ()
-        }
+        CentralAgent.agent.Post (CentralAgent.SendOrder cmd)
+
+    [<Rpc>]
+    let GetPlayerList() =
+        CentralAgent.agent.PostAndAsyncReply(fun reply -> CentralAgent.GetPlayerList reply)
+
+    [<Rpc>]
+    let TryLogin(password) =
+        let context = WebSharper.Web.Remoting.GetContext()
+        CentralAgent.agent.PostAndAsyncReply(fun reply -> CentralAgent.TryLogin(password, context, reply))
+
+    [<Rpc>]
+    let UpdateUserDb() =
+        CentralAgent.agent.Post (CentralAgent.UpdateUserDb)
 
 /// Client-side code.
 [<JavaScript>]
@@ -117,7 +76,7 @@ module WebCommander =
             | Attack dest -> sprintf "Attack_%s_%s" platoon (dest.Destination.Replace(" ", "_"))
             | Move dest -> sprintf "Move_%s_%s" platoon (dest.Destination.Replace(" ", "_"))
 
-    let orders(waypoints, platoons) =
+    let TakeOrders(waypoints, platoons) =
         let attackTo =
             waypoints
             |> List.map (fun name -> Attack { Destination = name })
@@ -136,18 +95,77 @@ module WebCommander =
               FlareRed
             ] @ attackTo @ moveTo
 
-        let chosenOrder = Var.Create FormationStop
-        let chosenPlatoon = Var.Create (List.head platoons)
-
+        let numRows = 8
+        let chosenOrders = Array.init numRows (fun _ -> Var.Create FormationStop)        
+        let myPlatoons =
+            let numPlatoons = List.length platoons
+            Array.init numRows (fun i -> Var.Create <| List.nth platoons (max i (numPlatoons - 1)))
         div [
-            text "Your order: "
-            Doc.Select [] id platoons chosenPlatoon
-            Doc.Select [] Order.Show orderList chosenOrder
-            Doc.Button "Send" [] (fun () ->
-                Server.SendOrder(chosenOrder.Value.ToServerInput(chosenPlatoon.Value))
-                |> Async.Start
-            )
+            for platoon, order in Array.zip myPlatoons chosenOrders do
+                yield div [
+                    Doc.Select [] id platoons platoon
+                    Doc.Select [] Order.Show orderList order
+                    Doc.Button "Send" [] (fun () ->
+                        Server.SendOrder(order.Value.ToServerInput(platoon.Value))
+                    )
+                    Doc.Button "Stop" [] (fun () ->
+                        Server.SendOrder(FormationStop.ToServerInput(platoon.Value))
+                    )
+                    Doc.Button "Continue" [] (fun () ->
+                        Server.SendOrder(FormationContinue.ToServerInput(platoon.Value))
+                    )
+                ] :> Doc
         ]
+
+    let ShowResult(result) =
+        result
+        |> List.map (fun (k, v) -> sprintf "Key: %s Value: %s" k v)
+        |> List.map text
+        |> div
+
+    let ShowPlayers(players : RemoteConsole.PlayerData[]) =
+        table [
+            yield tr [
+                td [ text "Client ID" ] :> Doc
+                td [ text "Status" ] :> Doc
+                td [ text "Name" ] :> Doc
+            ] :> Doc
+            for player in players do
+                yield tr [
+                    td [ sprintf "%02d" player.ClientId |> text ] :> Doc
+                    td [ sprintf "%d" player.Status |> text] :> Doc
+                    td [ sprintf "%s" player.Name |> text] :> Doc
+                ] :> Doc
+        ]
+
+    let Login() =
+        let password = Var.Create "AAA1234"
+        let status = Var.Create "Please enter the pin code provided to you in the game chat"
+        div [
+            div [
+                text "Your password: "
+                Doc.Input [] password
+                Doc.Button "Log in" [] (fun () ->
+                    async {
+                        let! username = Server.TryLogin(password.Value)
+                        match username with
+                        | Some username ->
+                            Var.Set status (sprintf "Welcome %s" username)
+                        | None ->
+                            Var.Set status "Incorrect pin code"
+                    }
+                    |> Async.Start
+                )
+            ]
+            Doc.TextView (View.FromVar status)
+        ]
+
+type EndPoint =
+    | [<EndPoint "GET /login">] Login
+    | [<EndPoint "GET /">] Home
+    | [<EndPoint "GET /players">] Players
+    | [<EndPoint "GET /apiPlayerList">] ApiPlayers
+    | [<EndPoint "GET /orders">] Orders
 
 /// <summary>
 /// Build a WebSharper application.
@@ -155,12 +173,75 @@ module WebCommander =
 /// <param name="waypoints">Names of waypoints.</param>
 /// <param name="platoons">Names of platoons.</param>
 let MySite(waypoints, platoons) =
-    Application.SinglePage(fun ctx ->
-        Content.Page(
-            Body = [
-                div [ client <@ WebCommander.orders(waypoints, platoons) @> ]
-            ]
-        ))
+    let menu (ctx : Context<_>) =
+        div [
+            aAttr [ Attr.Create "href" (ctx.Link Home) ] [ text "Home" ]
+            text " - "
+            aAttr [ Attr.Create "href" (ctx.Link Login) ] [ text "Log in" ]
+            text " - "
+            aAttr [ Attr.Create "href" (ctx.Link Orders) ] [ text "Orders" ]
+        ]
+
+    let login ctx =
+        async {
+            Server.UpdateUserDb()
+            return!
+                Content.Page(
+                    Body = [
+                        menu ctx
+                        div [ client <@ WebCommander.Login() @> ]
+                    ]
+                )
+        }
+
+    Application.MultiPage(fun ctx ->
+        function
+        | Home ->
+            Content.Page(
+                Title = "IL-2 Sturmovik Ground Forces Commander",
+                Body = [ menu ctx ]
+            )
+        | Login ->
+            login ctx
+        | Orders ->
+            async {
+                let! user = ctx.UserSession.GetLoggedInUser()
+                match user with
+                | Some _ ->
+                    return!
+                        Content.Page(
+                            Title = "Orders",
+                            Body = [
+                                menu ctx
+                                div [ client <@ WebCommander.TakeOrders(waypoints, platoons) @> ]
+                            ]
+                        )
+                | None ->
+                    return!
+                        Content.RedirectTemporary Login
+            }
+        | Players ->
+            async {
+                let! players = CentralAgent.agent.PostAndAsyncReply(fun reply -> CentralAgent.GetPlayerList reply)
+                return!
+                    match players with
+                    | Some players ->
+                        Content.Page(
+                            Title = "Player list",
+                            Body = [
+                                menu ctx
+                                div [ client <@ WebCommander.ShowPlayers(players) @> ]
+                            ]
+                        )
+                    | None ->
+                        Content.Text "Failed to retrieve list of players from the server"
+            }
+        | ApiPlayers ->
+            async {
+                let! players = CentralAgent.agent.PostAndAsyncReply(fun reply -> CentralAgent.GetPlayerList reply)
+                return! Content.Json players
+            }
+    )
 
 open SturmovikMissionTypes
 open SturmovikMission.DataProvider.Mcu
@@ -184,4 +265,12 @@ let main argv =
         (parseGroup config.PlatoonsFilename).ListOfVehicle
         |> List.map (fun platoon -> platoon.Name.Value)
 
+    let rec welcome() =
+        async {
+            CentralAgent.agent.Post(CentralAgent.UpdateUserDb)
+            do! Async.Sleep 60000
+            return! welcome()
+        }
+
+    Async.Start(welcome())
     WebSharper.Warp.RunAndWaitForInput(MySite(waypoints, platoons), urls = List.ofArray config.WebListeningAddresses)

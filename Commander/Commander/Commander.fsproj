@@ -63,6 +63,9 @@
   </Target>
   <ItemGroup>
     <Compile Include="Configuration.fs" />
+    <Compile Include="RemoteConsole.fs" />
+    <Compile Include="Users.fs" />
+    <Compile Include="CentralAgent.fs" />
     <Compile Include="MySite.fs" />
     <None Include="App.config" />
     <Content Include="packages.config" />

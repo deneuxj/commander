@@ -4,6 +4,6 @@
     "rconAddress": "127.0.0.1",
     "rconPort": 8991,
     "webListeningAddresses": [ "http://localhost:9000" ],
-    "waypointsFilename": "../../Waypoints.Group",
-    "platoonsFilename": "../../Platoons.Group"
+    "waypointsFilename": "../../VLuki/Waypoints.Group",
+    "platoonsFilename": "../../VLuki/Platoons.Group"
 }
