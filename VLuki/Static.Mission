@@ -94718,4 +94718,52 @@ Group
 }
 
 
+
+MCU_Icon
+{
+  Index = 4669;
+  Targets = [];
+  Objects = [];
+  XPos = 55057.936;
+  YPos = 97.410;
+  ZPos = 44009.449;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+  Enabled = 1;
+  LCName = 13;
+  LCDesc = 14;
+  IconId = 552;
+  RColor = 0;
+  GColor = 0;
+  BColor = 0;
+  LineType = 0;
+  Coalitions = [2];
+}
+
+
+
+MCU_Icon
+{
+  Index = 4670;
+  Targets = [];
+  Objects = [];
+  XPos = 53541.624;
+  YPos = 97.410;
+  ZPos = 62556.321;
+  XOri = 0.00;
+  YOri = 0.00;
+  ZOri = 0.00;
+  Enabled = 1;
+  LCName = 15;
+  LCDesc = 16;
+  IconId = 552;
+  RColor = 0;
+  GColor = 0;
+  BColor = 0;
+  LineType = 0;
+  Coalitions = [1];
+}
+
+
 # end of file

@@ -31,7 +31,7 @@ let updateUserDb (client : RemoteConsole.Client) (usersDb : Users.UsersData) =
                 |> Seq.map(fun player -> player.Name, player.ClientId)
             | None ->
                 Seq.empty
-        let usersDb, newUsers = usersDb.AddUsers(usernames |> Seq.map fst)        
+        let usersDb, newUsers = usersDb.AddUsers(usernames |> Seq.map fst)
         let currentUsers = usernames |> Seq.map fst |> Set.ofSeq
         let oldUsers =
             usersDb.UserNames
@@ -52,32 +52,44 @@ let agent = MailboxProcessor.Start(fun inbox ->
         let! msg = inbox.Receive()
         match msg with
         | UpdateUserDb ->
+            printfn "Updating user db..."
             let! users = updateUserDb client state.UsersDb
+            printfn "Done."
             return! loop client { state with UsersDb = users }
         | SendOrder order ->
+            printfn "Sending an order..."
             let! _ = client.ServerInput(order)
+            printfn "Done."
             return! loop client state
         | GetPlayerList reply ->
-            use! client = connect
+            printfn "Getting player list..."
             let! players = client.GetPlayerList()
+            printfn "Done."
             reply.Reply players
             return! loop client state
         | TryLogin(password, ctx, reply) ->
-            use! client = connect
-            let! users = updateUserDb client state.UsersDb
+            printfn "Trying to login user with pin code %s..." password
+            //let! users = updateUserDb client state.UsersDb
             let! result =
-                match users.TryGetPasswordOwner(password) with
+                match state.UsersDb.TryGetPasswordOwner(password) with
                 | Some(Users.Named name) ->
                     async {
-                        do! ctx.UserSession.LoginUser(name)
-                        return Some name
+                        try
+                            do! ctx.UserSession.LoginUser(name)
+                            printfn "Succeeded."
+                            return Some name
+                        with
+                        | exc ->
+                            printfn "Failed with exception: %A" exc
+                            return None
                     }
                 | None ->
                     async {
+                        printfn "Failed."
                         return None
                     }
             reply.Reply result
-            return! loop client { state with UsersDb = users }
+            return! loop client state
         return! loop client state
     }
     async {

@@ -146,8 +146,8 @@ module WebCommander =
               FlareRed
             ]
 
-        let speedList = [ Slow ; Normal ; Fast ]
-        let fireList = [ FreeFire ; ReturnFire ; HoldFire ]
+        let speedList = [ Slow ; Fast ]
+        let fireList = [ FreeFire ; ReturnFire ]
 
         let mkRow(defaultPlatoon) =
             let chosenOrder = Var.Create (List.head orderList)
@@ -333,10 +333,18 @@ let parseGroup filename =
 let main argv = 
     let config = Configuration.values
 
+    if not <| File.Exists(config.WaypointsFilename) then
+        eprintfn "Could not find '%s'" config.WaypointsFilename
+        failwith "Could not open waypoints filename"
+
     let waypoints =
         (parseGroup config.WaypointsFilename).ListOfMCU_Waypoint
         |> List.map (fun wp -> wp.Name.Value)
         |> List.sort
+
+    if not <| File.Exists(config.PlatoonsFilename) then
+        eprintfn "Could not find '%s'" config.PlatoonsFilename
+        failwith "Could not open platoons filename"
 
     let platoons =
         (parseGroup config.PlatoonsFilename).ListOfVehicle
@@ -345,6 +353,7 @@ let main argv =
     let rec welcome() =
         async {
             CentralAgent.agent.Post(CentralAgent.UpdateUserDb)
+            printfn "Requested to updated user DB"
             do! Async.Sleep 60000
             return! welcome()
         }

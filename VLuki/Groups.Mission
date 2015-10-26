@@ -77,7 +77,7 @@ Group
     GColor = 0;
     BColor = 0;
     LineType = 1;
-    Coalitions = [1, 2];
+    Coalitions = [1, 2, 0];
   }
   
 
@@ -100,7 +100,7 @@ Group
     GColor = 0;
     BColor = 0;
     LineType = 1;
-    Coalitions = [1, 2];
+    Coalitions = [1, 2, 0];
   }
   
 
@@ -123,7 +123,7 @@ Group
     GColor = 0;
     BColor = 0;
     LineType = 1;
-    Coalitions = [1, 2];
+    Coalitions = [1, 2, 0];
   }
   
 
@@ -146,7 +146,7 @@ Group
     GColor = 0;
     BColor = 0;
     LineType = 1;
-    Coalitions = [1, 2];
+    Coalitions = [1, 2, 0];
   }
   
 
@@ -1746,7 +1746,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 236;
+    Index = 88;
     Name = "Chernozem-NW";
     Desc = "";
     Targets = [];
@@ -1765,7 +1765,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 237;
+    Index = 89;
     Name = "Chernozem-E";
     Desc = "";
     Targets = [];
@@ -1784,7 +1784,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 238;
+    Index = 90;
     Name = "Chernozem-parking";
     Desc = "";
     Targets = [];
@@ -1808,12 +1808,12 @@ Group
 Group
 {
   Name = "Defenses";
-  Index = 88;
+  Index = 91;
   Desc = "";
   Vehicle
   {
     Name = "AT";
-    Index = 89;
+    Index = 92;
     LinkTrId = 0;
     XPos = 55450.137;
     YPos = 137.870;
@@ -1843,7 +1843,7 @@ Group
   Vehicle
   {
     Name = "AT";
-    Index = 90;
+    Index = 93;
     LinkTrId = 0;
     XPos = 54384.815;
     YPos = 137.870;
@@ -1873,7 +1873,7 @@ Group
   Vehicle
   {
     Name = "AT";
-    Index = 91;
+    Index = 94;
     LinkTrId = 0;
     XPos = 55065.130;
     YPos = 137.870;
@@ -1903,7 +1903,7 @@ Group
   Vehicle
   {
     Name = "AT";
-    Index = 92;
+    Index = 95;
     LinkTrId = 0;
     XPos = 53032.825;
     YPos = 137.870;
@@ -1933,7 +1933,7 @@ Group
   Vehicle
   {
     Name = "AT";
-    Index = 93;
+    Index = 96;
     LinkTrId = 0;
     XPos = 53351.672;
     YPos = 137.870;
@@ -1963,7 +1963,7 @@ Group
   Vehicle
   {
     Name = "AT";
-    Index = 94;
+    Index = 97;
     LinkTrId = 0;
     XPos = 53845.078;
     YPos = 137.870;
@@ -1993,7 +1993,7 @@ Group
   Vehicle
   {
     Name = "AT";
-    Index = 95;
+    Index = 98;
     LinkTrId = 0;
     XPos = 59540.915;
     YPos = 137.870;
@@ -2023,7 +2023,7 @@ Group
   Vehicle
   {
     Name = "AT";
-    Index = 96;
+    Index = 99;
     LinkTrId = 0;
     XPos = 60036.131;
     YPos = 137.870;
@@ -2053,7 +2053,7 @@ Group
   Vehicle
   {
     Name = "AT";
-    Index = 97;
+    Index = 100;
     LinkTrId = 0;
     XPos = 60636.056;
     YPos = 137.870;
@@ -2083,7 +2083,7 @@ Group
   Vehicle
   {
     Name = "AT";
-    Index = 98;
+    Index = 101;
     LinkTrId = 0;
     XPos = 49920.018;
     YPos = 137.870;
@@ -2113,7 +2113,7 @@ Group
   Vehicle
   {
     Name = "AT";
-    Index = 99;
+    Index = 102;
     LinkTrId = 0;
     XPos = 50088.292;
     YPos = 137.870;
@@ -2143,7 +2143,7 @@ Group
   Vehicle
   {
     Name = "AT";
-    Index = 100;
+    Index = 103;
     LinkTrId = 0;
     XPos = 51029.345;
     YPos = 137.870;
@@ -2173,7 +2173,7 @@ Group
   Vehicle
   {
     Name = "AT";
-    Index = 101;
+    Index = 104;
     LinkTrId = 0;
     XPos = 32608.622;
     YPos = 137.870;
@@ -2203,7 +2203,7 @@ Group
   Vehicle
   {
     Name = "AT";
-    Index = 102;
+    Index = 105;
     LinkTrId = 0;
     XPos = 32111.107;
     YPos = 137.870;
@@ -2233,7 +2233,7 @@ Group
   Vehicle
   {
     Name = "AT";
-    Index = 103;
+    Index = 106;
     LinkTrId = 0;
     XPos = 29579.953;
     YPos = 137.870;
@@ -2263,7 +2263,7 @@ Group
   Vehicle
   {
     Name = "AT";
-    Index = 104;
+    Index = 107;
     LinkTrId = 0;
     XPos = 37923.404;
     YPos = 137.870;
@@ -2293,7 +2293,7 @@ Group
   Vehicle
   {
     Name = "AT";
-    Index = 105;
+    Index = 108;
     LinkTrId = 0;
     XPos = 38612.118;
     YPos = 137.870;
@@ -2323,7 +2323,7 @@ Group
   Vehicle
   {
     Name = "AT";
-    Index = 106;
+    Index = 109;
     LinkTrId = 0;
     XPos = 41806.459;
     YPos = 137.870;
@@ -2353,7 +2353,7 @@ Group
   Vehicle
   {
     Name = "AT";
-    Index = 107;
+    Index = 110;
     LinkTrId = 0;
     XPos = 41254.656;
     YPos = 137.870;
@@ -2383,7 +2383,7 @@ Group
   Vehicle
   {
     Name = "AT";
-    Index = 108;
+    Index = 111;
     LinkTrId = 0;
     XPos = 54598.439;
     YPos = 137.870;
@@ -2413,7 +2413,7 @@ Group
   Vehicle
   {
     Name = "AT";
-    Index = 109;
+    Index = 112;
     LinkTrId = 0;
     XPos = 54241.834;
     YPos = 137.870;
@@ -2443,7 +2443,7 @@ Group
   Vehicle
   {
     Name = "AT";
-    Index = 110;
+    Index = 113;
     LinkTrId = 0;
     XPos = 53358.108;
     YPos = 137.870;
@@ -2473,7 +2473,7 @@ Group
   Vehicle
   {
     Name = "AT";
-    Index = 111;
+    Index = 114;
     LinkTrId = 0;
     XPos = 56385.692;
     YPos = 137.870;
@@ -2503,7 +2503,7 @@ Group
   Vehicle
   {
     Name = "AAA";
-    Index = 112;
+    Index = 115;
     LinkTrId = 0;
     XPos = 55256.158;
     YPos = 137.870;
@@ -2533,7 +2533,7 @@ Group
   Vehicle
   {
     Name = "AAA";
-    Index = 113;
+    Index = 116;
     LinkTrId = 0;
     XPos = 53127.419;
     YPos = 137.870;
@@ -2563,7 +2563,7 @@ Group
   Vehicle
   {
     Name = "AAA";
-    Index = 114;
+    Index = 117;
     LinkTrId = 0;
     XPos = 50694.822;
     YPos = 137.870;
@@ -2593,7 +2593,7 @@ Group
   Vehicle
   {
     Name = "AAA";
-    Index = 115;
+    Index = 118;
     LinkTrId = 0;
     XPos = 60710.580;
     YPos = 137.870;
@@ -2623,7 +2623,7 @@ Group
   Vehicle
   {
     Name = "AA";
-    Index = 116;
+    Index = 119;
     LinkTrId = 0;
     XPos = 52703.769;
     YPos = 137.870;
@@ -2653,7 +2653,7 @@ Group
   Vehicle
   {
     Name = "AA";
-    Index = 117;
+    Index = 120;
     LinkTrId = 0;
     XPos = 51890.092;
     YPos = 137.870;
@@ -2683,7 +2683,7 @@ Group
   Vehicle
   {
     Name = "AA";
-    Index = 118;
+    Index = 121;
     LinkTrId = 0;
     XPos = 55103.444;
     YPos = 137.870;
@@ -2713,7 +2713,7 @@ Group
   Vehicle
   {
     Name = "AAA";
-    Index = 119;
+    Index = 122;
     LinkTrId = 0;
     XPos = 55203.630;
     YPos = 137.870;
@@ -2743,7 +2743,7 @@ Group
   Vehicle
   {
     Name = "AAA";
-    Index = 120;
+    Index = 123;
     LinkTrId = 0;
     XPos = 53174.562;
     YPos = 137.870;
@@ -2773,7 +2773,7 @@ Group
   Vehicle
   {
     Name = "AAA";
-    Index = 121;
+    Index = 124;
     LinkTrId = 0;
     XPos = 57137.342;
     YPos = 137.870;
@@ -2803,7 +2803,7 @@ Group
   Vehicle
   {
     Name = "AAA";
-    Index = 122;
+    Index = 125;
     LinkTrId = 0;
     XPos = 32344.183;
     YPos = 137.870;
@@ -2833,7 +2833,7 @@ Group
   Vehicle
   {
     Name = "AAA";
-    Index = 123;
+    Index = 126;
     LinkTrId = 0;
     XPos = 32424.231;
     YPos = 137.870;
@@ -2863,7 +2863,7 @@ Group
   Vehicle
   {
     Name = "AAA";
-    Index = 124;
+    Index = 127;
     LinkTrId = 0;
     XPos = 31968.990;
     YPos = 137.870;
@@ -2893,7 +2893,7 @@ Group
   Vehicle
   {
     Name = "AAA";
-    Index = 125;
+    Index = 128;
     LinkTrId = 0;
     XPos = 32914.808;
     YPos = 137.870;
@@ -2923,7 +2923,7 @@ Group
   Vehicle
   {
     Name = "AA";
-    Index = 126;
+    Index = 129;
     LinkTrId = 0;
     XPos = 29130.624;
     YPos = 137.870;
@@ -2953,7 +2953,7 @@ Group
   Vehicle
   {
     Name = "AA";
-    Index = 127;
+    Index = 130;
     LinkTrId = 0;
     XPos = 32895.594;
     YPos = 137.870;
@@ -2983,7 +2983,7 @@ Group
   Vehicle
   {
     Name = "AA";
-    Index = 128;
+    Index = 131;
     LinkTrId = 0;
     XPos = 55443.268;
     YPos = 137.870;
@@ -3013,7 +3013,7 @@ Group
   Vehicle
   {
     Name = "AA";
-    Index = 129;
+    Index = 132;
     LinkTrId = 0;
     XPos = 53635.994;
     YPos = 137.870;
@@ -3047,13 +3047,13 @@ Group
 Group
 {
   Name = "Airfields";
-  Index = 130;
+  Index = 133;
   Desc = "";
   Airfield
   {
     Name = "Velikie Luki";
-    Index = 131;
-    LinkTrId = 132;
+    Index = 134;
+    LinkTrId = 135;
     XPos = 56857.246;
     YPos = 135.120;
     ZPos = 71542.109;
@@ -3318,7 +3318,7 @@ Group
 
   MCU_TR_Entity
   {
-    Index = 132;
+    Index = 135;
     Name = "Velikie Luki entity";
     Desc = "";
     Targets = [];
@@ -3330,15 +3330,15 @@ Group
     YOri = 0.00;
     ZOri = 0.00;
     Enabled = 1;
-    MisObjID = 131;
+    MisObjID = 134;
   }
   
 
   Airfield
   {
     Name = "Chernozem";
-    Index = 134;
-    LinkTrId = 135;
+    Index = 137;
+    LinkTrId = 138;
     XPos = 42429.664;
     YPos = 135.120;
     ZPos = 53190.085;
@@ -3549,7 +3549,7 @@ Group
 
   MCU_TR_Entity
   {
-    Index = 135;
+    Index = 138;
     Name = "Chernozem entity";
     Desc = "";
     Targets = [];
@@ -3561,15 +3561,15 @@ Group
     YOri = 0.00;
     ZOri = 0.00;
     Enabled = 1;
-    MisObjID = 134;
+    MisObjID = 137;
   }
   
 
   Airfield
   {
     Name = "Isocha";
-    Index = 137;
-    LinkTrId = 138;
+    Index = 140;
+    LinkTrId = 141;
     XPos = 32593.372;
     YPos = 135.120;
     ZPos = 36169.300;
@@ -3768,7 +3768,7 @@ Group
 
   MCU_TR_Entity
   {
-    Index = 138;
+    Index = 141;
     Name = "Isocha entity";
     Desc = "";
     Targets = [];
@@ -3780,16 +3780,16 @@ Group
     YOri = 0.00;
     ZOri = 0.00;
     Enabled = 1;
-    MisObjID = 137;
+    MisObjID = 140;
   }
   
 
   MCU_CheckZone
   {
-    Index = 140;
+    Index = 143;
     Name = "CapturedByAllied";
     Desc = "";
-    Targets = [141];
+    Targets = [144];
     Objects = [];
     XPos = 42370.165;
     YPos = 126.504;
@@ -3806,10 +3806,10 @@ Group
 
   MCU_CheckZone
   {
-    Index = 142;
+    Index = 145;
     Name = "CapturedByAxis";
     Desc = "";
-    Targets = [143];
+    Targets = [146];
     Objects = [];
     XPos = 42367.991;
     YPos = 126.504;
@@ -3826,11 +3826,11 @@ Group
 
   MCU_CMD_Behaviour
   {
-    Index = 143;
+    Index = 146;
     Name = "command Behaviour";
     Desc = "";
     Targets = [];
-    Objects = [135];
+    Objects = [138];
     XPos = 42368.278;
     YPos = 126.504;
     ZPos = 53208.495;
@@ -3852,11 +3852,11 @@ Group
 
   MCU_CMD_Behaviour
   {
-    Index = 141;
+    Index = 144;
     Name = "command Behaviour";
     Desc = "";
     Targets = [];
-    Objects = [135];
+    Objects = [138];
     XPos = 42370.967;
     YPos = 126.504;
     ZPos = 53208.500;
@@ -3879,8 +3879,8 @@ Group
   Block
   {
     Name = "RunwayHit";
-    Index = 146;
-    LinkTrId = 147;
+    Index = 149;
+    LinkTrId = 150;
     XPos = 42520.573;
     YPos = 135.120;
     ZPos = 53242.452;
@@ -3900,35 +3900,35 @@ Group
 
   MCU_TR_Entity
   {
-    Index = 147;
-    Name = "RunwayHit entity";
-    Desc = "";
-    Targets = [];
-    Objects = [];
-    XPos = 42520.573;
-    YPos = 135.320;
-    ZPos = 53242.452;
-    XOri = 0.00;
-    YOri = 0.00;
-    ZOri = 0.00;
-    Enabled = 1;
-    MisObjID = 146;
-    OnEvents
-    {
-      OnEvent
-      {
-        Type = 13;
-        TarId = 149;
-      }
-    }
-  }
-  
-
-  Block
-  {
-    Name = "RunwayHit";
     Index = 150;
-    LinkTrId = 151;
+    Name = "RunwayHit entity";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 42520.573;
+    YPos = 135.320;
+    ZPos = 53242.452;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Enabled = 1;
+    MisObjID = 149;
+    OnEvents
+    {
+      OnEvent
+      {
+        Type = 13;
+        TarId = 152;
+      }
+    }
+  }
+  
+
+  Block
+  {
+    Name = "RunwayHit";
+    Index = 153;
+    LinkTrId = 154;
     XPos = 42336.693;
     YPos = 135.120;
     ZPos = 53409.017;
@@ -3948,73 +3948,25 @@ Group
 
   MCU_TR_Entity
   {
-    Index = 151;
-    Name = "RunwayHit entity";
-    Desc = "";
-    Targets = [];
-    Objects = [];
-    XPos = 42336.693;
-    YPos = 135.320;
-    ZPos = 53409.017;
-    XOri = 0.00;
-    YOri = 0.00;
-    ZOri = 0.00;
-    Enabled = 1;
-    MisObjID = 150;
-    OnEvents
-    {
-      OnEvent
-      {
-        Type = 13;
-        TarId = 153;
-      }
-    }
-  }
-  
-
-  Block
-  {
-    Name = "RunwayHit";
     Index = 154;
-    LinkTrId = 155;
-    XPos = 42192.324;
-    YPos = 135.120;
-    ZPos = 53541.927;
-    XOri = 0.00;
-    YOri = 0.00;
-    ZOri = 0.00;
-    Model = "graphics\blocks\fake_block.mgm";
-    Script = "LuaScripts\WorldObjects\Blocks\fake_block.txt";
-    Country = 0;
-    Desc = "";
-    Durability = 1000;
-    DamageReport = 50;
-    DamageThreshold = 1;
-    DeleteAfterDeath = 1;
-  }
-  
-
-  MCU_TR_Entity
-  {
-    Index = 155;
     Name = "RunwayHit entity";
     Desc = "";
     Targets = [];
     Objects = [];
-    XPos = 42192.324;
+    XPos = 42336.693;
     YPos = 135.320;
-    ZPos = 53541.927;
+    ZPos = 53409.017;
     XOri = 0.00;
     YOri = 0.00;
     ZOri = 0.00;
     Enabled = 1;
-    MisObjID = 154;
+    MisObjID = 153;
     OnEvents
     {
       OnEvent
       {
         Type = 13;
-        TarId = 157;
+        TarId = 156;
       }
     }
   }
@@ -4023,8 +3975,56 @@ Group
   Block
   {
     Name = "RunwayHit";
+    Index = 157;
+    LinkTrId = 158;
+    XPos = 42192.324;
+    YPos = 135.120;
+    ZPos = 53541.927;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Model = "graphics\blocks\fake_block.mgm";
+    Script = "LuaScripts\WorldObjects\Blocks\fake_block.txt";
+    Country = 0;
+    Desc = "";
+    Durability = 1000;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+  }
+  
+
+  MCU_TR_Entity
+  {
     Index = 158;
-    LinkTrId = 159;
+    Name = "RunwayHit entity";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 42192.324;
+    YPos = 135.320;
+    ZPos = 53541.927;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Enabled = 1;
+    MisObjID = 157;
+    OnEvents
+    {
+      OnEvent
+      {
+        Type = 13;
+        TarId = 160;
+      }
+    }
+  }
+  
+
+  Block
+  {
+    Name = "RunwayHit";
+    Index = 161;
+    LinkTrId = 162;
     XPos = 41999.833;
     YPos = 135.120;
     ZPos = 53717.232;
@@ -4044,7 +4044,7 @@ Group
 
   MCU_TR_Entity
   {
-    Index = 159;
+    Index = 162;
     Name = "RunwayHit entity";
     Desc = "";
     Targets = [];
@@ -4056,13 +4056,13 @@ Group
     YOri = 0.00;
     ZOri = 0.00;
     Enabled = 1;
-    MisObjID = 158;
+    MisObjID = 161;
     OnEvents
     {
       OnEvent
       {
         Type = 13;
-        TarId = 161;
+        TarId = 164;
       }
     }
   }
@@ -4070,10 +4070,10 @@ Group
 
   MCU_Timer
   {
-    Index = 153;
+    Index = 156;
     Name = "1s";
     Desc = "";
-    Targets = [149];
+    Targets = [152];
     Objects = [];
     XPos = 42300.288;
     YPos = 126.504;
@@ -4088,10 +4088,10 @@ Group
 
   MCU_Timer
   {
-    Index = 157;
+    Index = 160;
     Name = "2s";
     Desc = "";
-    Targets = [149];
+    Targets = [152];
     Objects = [];
     XPos = 42153.628;
     YPos = 126.504;
@@ -4106,10 +4106,10 @@ Group
 
   MCU_Timer
   {
-    Index = 161;
+    Index = 164;
     Name = "3s";
     Desc = "";
-    Targets = [149];
+    Targets = [152];
     Objects = [];
     XPos = 41970.303;
     YPos = 126.504;
@@ -4124,10 +4124,10 @@ Group
 
   MCU_Counter
   {
-    Index = 149;
+    Index = 152;
     Name = "Trigger Counter";
     Desc = "";
-    Targets = [166,167];
+    Targets = [169,170];
     Objects = [];
     XPos = 42141.499;
     YPos = 126.504;
@@ -4142,11 +4142,11 @@ Group
 
   MCU_CMD_Behaviour
   {
-    Index = 166;
+    Index = 169;
     Name = "command Behaviour";
     Desc = "";
     Targets = [];
-    Objects = [135];
+    Objects = [138];
     XPos = 42140.804;
     YPos = 126.504;
     ZPos = 53271.590;
@@ -4168,10 +4168,10 @@ Group
 
   MCU_Deactivate
   {
-    Index = 167;
+    Index = 170;
     Name = "Trigger Deactivate";
     Desc = "";
-    Targets = [142,140];
+    Targets = [145,143];
     Objects = [];
     XPos = 42358.874;
     YPos = 126.504;
@@ -4184,10 +4184,10 @@ Group
 
   MCU_TR_MissionBegin
   {
-    Index = 170;
+    Index = 173;
     Name = "Translator Mission Begin";
     Desc = "";
-    Targets = [142,140];
+    Targets = [145,143];
     Objects = [];
     XPos = 42366.598;
     YPos = 126.504;
@@ -4206,11 +4206,11 @@ Group
 Group
 {
   Name = "Waypoints";
-  Index = 171;
+  Index = 174;
   Desc = "";
   MCU_Waypoint
   {
-    Index = 172;
+    Index = 175;
     Name = "Novosokolniki-N";
     Desc = "";
     Targets = [];
@@ -4229,7 +4229,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 173;
+    Index = 176;
     Name = "Novosokolniki-NW";
     Desc = "";
     Targets = [];
@@ -4248,7 +4248,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 174;
+    Index = 177;
     Name = "Novosokolniki-W";
     Desc = "";
     Targets = [];
@@ -4267,7 +4267,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 175;
+    Index = 178;
     Name = "Novosolniki-E";
     Desc = "";
     Targets = [];
@@ -4286,7 +4286,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 176;
+    Index = 179;
     Name = "Velikie-Luki-WNW";
     Desc = "";
     Targets = [];
@@ -4305,7 +4305,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 177;
+    Index = 180;
     Name = "Velike-Luki-NWN";
     Desc = "";
     Targets = [];
@@ -4324,7 +4324,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 178;
+    Index = 181;
     Name = "Velikie-Luki-W";
     Desc = "";
     Targets = [];
@@ -4343,7 +4343,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 179;
+    Index = 182;
     Name = "Velikie-Luki-N";
     Desc = "";
     Targets = [];
@@ -4362,7 +4362,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 180;
+    Index = 183;
     Name = "Velikie-Luki-SW";
     Desc = "";
     Targets = [];
@@ -4381,7 +4381,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 181;
+    Index = 184;
     Name = "Velikie-Luki-S";
     Desc = "";
     Targets = [];
@@ -4400,7 +4400,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 182;
+    Index = 185;
     Name = "Velikie-Luki-E";
     Desc = "";
     Targets = [];
@@ -4419,7 +4419,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 183;
+    Index = 186;
     Name = "Velikie-Luki-SE";
     Desc = "";
     Targets = [];
@@ -4438,7 +4438,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 184;
+    Index = 187;
     Name = "Zitova-W";
     Desc = "";
     Targets = [];
@@ -4457,7 +4457,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 185;
+    Index = 188;
     Name = "Zitova-E";
     Desc = "";
     Targets = [];
@@ -4476,7 +4476,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 186;
+    Index = 189;
     Name = "Gribushino-E";
     Desc = "";
     Targets = [];
@@ -4495,7 +4495,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 187;
+    Index = 190;
     Name = "Gribushino-W";
     Desc = "";
     Targets = [];
@@ -4514,7 +4514,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 188;
+    Index = 191;
     Name = "Botovo-N";
     Desc = "";
     Targets = [];
@@ -4533,7 +4533,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 189;
+    Index = 192;
     Name = "Botovo-S";
     Desc = "";
     Targets = [];
@@ -4552,7 +4552,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 190;
+    Index = 193;
     Name = "Bulynino-S";
     Desc = "";
     Targets = [];
@@ -4571,7 +4571,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 191;
+    Index = 194;
     Name = "Bulynino-N";
     Desc = "";
     Targets = [];
@@ -4590,7 +4590,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 192;
+    Index = 195;
     Name = "Davievo-N";
     Desc = "";
     Targets = [];
@@ -4609,7 +4609,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 193;
+    Index = 196;
     Name = "Davievo-S";
     Desc = "";
     Targets = [];
@@ -4628,7 +4628,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 194;
+    Index = 197;
     Name = "Kuriyakovo-N";
     Desc = "";
     Targets = [];
@@ -4647,7 +4647,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 195;
+    Index = 198;
     Name = "Kuriyakovo";
     Desc = "";
     Targets = [];
@@ -4666,7 +4666,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 196;
+    Index = 199;
     Name = "Staraya-Reka-SE";
     Desc = "";
     Targets = [];
@@ -4685,7 +4685,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 197;
+    Index = 200;
     Name = "Staraya-Reka-SW";
     Desc = "";
     Targets = [];
@@ -4704,7 +4704,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 198;
+    Index = 201;
     Name = "Staraya-Reka-NW";
     Desc = "";
     Targets = [];
@@ -4723,7 +4723,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 199;
+    Index = 202;
     Name = "Staraya-Reka-NW";
     Desc = "";
     Targets = [];
@@ -4742,7 +4742,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 200;
+    Index = 203;
     Name = "Chihachevo-S";
     Desc = "";
     Targets = [];
@@ -4761,7 +4761,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 201;
+    Index = 204;
     Name = "Chihachevo-N";
     Desc = "";
     Targets = [];
@@ -4780,7 +4780,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 202;
+    Index = 205;
     Name = "Zelenovo-W";
     Desc = "";
     Targets = [];
@@ -4799,7 +4799,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 203;
+    Index = 206;
     Name = "Zelenovo-E";
     Desc = "";
     Targets = [];
@@ -4818,7 +4818,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 204;
+    Index = 207;
     Name = "Lamishino-W";
     Desc = "";
     Targets = [];
@@ -4837,7 +4837,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 205;
+    Index = 208;
     Name = "Lamishino-N";
     Desc = "";
     Targets = [];
@@ -4856,7 +4856,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 206;
+    Index = 209;
     Name = "Izitsa-S";
     Desc = "";
     Targets = [];
@@ -4875,7 +4875,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 207;
+    Index = 210;
     Name = "Izitsa-N";
     Desc = "";
     Targets = [];
@@ -4894,7 +4894,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 208;
+    Index = 211;
     Name = "Bolotovo-W";
     Desc = "";
     Targets = [];
@@ -4913,7 +4913,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 209;
+    Index = 212;
     Name = "Bolotovo-E";
     Desc = "";
     Targets = [];
@@ -4932,7 +4932,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 210;
+    Index = 213;
     Name = "Palki-N";
     Desc = "";
     Targets = [];
@@ -4951,7 +4951,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 211;
+    Index = 214;
     Name = "Palki-S";
     Desc = "";
     Targets = [];
@@ -4970,7 +4970,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 212;
+    Index = 215;
     Name = "Markiznova-S";
     Desc = "";
     Targets = [];
@@ -4989,7 +4989,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 213;
+    Index = 216;
     Name = "Markiznova-N";
     Desc = "";
     Targets = [];
@@ -5008,7 +5008,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 214;
+    Index = 217;
     Name = "Duganovo-S";
     Desc = "";
     Targets = [];
@@ -5027,7 +5027,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 215;
+    Index = 218;
     Name = "Duganovo-N";
     Desc = "";
     Targets = [];
@@ -5046,7 +5046,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 216;
+    Index = 219;
     Name = "Sokolniki-W";
     Desc = "";
     Targets = [];
@@ -5065,7 +5065,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 217;
+    Index = 220;
     Name = "Sokolniki-E";
     Desc = "";
     Targets = [];
@@ -5084,7 +5084,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 218;
+    Index = 221;
     Name = "Lakomitsa-E";
     Desc = "";
     Targets = [];
@@ -5103,7 +5103,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 219;
+    Index = 222;
     Name = "Lakomitsa-W";
     Desc = "";
     Targets = [];
@@ -5122,7 +5122,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 220;
+    Index = 223;
     Name = "Timochny-E";
     Desc = "";
     Targets = [];
@@ -5141,7 +5141,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 221;
+    Index = 224;
     Name = "Timochny-W";
     Desc = "";
     Targets = [];
@@ -5160,7 +5160,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 222;
+    Index = 225;
     Name = "Kuchina-E";
     Desc = "";
     Targets = [];
@@ -5179,7 +5179,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 223;
+    Index = 226;
     Name = "Kuchina-W";
     Desc = "";
     Targets = [];
@@ -5198,7 +5198,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 224;
+    Index = 227;
     Name = "Naumtsevo-W";
     Desc = "";
     Targets = [];
@@ -5217,7 +5217,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 225;
+    Index = 228;
     Name = "Yekimova-N";
     Desc = "";
     Targets = [];
@@ -5236,7 +5236,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 226;
+    Index = 229;
     Name = "Yekimova-S";
     Desc = "";
     Targets = [];
@@ -5255,7 +5255,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 227;
+    Index = 230;
     Name = "Naumtsevo-E";
     Desc = "";
     Targets = [];
@@ -5274,7 +5274,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 228;
+    Index = 231;
     Name = "North";
     Desc = "";
     Targets = [];
@@ -5293,7 +5293,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 229;
+    Index = 232;
     Name = "West";
     Desc = "";
     Targets = [];
@@ -5312,7 +5312,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 230;
+    Index = 233;
     Name = "South";
     Desc = "";
     Targets = [];
@@ -5331,7 +5331,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 231;
+    Index = 234;
     Name = "East";
     Desc = "";
     Targets = [];
@@ -5350,7 +5350,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 232;
+    Index = 235;
     Name = "North-East";
     Desc = "";
     Targets = [];
@@ -5369,7 +5369,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 233;
+    Index = 236;
     Name = "North-West";
     Desc = "";
     Targets = [];
@@ -5388,7 +5388,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 234;
+    Index = 237;
     Name = "South-West";
     Desc = "";
     Targets = [];
@@ -5407,7 +5407,7 @@ Group
 
   MCU_Waypoint
   {
-    Index = 235;
+    Index = 238;
     Name = "South-East";
     Desc = "";
     Targets = [];

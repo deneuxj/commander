@@ -22,7 +22,7 @@ Group
     GColor = 0;
     BColor = 0;
     LineType = 1;
-    Coalitions = [1, 2];
+    Coalitions = [1, 2, 0];
   }
   
 
@@ -45,7 +45,7 @@ Group
     GColor = 0;
     BColor = 0;
     LineType = 1;
-    Coalitions = [1, 2];
+    Coalitions = [1, 2, 0];
   }
   
 
@@ -68,7 +68,7 @@ Group
     GColor = 0;
     BColor = 0;
     LineType = 1;
-    Coalitions = [1, 2];
+    Coalitions = [1, 2, 0];
   }
   
 
@@ -91,7 +91,7 @@ Group
     GColor = 0;
     BColor = 0;
     LineType = 1;
-    Coalitions = [1, 2];
+    Coalitions = [1, 2, 0];
   }
   
 

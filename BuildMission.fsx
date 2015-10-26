@@ -164,8 +164,13 @@ with
             Array2D.init 3 3 (fun prio speed ->
                 let prio : WaypointPriority = enum prio
                 let speed : TravelSpeed = enum speed
-                waypoints
-                |> List.map (fun wp -> createWaypoint prio speed (getPos wp) wp.Name.Value)
+                // Skip some of the
+                match speed, prio with
+                | TravelSpeed.Normal, _
+                | _, WaypointPriority.High -> []
+                | _ ->
+                    waypoints
+                    |> List.map (fun wp -> createWaypoint prio speed (getPos wp) wp.Name.Value)
             )
 
         let vehicleLogic = newVehicles()
