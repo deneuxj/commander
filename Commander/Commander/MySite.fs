@@ -84,7 +84,7 @@ module WebCommander =
             | FormationAttack -> "Attack formation"
             | FlareGreen -> "Fire a green flare"
             | FlareRed -> "Fire a red flare"
-            | Move dest -> sprintf "Move towards %s" dest
+            | Move dest -> dest
 
     type OrderAndPolicy =
         OrderAndPolicy of Order * Policy option
@@ -144,41 +144,52 @@ module WebCommander =
               FormationAttack
               FlareGreen
               FlareRed
-            ] @ moveTo
+            ]
 
         let speedList = [ Slow ; Normal ; Fast ]
         let fireList = [ FreeFire ; ReturnFire ; HoldFire ]
 
-        let mkRow() =
+        let mkRow(defaultPlatoon) =
             let chosenOrder = Var.Create (List.head orderList)
+            let chosenDestination = Var.Create (List.head moveTo)
             let chosenSpeed = Var.Create (List.head speedList)
             let chosenFire = Var.Create (List.head fireList)
-            let chosenPlatoon = Var.Create (List.head platoons)
+            let chosenPlatoon = Var.Create (List.nth platoons defaultPlatoon)
             div [
                 Doc.Select [] id platoons chosenPlatoon
                 Doc.Select [] Order.Show orderList chosenOrder
-                Doc.Select [] Speed.Show speedList chosenSpeed
-                Doc.Select [] FireControl.Show fireList chosenFire
-                Doc.Button "Send" [] (fun () ->
+                Doc.Button "Order" [] (fun () ->
                     let orderAndPolicy =
-                        OrderAndPolicy(chosenOrder.Value, Some { Speed = chosenSpeed.Value ; FireControl = chosenFire.Value })
+                        OrderAndPolicy(chosenOrder.Value, None)
                     Server.SendOrder(orderAndPolicy.ToServerInput(chosenPlatoon.Value, compressDestination))
                 )
+                text " - "
+                text "Move towards..."
+                Doc.Select [] Order.Show moveTo chosenDestination
+                text " at "
+                Doc.Select [] Speed.Show speedList chosenSpeed
+                text ", "
+                Doc.Select [] FireControl.Show fireList chosenFire
+                Doc.Button "Move" [] (fun () ->
+                    let orderAndPolicy =
+                        OrderAndPolicy(chosenDestination.Value, Some { Speed = chosenSpeed.Value ; FireControl = chosenFire.Value })
+                    Server.SendOrder(orderAndPolicy.ToServerInput(chosenPlatoon.Value, compressDestination))
+                )
+                text " - "
                 Doc.Button "Stop" [] (fun () ->
                     Server.SendOrder(OrderAndPolicy(FormationStop, None).ToServerInput(chosenPlatoon.Value, compressDestination))
                 )
+                text " "
                 Doc.Button "Continue" [] (fun () ->
                     Server.SendOrder(OrderAndPolicy(FormationContinue, None).ToServerInput(chosenPlatoon.Value, compressDestination))
                 )
             ] :> Doc
 
+        let numRows =
+            min (List.length platoons) 6
         div [
-            mkRow()
-            mkRow()
-            mkRow()
-            mkRow()
-            mkRow()
-            mkRow()
+            for i in 0..numRows-1 do
+                yield mkRow i
         ]
 
     let ShowResult(result) =
