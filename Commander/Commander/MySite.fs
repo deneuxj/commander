@@ -16,6 +16,7 @@ module Server =
 
     [<Rpc>]
     let SendOrder cmd =
+        printfn "Order sent: %s" cmd
         CentralAgent.agent.Post (CentralAgent.SendOrder cmd)
 
     [<Rpc>]
@@ -37,8 +38,32 @@ module WebCommander =
     open WebSharper.JavaScript
     open WebSharper.UI.Next.Client
 
-    type Destination =
-        { Destination : string }
+    type Speed =
+        | Slow
+        | Normal
+        | Fast
+    with
+        static member Show(speed) =
+            match speed with
+            | Slow -> "slow speed"
+            | Normal -> "normal speed"
+            | Fast -> "maximum speed"
+
+    type FireControl =
+        | FreeFire
+        | ReturnFire
+        | HoldFire
+    with
+        static member Show(fire) =
+            match fire with
+            | FreeFire -> "free fire"
+            | ReturnFire -> "return fire only"
+            | HoldFire -> "hold fire"
+
+    type Policy =
+        { Speed : Speed
+          FireControl : FireControl
+        }
 
     type Order =
         | FormationStop
@@ -48,10 +73,8 @@ module WebCommander =
         | FormationAttack
         | FlareGreen
         | FlareRed
-        | Attack of Destination
-        | Move of Destination
-
-    type Order with
+        | Move of string
+    with
         static member Show(order : Order) =
             match order with
             | FormationStop -> "Stop"
@@ -61,60 +84,101 @@ module WebCommander =
             | FormationAttack -> "Attack formation"
             | FlareGreen -> "Fire a green flare"
             | FlareRed -> "Fire a red flare"
-            | Attack dest -> sprintf "Move towards %s, free fire" dest.Destination
-            | Move dest -> sprintf "Move towards %s, return fire only" dest.Destination
+            | Move dest -> sprintf "Move towards %s" dest
 
-        member this.ToServerInput(platoon) =
+    type OrderAndPolicy =
+        OrderAndPolicy of Order * Policy option
+    with
+        member this.ToServerInput(platoon, compressDestination) =
             match this with
-            | FormationStop -> sprintf "Order_%s_Stop" platoon
-            | FormationContinue -> sprintf "Order_%s_Continue" platoon
-            | FormationColumn -> sprintf "Order_%s_Column" platoon
-            | FormationOnRoad -> sprintf "Order_%s_OnRoad" platoon
-            | FormationAttack -> sprintf "Order_%s_Attack" platoon
-            | FlareGreen -> sprintf "Order_%s_GreenFlare" platoon
-            | FlareRed -> sprintf "Order_%s_RedFlare" platoon
-            | Attack dest -> sprintf "Attack_%s_%s" platoon (dest.Destination.Replace(" ", "_"))
-            | Move dest -> sprintf "Move_%s_%s" platoon (dest.Destination.Replace(" ", "_"))
+            | OrderAndPolicy (FormationStop, _) -> sprintf "Order_%s_Stop" platoon
+            | OrderAndPolicy (FormationContinue, _) -> sprintf "Order_%s_Continue" platoon
+            | OrderAndPolicy (FormationColumn, _) -> sprintf "Order_%s_Column" platoon
+            | OrderAndPolicy (FormationOnRoad, _) -> sprintf "Order_%s_OnRoad" platoon
+            | OrderAndPolicy (FormationAttack, _) -> sprintf "Order_%s_Attack" platoon
+            | OrderAndPolicy (FlareGreen, _) -> sprintf "Order_%s_GreenFlare" platoon
+            | OrderAndPolicy (FlareRed, _) -> sprintf "Order_%s_RedFlare" platoon
+            | OrderAndPolicy (Move dest, Some policy) ->
+                let prefix1 =
+                    match policy.FireControl with
+                    | FreeFire -> "F"
+                    | ReturnFire -> "R"
+                    | HoldFire -> "H"
+                let prefix2 =
+                    match policy.Speed with
+                    | Slow -> "S"
+                    | Normal -> "N"
+                    | Fast -> "F"
+                sprintf "%s%s_%s_%s" prefix1 prefix2 platoon (compressDestination dest)
+            | OrderAndPolicy (Move dest, None) ->
+                OrderAndPolicy(Move dest, Some { Speed = Normal ; FireControl = ReturnFire }).ToServerInput(platoon, compressDestination)
 
     let TakeOrders(waypoints, platoons) =
-        let attackTo =
+        let wpRank =
             waypoints
-            |> List.map (fun name -> Attack { Destination = name })
+            |> List.mapi (fun i wp -> (wp, i))
+            |> List.fold (fun m (wp, i) -> Map.add wp i m) Map.empty
+
+        let compressDestination wp =
+            sprintf "WP%d" (wpRank.[wp])
 
         let moveTo =
             waypoints
-            |> List.map (fun name -> Move { Destination = name })
+            |> List.sortBy (
+                function
+                | "North" -> (0, None)
+                | "North-East" -> (1, None)
+                | "East" -> (2, None)
+                | "South-East" -> (3, None)
+                | "South" -> (4, None)
+                | "South-West" -> (5, None)
+                | "West" -> (6, None)
+                | "North-West" -> (7, None)
+                | place -> (8, Some place)
+            )
+            |> List.map (fun name -> Move name )
 
         let orderList =
             [ FormationOnRoad
-              FormationStop
-              FormationContinue
               FormationColumn
               FormationAttack
               FlareGreen
               FlareRed
-            ] @ attackTo @ moveTo
+            ] @ moveTo
 
-        let numRows = 8
-        let chosenOrders = Array.init numRows (fun _ -> Var.Create FormationStop)        
-        let myPlatoons =
-            let numPlatoons = List.length platoons
-            Array.init numRows (fun i -> Var.Create <| List.nth platoons (max i (numPlatoons - 1)))
+        let speedList = [ Slow ; Normal ; Fast ]
+        let fireList = [ FreeFire ; ReturnFire ; HoldFire ]
+
+        let mkRow() =
+            let chosenOrder = Var.Create (List.head orderList)
+            let chosenSpeed = Var.Create (List.head speedList)
+            let chosenFire = Var.Create (List.head fireList)
+            let chosenPlatoon = Var.Create (List.head platoons)
+            div [
+                Doc.Select [] id platoons chosenPlatoon
+                Doc.Select [] Order.Show orderList chosenOrder
+                Doc.Select [] Speed.Show speedList chosenSpeed
+                Doc.Select [] FireControl.Show fireList chosenFire
+                Doc.Button "Send" [] (fun () ->
+                    let orderAndPolicy =
+                        OrderAndPolicy(chosenOrder.Value, Some { Speed = chosenSpeed.Value ; FireControl = chosenFire.Value })
+                    Server.SendOrder(orderAndPolicy.ToServerInput(chosenPlatoon.Value, compressDestination))
+                )
+                Doc.Button "Stop" [] (fun () ->
+                    Server.SendOrder(OrderAndPolicy(FormationStop, None).ToServerInput(chosenPlatoon.Value, compressDestination))
+                )
+                Doc.Button "Continue" [] (fun () ->
+                    Server.SendOrder(OrderAndPolicy(FormationContinue, None).ToServerInput(chosenPlatoon.Value, compressDestination))
+                )
+            ] :> Doc
+
         div [
-            for platoon, order in Array.zip myPlatoons chosenOrders do
-                yield div [
-                    Doc.Select [] id platoons platoon
-                    Doc.Select [] Order.Show orderList order
-                    Doc.Button "Send" [] (fun () ->
-                        Server.SendOrder(order.Value.ToServerInput(platoon.Value))
-                    )
-                    Doc.Button "Stop" [] (fun () ->
-                        Server.SendOrder(FormationStop.ToServerInput(platoon.Value))
-                    )
-                    Doc.Button "Continue" [] (fun () ->
-                        Server.SendOrder(FormationContinue.ToServerInput(platoon.Value))
-                    )
-                ] :> Doc
+            mkRow()
+            mkRow()
+            mkRow()
+            mkRow()
+            mkRow()
+            mkRow()
         ]
 
     let ShowResult(result) =
@@ -207,6 +271,7 @@ let MySite(waypoints, platoons) =
             async {
                 let! user = ctx.UserSession.GetLoggedInUser()
                 match user with
+                | None
                 | Some _ ->
                     return!
                         Content.Page(
@@ -260,6 +325,7 @@ let main argv =
     let waypoints =
         (parseGroup config.WaypointsFilename).ListOfMCU_Waypoint
         |> List.map (fun wp -> wp.Name.Value)
+        |> List.sort
 
     let platoons =
         (parseGroup config.PlatoonsFilename).ListOfVehicle

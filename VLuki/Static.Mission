@@ -183,7 +183,7 @@ Group
     Zone = 800;
     Cylinder = 1;
     Closer = 1;
-    VehicleCoalitions = [1];
+    VehicleCoalitions = [2];
   }
   
 
@@ -269,7 +269,7 @@ Group
     Zone = 800;
     Cylinder = 1;
     Closer = 1;
-    VehicleCoalitions = [1];
+    VehicleCoalitions = [2];
   }
   
 

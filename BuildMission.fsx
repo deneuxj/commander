@@ -51,12 +51,17 @@ let mkInput (subst : McuBase seq -> int -> int) name prefix (cmd : McuCommand) =
             .CreateMcuCommand()
     subst [input] |> ignore
     input.Targets <- [cmd.Index]
-    input                
+    input
 
 type WaypointPriority =
     | Low = 0
     | Medium = 1
     | High = 2
+
+type TravelSpeed =
+    | Slow = 0
+    | Normal = 1
+    | Fast = 2
 
 let tryGetRussianBaseEquivalent =
     function
@@ -99,11 +104,11 @@ let tryGetGermanArtilleryBaseEquivalent =
     | _ -> None
 
 let getGermanArtilleryScriptEquivalent script =
-    let re = Regex(@"graphics\\artillery\\(.*)\\(.*)\.txt")
+    let re = Regex(@"LuaScripts\\WorldObjects\\vehicles\\(.*)\.txt")
     let m = re.Match(script)
     if m.Success then
-        match tryGetGermanArtilleryBaseEquivalent m.Groups.[2].Value with
-        | Some (sub, ger) -> sprintf @"graphics\artillery\%s\%s.txt" sub ger
+        match tryGetGermanArtilleryBaseEquivalent m.Groups.[1].Value with
+        | Some (_, ger) -> sprintf @"LuaScripts\WorldObjects\vehicles\%s.txt" ger
         | None -> script
     else
         script
@@ -120,13 +125,6 @@ let getGermanArtilleryModelEquivalent model =
 
 type VehicleGroup =
     { Leader : HasEntity
-      TravelTo : McuCommand list
-      AttackTo : McuCommand list
-      Stop : McuCommand
-      Continue : McuCommand
-      Column : McuCommand
-      OnRoad : McuCommand
-      Attack : McuCommand
       All : McuBase list
     }
 with
@@ -136,12 +134,24 @@ with
         member this.LcStrings = []
 
     static member Create(subst : McuBase seq -> int -> int, name : string, pos : Vec3, ori : float, swapToRussians : bool, speed : int, newVehicles : unit -> McuBase list, getLeader : McuBase list -> HasEntity, waypoints : T.MCU_Waypoint list) =
-        let createWaypoint (prio : WaypointPriority) (pos : Vec3) name =
+        let wpRank =
+            waypoints
+            |> List.mapi (fun i wp -> (wp.Name.Value, i))
+            |> List.fold (fun m (wp, i) -> Map.add wp i m) Map.empty
+
+        let getSpeedValue =
+            function
+            | TravelSpeed.Slow -> 20
+            | TravelSpeed.Normal -> 2 * speed / 3
+            | TravelSpeed.Fast -> speed
+            | _ -> speed
+
+        let createWaypoint (prio : WaypointPriority) (speed : TravelSpeed) (pos : Vec3) name =
             let res =
                 T.Palette.AWaypoint
-                    .SetName(T.String name)
+                    .SetName(T.String (sprintf "WP%d" wpRank.[name]))
                     .SetArea(T.Integer 10)
-                    .SetSpeed(T.Integer speed)
+                    .SetSpeed(T.Integer (getSpeedValue speed))
                     .SetPriority(T.Integer(int prio))
                     .SetXPos(T.Float pos.X)
                     .SetYPos(T.Float pos.Y)
@@ -150,13 +160,13 @@ with
             subst [res] |> ignore
             res
         
-        let lowPrioWaypoints =
-            waypoints
-            |> List.map (fun wp -> createWaypoint WaypointPriority.Low (getPos wp) wp.Name.Value)
-
-        let hiPrioWaypoints =
-            waypoints
-            |> List.map (fun wp -> createWaypoint WaypointPriority.Medium (getPos wp) wp.Name.Value)
+        let waypointInstances =
+            Array2D.init 3 3 (fun prio speed ->
+                let prio : WaypointPriority = enum prio
+                let speed : TravelSpeed = enum speed
+                waypoints
+                |> List.map (fun wp -> createWaypoint prio speed (getPos wp) wp.Name.Value)
+            )
 
         let vehicleLogic = newVehicles()
         subst vehicleLogic |> ignore
@@ -191,11 +201,8 @@ with
                 veh.Model <- getRussianModelEquivalent veh.Model
                 veh.Country <- russia
 
-        for wp in lowPrioWaypoints do
-            wp.Objects <- [leader.LinkTrId]
-        
-        for wp in hiPrioWaypoints do
-            wp.Objects <- [leader.LinkTrId]
+        waypointInstances
+        |> Array2D.iter (List.iter (fun wp -> wp.Objects <- [leader.LinkTrId]))
 
         let mkOrderInput = mkInput subst name "Order"
         let stop = getCommandByName "Stop" vehicleLogic
@@ -213,35 +220,51 @@ with
         let flareGreen = getCommandByName "GreenFlare" vehicleLogic
         let flareGreenSi = mkOrderInput flareGreen
 
-        let travelTo =
-            [
-                for wp in hiPrioWaypoints do
-                    let input = mkInput subst name "Move" wp
+        let travelOrders =
+            waypointInstances
+            |> Array2D.mapi (fun prio speed wps ->
+                wps
+                |> List.map (fun wp ->
+                    let prio =
+                        match enum<WaypointPriority> prio with
+                        | WaypointPriority.Low -> "F"
+                        | WaypointPriority.Medium -> "R"
+                        | WaypointPriority.High -> "H"
+                        | x -> failwithf "Unexpected waypoint priority %A" x
+                    let speed =
+                        match enum<TravelSpeed> speed with
+                        | TravelSpeed.Slow -> "S"
+                        | TravelSpeed.Normal -> "N"
+                        | TravelSpeed.Fast -> "F"
+                        | x -> failwithf "Unexpected speed %A" x
+                    let prefix = sprintf "%s%s" prio speed
+                    let input = mkInput subst name prefix wp
                     subst [input] |> ignore
                     input.Targets <- [wp.Index]
-                    yield input
-            ]
+                    input
+                )
+            )
 
-        let attackTo =
+        let wpCmds =
             [
-                for wp in lowPrioWaypoints do
-                    let input = mkInput subst name "Attack" wp
-                    subst [input] |> ignore
-                    input.Targets <- [wp.Index]
-                    yield input
+                for i in 0..2 do
+                    for j in 0..2 do
+                        yield waypointInstances.[i,j]
             ]
+            |> List.concat
+
+        let travelOrders =
+            [
+                for i in 0..2 do
+                    for j in 0..2 do
+                        yield travelOrders.[i,j]
+            ]
+            |> List.concat
 
         let all : McuBase list =
-            vehicleLogic @@ lowPrioWaypoints @@ hiPrioWaypoints @@ travelTo @@ attackTo @@ [ stopSi ; contSi ; onRoadSi ; attackSi ; columnSi ; flareRedSi ; flareGreenSi ] @@ []
+            vehicleLogic @@ wpCmds @@ travelOrders @@ [ stopSi ; contSi ; onRoadSi ; attackSi ; columnSi ; flareRedSi ; flareGreenSi ] @@ []
 
         { Leader = leader
-          TravelTo = travelTo
-          AttackTo = attackTo
-          Stop = stop
-          Continue = cont
-          OnRoad = onRoad
-          Attack = attack
-          Column = column
           All = all
         }
 
@@ -368,12 +391,17 @@ let buildMission(outdir, basename) =
     let groundLcStrings =
         Localization.transfer true getLcId (Path.Combine(T.ResolutionFolder, outdir, "Static.eng"))
 
-    let waypoints = parse("Waypoints.Group").ListOfMCU_Waypoint
+    let waypoints =
+        parse("Waypoints.Group").ListOfMCU_Waypoint
+        |> List.sortBy (fun wp -> wp.Name.Value)
 
     // vehicles
     let vehicles =
+        let vehicles =
+            parse("Platoons.Group").ListOfVehicle
+            |> List.sortBy (fun veh -> veh.Name.Value)
         [
-            for refVehicle in parse("Platoons.Group").ListOfVehicle do
+            for refVehicle in vehicles do
                 let swapToRussian, speed, createMcuList =
                     match refVehicle.Name.Value with
                     | StartsWith "Pz3" ->
@@ -399,7 +427,7 @@ let buildMission(outdir, basename) =
         ]
 
     // Defenses
-    let defenses =        
+    let defenses =
         [
             for refArty in parse("Defenses.Group").ListOfVehicle do
                 let swapToGerman, createMcuList =
@@ -423,7 +451,7 @@ let buildMission(outdir, basename) =
         ]
 
     let waypointLabels = WaypointLabels.Create(subst, waypoints)
-    
+
     // Airfields
     let airfields = parse("Airfields.Group").CreateMcuList()
     subst airfields |> ignore
