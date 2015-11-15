@@ -421,6 +421,7 @@ let buildMission(outdir, basename) =
                         false, 70, T.GerMechanizedInfantry.CreateMcuList
                     | StartsWith "ba10m" ->
                         true, 70, T.GerMechanizedInfantry.CreateMcuList
+                    | StartsWith "szf"
                     | StartsWith "Szf" ->
                         false, 70, T.GerMobileArtillery.CreateMcuList
                     | StartsWith "bm13" ->
@@ -510,5 +511,5 @@ let buildMission(outdir, basename) =
     for lang in [ "eng"; "ger"; "pol"; "rus" ] do
         createLcFile (basename + "." + lang) allLcStrings
 
-buildMission("VLuki", "GroundCommanderMini")
-//buildMission("Kalach", "GroundCommanderKalach")
+//buildMission("VLuki", "GroundCommanderMini")
+buildMission("Stalingrad", "GroundCommanderStalingrad")
