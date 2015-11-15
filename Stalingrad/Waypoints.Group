@@ -1,0 +1,539 @@
+Group
+{
+  Name = "Waypoints";
+  Index = 2236;
+  Desc = "";
+  MCU_Waypoint
+  {
+    Index = 2235;
+    Name = "Businovka";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 108696.473;
+    YPos = 50.086;
+    ZPos = 208061.105;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Area = 5;
+    Speed = 100;
+    Priority = 1;
+  }
+  
+
+  MCU_Waypoint
+  {
+    Index = 2234;
+    Name = "Stalinksy";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 118225.220;
+    YPos = 50.086;
+    ZPos = 201670.987;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Area = 5;
+    Speed = 100;
+    Priority = 1;
+  }
+  
+
+  MCU_Waypoint
+  {
+    Index = 2233;
+    Name = "Marinovka";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 129779.162;
+    YPos = 50.086;
+    ZPos = 202950.506;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Area = 5;
+    Speed = 100;
+    Priority = 1;
+  }
+  
+
+  MCU_Waypoint
+  {
+    Index = 2237;
+    Name = "CapSW";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 105345.453;
+    YPos = 50.086;
+    ZPos = 206755.939;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Area = 5;
+    Speed = 100;
+    Priority = 1;
+  }
+  
+
+  MCU_Waypoint
+  {
+    Index = 2238;
+    Name = "CapW";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 135257.315;
+    YPos = 50.086;
+    ZPos = 214848.948;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Area = 5;
+    Speed = 100;
+    Priority = 1;
+  }
+  
+
+  MCU_Waypoint
+  {
+    Index = 2239;
+    Name = "CapNW";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 152209.809;
+    YPos = 50.086;
+    ZPos = 204617.216;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Area = 5;
+    Speed = 100;
+    Priority = 1;
+  }
+  
+
+  MCU_Waypoint
+  {
+    Index = 2240;
+    Name = "CapNE";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 159387.161;
+    YPos = 50.086;
+    ZPos = 234542.565;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Area = 5;
+    Speed = 100;
+    Priority = 1;
+  }
+  
+
+  MCU_Waypoint
+  {
+    Index = 2241;
+    Name = "CapE";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 140209.766;
+    YPos = 50.086;
+    ZPos = 241468.747;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Area = 5;
+    Speed = 100;
+    Priority = 1;
+  }
+  
+
+  MCU_Waypoint
+  {
+    Index = 2242;
+    Name = "CapSE";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 113991.394;
+    YPos = 50.086;
+    ZPos = 243717.148;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Area = 5;
+    Speed = 100;
+    Priority = 1;
+  }
+  
+
+  MCU_Waypoint
+  {
+    Index = 2243;
+    Name = "Rubezhny";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 100083.420;
+    YPos = 50.086;
+    ZPos = 209765.757;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Area = 5;
+    Speed = 100;
+    Priority = 1;
+  }
+  
+
+  MCU_Waypoint
+  {
+    Index = 2244;
+    Name = "Tsybenko";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 118319.080;
+    YPos = 50.086;
+    ZPos = 227664.490;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Area = 5;
+    Speed = 100;
+    Priority = 1;
+  }
+  
+
+  MCU_Waypoint
+  {
+    Index = 2245;
+    Name = "Karpovka-S";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 130794.502;
+    YPos = 50.086;
+    ZPos = 214396.933;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Area = 5;
+    Speed = 100;
+    Priority = 1;
+  }
+  
+
+  MCU_Waypoint
+  {
+    Index = 2246;
+    Name = "Karpovka-N";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 131662.892;
+    YPos = 50.086;
+    ZPos = 214744.472;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Area = 5;
+    Speed = 100;
+    Priority = 1;
+  }
+  
+
+  MCU_Waypoint
+  {
+    Index = 2247;
+    Name = "Zhirnokleevka";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 130917.783;
+    YPos = 50.086;
+    ZPos = 216021.335;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Area = 5;
+    Speed = 100;
+    Priority = 1;
+  }
+  
+
+  MCU_Waypoint
+  {
+    Index = 2248;
+    Name = "Nov. Roganchik";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 128603.748;
+    YPos = 50.086;
+    ZPos = 220410.020;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Area = 5;
+    Speed = 100;
+    Priority = 1;
+  }
+  
+
+  MCU_Waypoint
+  {
+    Index = 2249;
+    Name = "Basargino";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 126704.478;
+    YPos = 50.086;
+    ZPos = 226551.187;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Area = 5;
+    Speed = 100;
+    Priority = 1;
+  }
+  
+
+  MCU_Waypoint
+  {
+    Index = 2250;
+    Name = "Bol.Rossoshka";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 144754.164;
+    YPos = 50.086;
+    ZPos = 227829.750;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Area = 5;
+    Speed = 100;
+    Priority = 1;
+  }
+  
+
+  MCU_Waypoint
+  {
+    Index = 2251;
+    Name = "Samofalovka";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 158137.688;
+    YPos = 50.086;
+    ZPos = 232719.451;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Area = 5;
+    Speed = 100;
+    Priority = 1;
+  }
+  
+
+  MCU_Waypoint
+  {
+    Index = 2252;
+    Name = "Vertyachy";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 157441.308;
+    YPos = 50.086;
+    ZPos = 208252.680;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Area = 5;
+    Speed = 100;
+    Priority = 1;
+  }
+  
+
+  MCU_Waypoint
+  {
+    Index = 2253;
+    Name = "Peshanka 3";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 126734.115;
+    YPos = 50.086;
+    ZPos = 240814.696;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Area = 5;
+    Speed = 100;
+    Priority = 1;
+  }
+  
+
+  MCU_Waypoint
+  {
+    Index = 2254;
+    Name = "Kuzmichi";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 152584.951;
+    YPos = 50.086;
+    ZPos = 243016.001;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Area = 5;
+    Speed = 100;
+    Priority = 1;
+  }
+  
+
+  MCU_Waypoint
+  {
+    Index = 2255;
+    Name = "Kachalinskaya";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 175592.488;
+    YPos = 50.086;
+    ZPos = 218441.736;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Area = 5;
+    Speed = 100;
+    Priority = 1;
+  }
+  
+
+  MCU_Waypoint
+  {
+    Index = 2256;
+    Name = "Erzovka";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 156443.317;
+    YPos = 50.086;
+    ZPos = 263417.039;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Area = 5;
+    Speed = 100;
+    Priority = 1;
+  }
+  
+
+  MCU_Waypoint
+  {
+    Index = 2257;
+    Name = "Gorodishche";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 141768.641;
+    YPos = 50.086;
+    ZPos = 250693.142;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Area = 5;
+    Speed = 100;
+    Priority = 1;
+  }
+  
+
+  MCU_Waypoint
+  {
+    Index = 2258;
+    Name = "Varvarovka";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 114925.589;
+    YPos = 50.086;
+    ZPos = 228375.595;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Area = 5;
+    Speed = 100;
+    Priority = 1;
+  }
+  
+
+  MCU_Waypoint
+  {
+    Index = 2259;
+    Name = "Gavrilovka";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 108689.458;
+    YPos = 50.086;
+    ZPos = 231303.807;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Area = 5;
+    Speed = 100;
+    Priority = 1;
+  }
+  
+
+  MCU_Waypoint
+  {
+    Index = 2260;
+    Name = "Ivanovka";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 105418.689;
+    YPos = 50.086;
+    ZPos = 243565.266;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Area = 5;
+    Speed = 100;
+    Priority = 1;
+  }
+  
+
+  MCU_Waypoint
+  {
+    Index = 2261;
+    Name = "Tinguta 2";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 84796.991;
+    YPos = 50.086;
+    ZPos = 236268.290;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Area = 5;
+    Speed = 100;
+    Priority = 1;
+  }
+  
+
+}
+

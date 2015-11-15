@@ -1,0 +1,127 @@
+Group
+{
+  Name = "Defenses";
+  Index = 16507;
+  Desc = "";
+  Vehicle
+  {
+    Name = "Vehicle";
+    Index = 16505;
+    LinkTrId = 0;
+    XPos = 129839.445;
+    YPos = 98.492;
+    ZPos = 181943.460;
+    XOri = 359.86;
+    YOri = 0.00;
+    ZOri = 0.02;
+    Script = "LuaScripts\WorldObjects\vehicles\flak37.txt";
+    Model = "graphics\artillery\flak37\flak37.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "Vehicle";
+    Index = 16506;
+    LinkTrId = 0;
+    XPos = 135477.545;
+    YPos = 98.492;
+    ZPos = 180253.091;
+    XOri = 359.98;
+    YOri = 0.00;
+    ZOri = 0.06;
+    Script = "LuaScripts\WorldObjects\vehicles\flak37.txt";
+    Model = "graphics\artillery\flak37\flak37.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "Vehicle";
+    Index = 16503;
+    LinkTrId = 0;
+    XPos = 146790.109;
+    YPos = 98.492;
+    ZPos = 254944.259;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Script = "LuaScripts\WorldObjects\vehicles\52k.txt";
+    Model = "graphics\artillery\52k\52k.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "Vehicle";
+    Index = 16504;
+    LinkTrId = 0;
+    XPos = 155955.220;
+    YPos = 98.492;
+    ZPos = 263014.787;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Script = "LuaScripts\WorldObjects\vehicles\52k.txt";
+    Model = "graphics\artillery\52k\52k.mgm";
+    Desc = "";
+    Country = 0;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+}
+
