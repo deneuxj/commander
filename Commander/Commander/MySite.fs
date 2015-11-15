@@ -119,7 +119,7 @@ module WebCommander =
             |> List.mapi (fun i wp -> (wp, i))
             |> List.fold (fun m (wp, i) -> Map.add wp i m) Map.empty
 
-        let compressDestination wp =
+        let inline compressDestination wp =
             sprintf "WP%d" (wpRank.[wp])
 
         let moveTo =
@@ -235,12 +235,16 @@ module WebCommander =
             Doc.TextView (View.FromVar status)
         ]
 
+    let Simple =
+        div []
+
 type EndPoint =
     | [<EndPoint "GET /login">] Login
     | [<EndPoint "GET /">] Home
     | [<EndPoint "GET /players">] Players
     | [<EndPoint "GET /apiPlayerList">] ApiPlayers
     | [<EndPoint "GET /orders">] Orders
+    | [<EndPoint "GET /simple">] Simple
 
 /// <summary>
 /// Build a WebSharper application.
@@ -317,11 +321,22 @@ let MySite(waypoints, platoons) =
                 let! players = CentralAgent.agent.PostAndAsyncReply(fun reply -> CentralAgent.GetPlayerList reply)
                 return! Content.Json players
             }
+        | Simple ->
+            Content.Page(
+                Title = "Simple",
+                Body = [
+                    menu ctx
+                    div [ client <@ WebCommander.Simple @> ]
+                ]
+            )
     )
 
 open SturmovikMissionTypes
 open SturmovikMission.DataProvider.Mcu
 open System.IO
+open Suave.Web
+open Suave.Types
+open WebSharper.Suave
 
 type T = Provider<"Sample.Mission", library="Sample.Mission">
 
@@ -333,18 +348,10 @@ let parseGroup filename =
 let main argv = 
     let config = Configuration.values
 
-    if not <| File.Exists(config.WaypointsFilename) then
-        eprintfn "Could not find '%s'" config.WaypointsFilename
-        failwith "Could not open waypoints filename"
-
     let waypoints =
         (parseGroup config.WaypointsFilename).ListOfMCU_Waypoint
         |> List.map (fun wp -> wp.Name.Value)
         |> List.sort
-
-    if not <| File.Exists(config.PlatoonsFilename) then
-        eprintfn "Could not find '%s'" config.PlatoonsFilename
-        failwith "Could not open platoons filename"
 
     let platoons =
         (parseGroup config.PlatoonsFilename).ListOfVehicle
@@ -353,10 +360,23 @@ let main argv =
     let rec welcome() =
         async {
             CentralAgent.agent.Post(CentralAgent.UpdateUserDb)
-            printfn "Requested to updated user DB"
+            printfn "Requested to update user DB"
             do! Async.Sleep 60000
             return! welcome()
         }
 
-    Async.Start(welcome())
-    WebSharper.Warp.RunAndWaitForInput(MySite(waypoints, platoons), urls = List.ofArray config.WebListeningAddresses)
+    try
+        Async.Start(welcome())
+        let myConfig = 
+            { defaultConfig with
+                bindings =
+                [
+                    HttpBinding.mk' HTTP "192.168.0.100" 9000
+                ]
+            }
+        startWebServer myConfig (WebSharperAdapter.ToWebPart <| MySite(waypoints, platoons))
+        0
+    with
+        | exc ->
+            failwithf "Exception: %s" exc.Message
+            1
