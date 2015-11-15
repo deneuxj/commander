@@ -38,7 +38,7 @@ type Client(address : IPAddress, port, login, password) as this =
             let buffer : byte[] = Array.zeroCreate 0xffff
             let response = stream.Read(buffer, 0, 2)
             let responseLength = (256 * int buffer.[1]) + int buffer.[0]
-            let! response = receive(buffer, 2, responseLength)            
+            let! response = receive(buffer, 2, responseLength)
             let data =
                 if responseLength > 0 then
                     Encoding.ASCII.GetString(buffer, 2, responseLength - 1)
