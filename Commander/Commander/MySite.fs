@@ -154,7 +154,7 @@ module WebCommander =
             let chosenDestination = Var.Create (List.head moveTo)
             let chosenSpeed = Var.Create (List.head speedList)
             let chosenFire = Var.Create (List.head fireList)
-            let chosenPlatoon = Var.Create (List.nth platoons defaultPlatoon)
+            let chosenPlatoon = Var.Create (List.item defaultPlatoon platoons)
             div [
                 Doc.Select [] id platoons chosenPlatoon
                 Doc.Select [] Order.Show orderList chosenOrder
@@ -235,8 +235,19 @@ module WebCommander =
             Doc.TextView (View.FromVar status)
         ]
 
-    let Simple =
-        div []
+[<JavaScript>]
+let SimpleFun() =
+    div [] :> IControlBody
+
+let MySimplePage =
+    Application.SinglePage(fun ctx ->
+        Content.Page(
+            Title = "Simple",
+            Body = [
+                div [ client <@ SimpleFun() @> ]
+            ]
+        )
+    )
 
 type EndPoint =
     | [<EndPoint "GET /login">] Login
@@ -326,7 +337,7 @@ let MySite(waypoints, platoons) =
                 Title = "Simple",
                 Body = [
                     menu ctx
-                    div [ client <@ WebCommander.Simple @> ]
+                    div [ client <@ SimpleFun() @> ]
                 ]
             )
     )
@@ -369,12 +380,15 @@ let main argv =
         Async.Start(welcome())
         let myConfig = 
             { defaultConfig with
+                logger = Suave.Logging.Loggers.ConsoleWindowLogger(Suave.Logging.LogLevel.Verbose)
                 bindings =
                 [
                     HttpBinding.mk' HTTP "192.168.0.100" 9000
+                    HttpBinding.mk' HTTP "127.0.0.1" 9000
                 ]
             }
-        startWebServer myConfig (WebSharperAdapter.ToWebPart <| MySite(waypoints, platoons))
+        //startWebServer myConfig (WebSharperAdapter.ToWebPart <| MySite(waypoints, platoons))
+        startWebServer myConfig (WebSharperAdapter.ToWebPart <| MySimplePage)
         0
     with
         | exc ->
