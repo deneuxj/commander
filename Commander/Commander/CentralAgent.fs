@@ -10,7 +10,7 @@ type Request =
     | UpdateUserDb
     | SendOrder of string
     | GetPlayerList of AsyncReplyChannel<RemoteConsole.PlayerData [] option>
-    | TryLogin of string * WebSharper.Web.IContext * AsyncReplyChannel<string option>
+    | TryLogin of string * AsyncReplyChannel<string option>
 
 let connect =
     async {
@@ -67,7 +67,7 @@ let agent = MailboxProcessor.Start(fun inbox ->
             printfn "Done."
             reply.Reply players
             return! loop client state
-        | TryLogin(password, ctx, reply) ->
+        | TryLogin(password, reply) ->
             printfn "Trying to login user with pin code %s..." password
             //let! users = updateUserDb client state.UsersDb
             let! result =
@@ -75,7 +75,6 @@ let agent = MailboxProcessor.Start(fun inbox ->
                 | Some(Users.Named name) ->
                     async {
                         try
-                            do! ctx.UserSession.LoginUser(name)
                             printfn "Succeeded."
                             return Some name
                         with

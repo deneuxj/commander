@@ -1,6 +1,6 @@
 (function()
 {
- var Global=this,Runtime=this.IntelliFactory.Runtime,UI,Next,Var,List,Doc,T,Concurrency,Remoting,AjaxRemotingProvider,Var1,PrintfHelpers,Commander,WebCommander,OrderAndPolicy,Order,Speed,FireControl,Seq,Collections,FSharpMap,Operators;
+ var Global=this,Runtime=this.IntelliFactory.Runtime,PrintfHelpers,Commander,WebCommander,OrderAndPolicy,Order,Speed,FireControl,Seq,List,UI,Next,Doc,Strings,T,Var,Concurrency,Remoting,AjaxRemotingProvider,Var1,Collections,FSharpMap,View;
  Runtime.Define(Global,{
   Commander:{
    WebCommander:{
@@ -10,39 +10,6 @@
       return fire.$==1?"return fire only":fire.$==2?"hold fire":"free fire";
      }
     }),
-    Login:function()
-    {
-     var password,status,arg20,arg201;
-     password=Var.Create("AAA1234");
-     status=Var.Create("Please enter the pin code provided to you in the game chat");
-     arg201=List.ofArray([Doc.TextNode("Your password: "),Doc.Input(Runtime.New(T,{
-      $:0
-     }),password),Doc.Button("Log in",Runtime.New(T,{
-      $:0
-     }),function()
-     {
-      return Concurrency.Start(Concurrency.Delay(function()
-      {
-       return Concurrency.Bind(AjaxRemotingProvider.Async("Commander:2",[Var1.Get(password)]),function(_arg1)
-       {
-        if(_arg1.$==0)
-         {
-          Var1.Set(status,"Incorrect pin code");
-          return Concurrency.Return(null);
-         }
-        else
-         {
-          Var1.Set(status,"Welcome "+PrintfHelpers.toSafe(_arg1.$0));
-          return Concurrency.Return(null);
-         }
-       });
-      }),{
-       $:0
-      });
-     })]);
-     arg20=List.ofArray([Doc.Element("div",[],arg201),Doc.TextView(status.get_View())]);
-     return Doc.Element("div",[],arg20);
-    },
     Order:Runtime.Class({},{
      Show:function(order)
      {
@@ -196,24 +163,19 @@
      var arg20;
      arg20=Seq.toList(Seq.delay(function()
      {
-      var arg201,arg202,arg203,arg204;
-      arg202=List.ofArray([Doc.TextNode("Client ID")]);
-      arg203=List.ofArray([Doc.TextNode("Status")]);
-      arg204=List.ofArray([Doc.TextNode("Name")]);
-      arg201=List.ofArray([Doc.Element("td",[],arg202),Doc.Element("td",[],arg203),Doc.Element("td",[],arg204)]);
+      var arg201,arg202,arg203;
+      arg202=List.ofArray([Doc.TextNode("Name")]);
+      arg203=List.ofArray([Doc.TextNode("Ping")]);
+      arg201=List.ofArray([Doc.Element("td",[],arg202),Doc.Element("td",[],arg203)]);
       return Seq.append([Doc.Element("tr",[],arg201)],Seq.delay(function()
       {
        return Seq.map(function(player)
        {
-        var arg205,arg206,t,arg207,t1,arg208,t2;
-        t=PrintfHelpers.padNumLeft(Global.String(player.ClientId),2);
-        arg206=List.ofArray([Doc.TextNode(t)]);
-        t1=Global.String(player.Status);
-        arg207=List.ofArray([Doc.TextNode(t1)]);
-        t2=PrintfHelpers.toSafe(player.Name);
-        arg208=List.ofArray([Doc.TextNode(t2)]);
-        arg205=List.ofArray([Doc.Element("td",[],arg206),Doc.Element("td",[],arg207),Doc.Element("td",[],arg208)]);
-        return Doc.Element("tr",[],arg205);
+        var arg204,arg205,arg206;
+        arg205=List.ofArray([Doc.TextNode(PrintfHelpers.toSafe(player.Name))]);
+        arg206=List.ofArray([Doc.TextNode(Strings.PadLeft(Global.String(player.Ping),3))]);
+        arg204=List.ofArray([Doc.Element("td",[],arg205),Doc.Element("td",[],arg206)]);
+        return Doc.Element("tr",[],arg204);
        },players);
       }));
      }));
@@ -244,205 +206,361 @@
     }),
     TakeOrders:function(waypoints,platoons)
     {
-     var mapping,x,folder,state,wpRank,compressDestination,projection,mapping1,list,moveTo,orderList,speedList,fireList,mkRow,numRows,arg205;
-     mapping=function(i)
-     {
-      return function(wp)
-      {
-       return[wp,i];
-      };
+     var arg00,rvState,commandSection,arg101,_arg00_;
+     arg00={
+      User:{
+       $:0
+      },
+      Platoons:Runtime.New(T,{
+       $:0
+      }),
+      LoginMessage:{
+       $:0
+      }
      };
-     x=List.mapi(mapping,waypoints);
-     folder=function(m)
+     rvState=Var.Create(arg00);
+     commandSection=function(state)
      {
-      return function(tupledArg)
-      {
-       var wp,i;
-       wp=tupledArg[0];
-       i=tupledArg[1];
-       return m.Add(wp,i);
-      };
-     };
-     state=FSharpMap.New1([]);
-     wpRank=Seq.fold(folder,state,x);
-     compressDestination=function(wp)
-     {
-      return"WP"+Global.String(wpRank.get_Item(wp));
-     };
-     projection=function(_arg1)
-     {
-      return _arg1==="North"?[0,{
-       $:0
-      }]:_arg1==="North-East"?[1,{
-       $:0
-      }]:_arg1==="East"?[2,{
-       $:0
-      }]:_arg1==="South-East"?[3,{
-       $:0
-      }]:_arg1==="South"?[4,{
-       $:0
-      }]:_arg1==="South-West"?[5,{
-       $:0
-      }]:_arg1==="West"?[6,{
-       $:0
-      }]:_arg1==="North-West"?[7,{
-       $:0
-      }]:[8,{
-       $:1,
-       $0:_arg1
-      }];
-     };
-     mapping1=function(name)
-     {
-      return Runtime.New(Order,{
-       $:7,
-       $0:name
-      });
-     };
-     list=List.sortBy(projection,waypoints);
-     moveTo=List.map(mapping1,list);
-     orderList=List.ofArray([Runtime.New(Order,{
-      $:3
-     }),Runtime.New(Order,{
-      $:2
-     }),Runtime.New(Order,{
-      $:4
-     }),Runtime.New(Order,{
-      $:5
-     }),Runtime.New(Order,{
-      $:6
-     })]);
-     speedList=List.ofArray([Runtime.New(Speed,{
-      $:0
-     }),Runtime.New(Speed,{
-      $:2
-     })]);
-     fireList=List.ofArray([Runtime.New(FireControl,{
-      $:0
-     }),Runtime.New(FireControl,{
-      $:1
-     })]);
-     mkRow=function(defaultPlatoon)
-     {
-      var chosenOrder,chosenDestination,chosenSpeed,chosenFire,chosenPlatoon,arg20,arg201,arg202,arg203,arg204;
-      chosenOrder=Var.Create(List.head(orderList));
-      chosenDestination=Var.Create(List.head(moveTo));
-      chosenSpeed=Var.Create(List.head(speedList));
-      chosenFire=Var.Create(List.head(fireList));
-      chosenPlatoon=Var.Create(Seq.nth(defaultPlatoon,platoons));
-      arg201=function()
-      {
-       var orderAndPolicy;
-       orderAndPolicy=Runtime.New(OrderAndPolicy,{
-        $:0,
-        $0:Var1.Get(chosenOrder),
-        $1:{
+      var matchValue,login,_,user,arg001,password,arg20,arg201,attrs,arg202,matchValue1,_2,msg,matchValue2,platoonSelection,_3,user1,predicate,available,_4,first,chosen,arg203,arg30,mapping,x1,folder,state1,wpRank,compressDestination,projection,mapping1,list,moveTo,orderList,speedList,fireList,mkRow,arg209,orderAssignment,matchValue3,logout,_5,arg20a,arg20b;
+      matchValue=state.User;
+      if(matchValue.$==1)
+       {
+        user=matchValue.$0;
+        arg001="Command panel for "+PrintfHelpers.toSafe(user);
+        _=Doc.TextNode(arg001);
+       }
+      else
+       {
+        password=Var.Create("AAA1234");
+        attrs=Runtime.New(T,{
          $:0
-        }
-       });
-       return AjaxRemotingProvider.Send("Commander:0",[orderAndPolicy.ToServerInput(Var1.Get(chosenPlatoon),compressDestination)]);
-      };
-      arg202=function()
-      {
-       var orderAndPolicy;
-       orderAndPolicy=Runtime.New(OrderAndPolicy,{
-        $:0,
-        $0:Var1.Get(chosenDestination),
-        $1:{
-         $:1,
-         $0:{
-          Speed:Var1.Get(chosenSpeed),
-          FireControl:Var1.Get(chosenFire)
+        });
+        arg202=function()
+        {
+         return AjaxRemotingProvider.Send("Commander:3",[]);
+        };
+        arg201=List.ofArray([Doc.TextNode("Your PIN: "),Doc.Input(Runtime.New(T,{
+         $:0
+        }),password),Doc.Button("Log in",attrs,function()
+        {
+         var arg002;
+         arg002=Concurrency.Delay(function()
+         {
+          var x;
+          x=AjaxRemotingProvider.Async("Commander:2",[Var1.Get(password)]);
+          return Concurrency.Bind(x,function(_arg1)
+          {
+           var status,_1,username,arg10;
+           if(_arg1.$==0)
+            {
+             _1={
+              $:1,
+              $0:"Incorrect pin code"
+             };
+            }
+           else
+            {
+             username=_arg1.$0;
+             _1={
+              $:1,
+              $0:"Welcome "+PrintfHelpers.toSafe(username)
+             };
+            }
+           status=_1;
+           arg10={
+            User:_arg1,
+            Platoons:state.Platoons,
+            LoginMessage:status
+           };
+           Var1.Set(rvState,arg10);
+           return Concurrency.Return(null);
+          });
+         });
+         return Concurrency.Start(arg002,{
+          $:0
+         });
+        }),Doc.Button("Request PIN",Runtime.New(T,{
+         $:0
+        }),arg202)]);
+        matchValue1=state.LoginMessage;
+        if(matchValue1.$==1)
+         {
+          msg=matchValue1.$0;
+          _2=msg;
          }
-        }
+        else
+         {
+          _2="";
+         }
+        arg20=List.ofArray([Doc.Element("div",[],arg201),Doc.TextNode(_2)]);
+        _=Doc.Element("div",[],arg20);
+       }
+      login=_;
+      matchValue2=state.User;
+      if(matchValue2.$==1)
+       {
+        user1=matchValue2.$0;
+        predicate=function(platoon)
+        {
+         var value;
+         value=List.contains(platoon,state.Platoons);
+         return!value;
+        };
+        available=List.filter(predicate,platoons);
+        if(available.$==1)
+         {
+          first=available.$0;
+          chosen=Var.Create(first);
+          arg30=function(platoon)
+          {
+           var Platoons,state2;
+           Platoons=Runtime.New(T,{
+            $:1,
+            $0:platoon,
+            $1:state.Platoons
+           });
+           state2={
+            User:state.User,
+            Platoons:Platoons,
+            LoginMessage:state.LoginMessage
+           };
+           return Var1.Set(rvState,state2);
+          };
+          arg203=List.ofArray([Doc.Select(Runtime.New(T,{
+           $:0
+          }),function(x)
+          {
+           return x;
+          },available,chosen),Doc.ButtonView("Add",Runtime.New(T,{
+           $:0
+          }),chosen.get_View(),arg30)]);
+          _4=Doc.Element("div",[],arg203);
+         }
+        else
+         {
+          _4=Doc.TextNode("All platoons assigned");
+         }
+        _3=_4;
+       }
+      else
+       {
+        _3=Doc.get_Empty();
+       }
+      platoonSelection=_3;
+      mapping=function(i)
+      {
+       return function(wp)
+       {
+        return[wp,i];
+       };
+      };
+      x1=List.mapi(mapping,waypoints);
+      folder=function(m)
+      {
+       return function(tupledArg)
+       {
+        var wp,i;
+        wp=tupledArg[0];
+        i=tupledArg[1];
+        return m.Add(wp,i);
+       };
+      };
+      state1=FSharpMap.New1([]);
+      wpRank=Seq.fold(folder,state1,x1);
+      compressDestination=function(wp)
+      {
+       return"WP"+Global.String(wpRank.get_Item(wp));
+      };
+      projection=function(_arg2)
+      {
+       return _arg2==="North"?[0,{
+        $:0
+       }]:_arg2==="North-East"?[1,{
+        $:0
+       }]:_arg2==="East"?[2,{
+        $:0
+       }]:_arg2==="South-East"?[3,{
+        $:0
+       }]:_arg2==="South"?[4,{
+        $:0
+       }]:_arg2==="South-West"?[5,{
+        $:0
+       }]:_arg2==="West"?[6,{
+        $:0
+       }]:_arg2==="North-West"?[7,{
+        $:0
+       }]:[8,{
+        $:1,
+        $0:_arg2
+       }];
+      };
+      mapping1=function(name)
+      {
+       return Runtime.New(Order,{
+        $:7,
+        $0:name
        });
-       return AjaxRemotingProvider.Send("Commander:0",[orderAndPolicy.ToServerInput(Var1.Get(chosenPlatoon),compressDestination)]);
       };
-      arg203=function()
+      list=List.sortBy(projection,waypoints);
+      moveTo=List.map(mapping1,list);
+      orderList=List.ofArray([Runtime.New(Order,{
+       $:3
+      }),Runtime.New(Order,{
+       $:2
+      }),Runtime.New(Order,{
+       $:4
+      }),Runtime.New(Order,{
+       $:5
+      }),Runtime.New(Order,{
+       $:6
+      })]);
+      speedList=List.ofArray([Runtime.New(Speed,{
+       $:0
+      }),Runtime.New(Speed,{
+       $:2
+      })]);
+      fireList=List.ofArray([Runtime.New(FireControl,{
+       $:0
+      }),Runtime.New(FireControl,{
+       $:1
+      })]);
+      mkRow=function(platoon)
       {
-       return AjaxRemotingProvider.Send("Commander:0",[Runtime.New(OrderAndPolicy,{
-        $:0,
-        $0:Runtime.New(Order,{
-         $:0
-        }),
-        $1:{
-         $:0
-        }
-       }).ToServerInput(Var1.Get(chosenPlatoon),compressDestination)]);
+       var chosenOrder,chosenDestination,chosenSpeed,chosenFire,arg204,arg205,arg206,arg207,arg208;
+       chosenOrder=Var.Create(List.head(orderList));
+       chosenDestination=Var.Create(List.head(moveTo));
+       chosenSpeed=Var.Create(List.head(speedList));
+       chosenFire=Var.Create(List.head(fireList));
+       arg205=function()
+       {
+        var orderAndPolicy;
+        orderAndPolicy=Runtime.New(OrderAndPolicy,{
+         $:0,
+         $0:Var1.Get(chosenOrder),
+         $1:{
+          $:0
+         }
+        });
+        return AjaxRemotingProvider.Send("Commander:0",[orderAndPolicy.ToServerInput(platoon,compressDestination)]);
+       };
+       arg206=function()
+       {
+        var orderAndPolicy;
+        orderAndPolicy=Runtime.New(OrderAndPolicy,{
+         $:0,
+         $0:Var1.Get(chosenDestination),
+         $1:{
+          $:1,
+          $0:{
+           Speed:Var1.Get(chosenSpeed),
+           FireControl:Var1.Get(chosenFire)
+          }
+         }
+        });
+        return AjaxRemotingProvider.Send("Commander:0",[orderAndPolicy.ToServerInput(platoon,compressDestination)]);
+       };
+       arg207=function()
+       {
+        return AjaxRemotingProvider.Send("Commander:0",[Runtime.New(OrderAndPolicy,{
+         $:0,
+         $0:Runtime.New(Order,{
+          $:0
+         }),
+         $1:{
+          $:0
+         }
+        }).ToServerInput(platoon,compressDestination)]);
+       };
+       arg208=function()
+       {
+        return AjaxRemotingProvider.Send("Commander:0",[Runtime.New(OrderAndPolicy,{
+         $:0,
+         $0:Runtime.New(Order,{
+          $:1
+         }),
+         $1:{
+          $:0
+         }
+        }).ToServerInput(platoon,compressDestination)]);
+       };
+       arg204=List.ofArray([Doc.TextNode(platoon),Doc.Select(Runtime.New(T,{
+        $:0
+       }),function(arg002)
+       {
+        return Order.Show(arg002);
+       },orderList,chosenOrder),Doc.Button("Order",Runtime.New(T,{
+        $:0
+       }),arg205),Doc.TextNode(" - "),Doc.TextNode("Move towards..."),Doc.Select(Runtime.New(T,{
+        $:0
+       }),function(arg002)
+       {
+        return Order.Show(arg002);
+       },moveTo,chosenDestination),Doc.TextNode(" at "),Doc.Select(Runtime.New(T,{
+        $:0
+       }),function(arg002)
+       {
+        return Speed.Show(arg002);
+       },speedList,chosenSpeed),Doc.TextNode(", "),Doc.Select(Runtime.New(T,{
+        $:0
+       }),function(arg002)
+       {
+        return FireControl.Show(arg002);
+       },fireList,chosenFire),Doc.Button("Move",Runtime.New(T,{
+        $:0
+       }),arg206),Doc.TextNode(" - "),Doc.Button("Stop",Runtime.New(T,{
+        $:0
+       }),arg207),Doc.TextNode(" "),Doc.Button("Continue",Runtime.New(T,{
+        $:0
+       }),arg208)]);
+       return Doc.Element("div",[],arg204);
       };
-      arg204=function()
+      arg209=Seq.toList(Seq.delay(function()
       {
-       return AjaxRemotingProvider.Send("Commander:0",[Runtime.New(OrderAndPolicy,{
-        $:0,
-        $0:Runtime.New(Order,{
-         $:1
-        }),
-        $1:{
+       return Seq.map(function(platoon)
+       {
+        return mkRow(platoon);
+       },state.Platoons);
+      }));
+      orderAssignment=Doc.Element("div",[],arg209);
+      matchValue3=state.User;
+      if(matchValue3.$==1)
+       {
+        matchValue3.$0;
+        arg20a=function()
+        {
+         var arg10;
+         arg10={
+          User:{
+           $:0
+          },
+          Platoons:Runtime.New(T,{
+           $:0
+          }),
+          LoginMessage:state.LoginMessage
+         };
+         return Var1.Set(rvState,arg10);
+        };
+        _5=Doc.Button("Log out",Runtime.New(T,{
          $:0
-        }
-       }).ToServerInput(Var1.Get(chosenPlatoon),compressDestination)]);
-      };
-      arg20=List.ofArray([Doc.Select(Runtime.New(T,{
-       $:0
-      }),function(x1)
-      {
-       return x1;
-      },platoons,chosenPlatoon),Doc.Select(Runtime.New(T,{
-       $:0
-      }),function(arg00)
-      {
-       return Order.Show(arg00);
-      },orderList,chosenOrder),Doc.Button("Order",Runtime.New(T,{
-       $:0
-      }),arg201),Doc.TextNode(" - "),Doc.TextNode("Move towards..."),Doc.Select(Runtime.New(T,{
-       $:0
-      }),function(arg00)
-      {
-       return Order.Show(arg00);
-      },moveTo,chosenDestination),Doc.TextNode(" at "),Doc.Select(Runtime.New(T,{
-       $:0
-      }),function(arg00)
-      {
-       return Speed.Show(arg00);
-      },speedList,chosenSpeed),Doc.TextNode(", "),Doc.Select(Runtime.New(T,{
-       $:0
-      }),function(arg00)
-      {
-       return FireControl.Show(arg00);
-      },fireList,chosenFire),Doc.Button("Move",Runtime.New(T,{
-       $:0
-      }),arg202),Doc.TextNode(" - "),Doc.Button("Stop",Runtime.New(T,{
-       $:0
-      }),arg203),Doc.TextNode(" "),Doc.Button("Continue",Runtime.New(T,{
-       $:0
-      }),arg204)]);
-      return Doc.Element("div",[],arg20);
+        }),arg20a);
+       }
+      else
+       {
+        _5=Doc.get_Empty();
+       }
+      logout=_5;
+      arg20b=List.ofArray([login,platoonSelection,orderAssignment,logout]);
+      return Doc.Element("div",[],arg20b);
      };
-     numRows=Operators.Min(Seq.length(platoons),6);
-     arg205=Seq.toList(Seq.delay(function()
-     {
-      return Seq.map(function(i)
-      {
-       return mkRow(i);
-      },Operators.range(0,numRows-1));
-     }));
-     return Doc.Element("div",[],arg205);
+     arg101=rvState.get_View();
+     _arg00_=View.Map(commandSection,arg101);
+     return Doc.EmbedView(_arg00_);
     }
    }
   }
  });
  Runtime.OnInit(function()
  {
-  UI=Runtime.Safe(Global.WebSharper.UI);
-  Next=Runtime.Safe(UI.Next);
-  Var=Runtime.Safe(Next.Var);
-  List=Runtime.Safe(Global.WebSharper.List);
-  Doc=Runtime.Safe(Next.Doc);
-  T=Runtime.Safe(List.T);
-  Concurrency=Runtime.Safe(Global.WebSharper.Concurrency);
-  Remoting=Runtime.Safe(Global.WebSharper.Remoting);
-  AjaxRemotingProvider=Runtime.Safe(Remoting.AjaxRemotingProvider);
-  Var1=Runtime.Safe(Next.Var1);
   PrintfHelpers=Runtime.Safe(Global.WebSharper.PrintfHelpers);
   Commander=Runtime.Safe(Global.Commander);
   WebCommander=Runtime.Safe(Commander.WebCommander);
@@ -451,9 +569,20 @@
   Speed=Runtime.Safe(WebCommander.Speed);
   FireControl=Runtime.Safe(WebCommander.FireControl);
   Seq=Runtime.Safe(Global.WebSharper.Seq);
+  List=Runtime.Safe(Global.WebSharper.List);
+  UI=Runtime.Safe(Global.WebSharper.UI);
+  Next=Runtime.Safe(UI.Next);
+  Doc=Runtime.Safe(Next.Doc);
+  Strings=Runtime.Safe(Global.WebSharper.Strings);
+  T=Runtime.Safe(List.T);
+  Var=Runtime.Safe(Next.Var);
+  Concurrency=Runtime.Safe(Global.WebSharper.Concurrency);
+  Remoting=Runtime.Safe(Global.WebSharper.Remoting);
+  AjaxRemotingProvider=Runtime.Safe(Remoting.AjaxRemotingProvider);
+  Var1=Runtime.Safe(Next.Var1);
   Collections=Runtime.Safe(Global.WebSharper.Collections);
   FSharpMap=Runtime.Safe(Collections.FSharpMap);
-  return Operators=Runtime.Safe(Global.WebSharper.Operators);
+  return View=Runtime.Safe(Next.View);
  });
  Runtime.OnLoad(function()
  {

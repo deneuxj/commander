@@ -22,8 +22,7 @@ module Server =
 
     [<Rpc>]
     let TryLogin(password) =
-        let context = WebSharper.Web.Remoting.GetContext()
-        CentralAgent.agent.PostAndAsyncReply(fun reply -> CentralAgent.TryLogin(password, context, reply))
+        CentralAgent.agent.PostAndAsyncReply(fun reply -> CentralAgent.TryLogin(password, reply))
 
     [<Rpc>]
     let UpdateUserDb() =
@@ -110,84 +109,166 @@ module WebCommander =
             | OrderAndPolicy (Move dest, None) ->
                 OrderAndPolicy(Move dest, Some { Speed = Normal ; FireControl = ReturnFire }).ToServerInput(platoon, compressDestination)
 
+    type State =
+        { User : string option
+          Platoons : string list
+          LoginMessage : string option
+        }
+
     let TakeOrders(waypoints, platoons) =
-        let wpRank =
-            waypoints
-            |> List.mapi (fun i wp -> (wp, i))
-            |> List.fold (fun m (wp, i) -> Map.add wp i m) Map.empty
+        let rvState =
+            { User = None
+              Platoons = []
+              LoginMessage = None
+            }
+            |> Var.Create
 
-        let inline compressDestination wp =
-            sprintf "WP%d" (wpRank.[wp])
+        let commandSection (state : State) =
+            let login =
+                match state.User with
+                | None ->
+                    let password = Var.Create "AAA1234"
+                    div [
+                        div [
+                            text "Your PIN: "
+                            Doc.Input [] password
+                            Doc.Button "Log in" [] (fun () ->
+                                async {
+                                    let! username = Server.TryLogin(password.Value)
+                                    let status =
+                                        match username with
+                                        | Some username ->
+                                            Some (sprintf "Welcome %s" username)
+                                        | None ->
+                                            Some "Incorrect pin code"
+                                    Var.Set rvState { state with User = username; LoginMessage = status }
+                                }
+                                |> Async.Start
+                            )
+                            Doc.Button "Request PIN" [] (fun () ->
+                                Server.UpdateUserDb()
+                            )
+                        ]
+                        text (match state.LoginMessage with None -> "" | Some msg -> msg)
+                    ] :> Doc
+                | Some user ->
+                    Doc.TextNode <| sprintf "Command panel for %s" user
 
-        let moveTo =
-            waypoints
-            |> List.sortBy (
-                function
-                | "North" -> (0, None)
-                | "North-East" -> (1, None)
-                | "East" -> (2, None)
-                | "South-East" -> (3, None)
-                | "South" -> (4, None)
-                | "South-West" -> (5, None)
-                | "West" -> (6, None)
-                | "North-West" -> (7, None)
-                | place -> (8, Some place)
-            )
-            |> List.map (fun name -> Move name )
+            let platoonSelection =
+                match state.User with
+                | None ->
+                    Doc.Empty
+                | Some user ->
+                    let available =
+                        platoons
+                        |> List.filter(fun platoon -> List.contains platoon state.Platoons |> not)
+                    match available with
+                    | [] ->
+                        text "All platoons assigned"
+                    | first :: _ ->
+                        let chosen = Var.Create first
+                        div [
+                            Doc.Select [] id available chosen
+                            Doc.ButtonView "Add" [] (View.FromVar chosen) (fun platoon ->
+                                let state2 = { state with Platoons = platoon :: state.Platoons }
+                                Var.Set rvState state2
+                            )
+                        ] :> Doc
 
-        let orderList =
-            [ FormationOnRoad
-              FormationColumn
-              FormationAttack
-              FlareGreen
-              FlareRed
+            let orderAssignment =
+                let wpRank =
+                    waypoints
+                    |> List.mapi (fun i wp -> (wp, i))
+                    |> List.fold (fun m (wp, i) -> Map.add wp i m) Map.empty
+
+                let inline compressDestination wp =
+                    sprintf "WP%d" (wpRank.[wp])
+
+                let moveTo =
+                    waypoints
+                    |> List.sortBy (
+                        function
+                        | "North" -> (0, None)
+                        | "North-East" -> (1, None)
+                        | "East" -> (2, None)
+                        | "South-East" -> (3, None)
+                        | "South" -> (4, None)
+                        | "South-West" -> (5, None)
+                        | "West" -> (6, None)
+                        | "North-West" -> (7, None)
+                        | place -> (8, Some place)
+                    )
+                    |> List.map (fun name -> Move name )
+
+                let orderList =
+                    [ FormationOnRoad
+                      FormationColumn
+                      FormationAttack
+                      FlareGreen
+                      FlareRed
+                    ]
+
+                let speedList = [ Slow ; Fast ]
+                let fireList = [ FreeFire ; ReturnFire ]
+
+                let mkRow(platoon) =
+                    let chosenOrder = Var.Create (List.head orderList)
+                    let chosenDestination = Var.Create (List.head moveTo)
+                    let chosenSpeed = Var.Create (List.head speedList)
+                    let chosenFire = Var.Create (List.head fireList)
+                    div [
+                        Doc.TextNode platoon
+                        Doc.Select [] Order.Show orderList chosenOrder
+                        Doc.Button "Order" [] (fun () ->
+                            let orderAndPolicy =
+                                OrderAndPolicy(chosenOrder.Value, None)
+                            Server.SendOrder(orderAndPolicy.ToServerInput(platoon, compressDestination))
+                        )
+                        text " - "
+                        text "Move towards..."
+                        Doc.Select [] Order.Show moveTo chosenDestination
+                        text " at "
+                        Doc.Select [] Speed.Show speedList chosenSpeed
+                        text ", "
+                        Doc.Select [] FireControl.Show fireList chosenFire
+                        Doc.Button "Move" [] (fun () ->
+                            let orderAndPolicy =
+                                OrderAndPolicy(chosenDestination.Value, Some { Speed = chosenSpeed.Value ; FireControl = chosenFire.Value })
+                            Server.SendOrder(orderAndPolicy.ToServerInput(platoon, compressDestination))
+                        )
+                        text " - "
+                        Doc.Button "Stop" [] (fun () ->
+                            Server.SendOrder(OrderAndPolicy(FormationStop, None).ToServerInput(platoon, compressDestination))
+                        )
+                        text " "
+                        Doc.Button "Continue" [] (fun () ->
+                            Server.SendOrder(OrderAndPolicy(FormationContinue, None).ToServerInput(platoon, compressDestination))
+                        )
+                    ] :> Doc
+
+                div [
+                    for platoon in state.Platoons do
+                        yield mkRow platoon
+                ]
+
+            let logout =
+                match state.User with
+                | None ->
+                    Doc.Empty
+                | Some user ->
+                    Doc.Button "Log out" [] (fun () ->
+                        Var.Set rvState { state with User = None; Platoons = [] }
+                    ) :> Doc
+
+            div [
+                login
+                platoonSelection
+                orderAssignment
+                logout
             ]
 
-        let speedList = [ Slow ; Fast ]
-        let fireList = [ FreeFire ; ReturnFire ]
-
-        let mkRow(defaultPlatoon) =
-            let chosenOrder = Var.Create (List.head orderList)
-            let chosenDestination = Var.Create (List.head moveTo)
-            let chosenSpeed = Var.Create (List.head speedList)
-            let chosenFire = Var.Create (List.head fireList)
-            let chosenPlatoon = Var.Create (List.item defaultPlatoon platoons)
-            div [
-                Doc.Select [] id platoons chosenPlatoon
-                Doc.Select [] Order.Show orderList chosenOrder
-                Doc.Button "Order" [] (fun () ->
-                    let orderAndPolicy =
-                        OrderAndPolicy(chosenOrder.Value, None)
-                    Server.SendOrder(orderAndPolicy.ToServerInput(chosenPlatoon.Value, compressDestination))
-                )
-                text " - "
-                text "Move towards..."
-                Doc.Select [] Order.Show moveTo chosenDestination
-                text " at "
-                Doc.Select [] Speed.Show speedList chosenSpeed
-                text ", "
-                Doc.Select [] FireControl.Show fireList chosenFire
-                Doc.Button "Move" [] (fun () ->
-                    let orderAndPolicy =
-                        OrderAndPolicy(chosenDestination.Value, Some { Speed = chosenSpeed.Value ; FireControl = chosenFire.Value })
-                    Server.SendOrder(orderAndPolicy.ToServerInput(chosenPlatoon.Value, compressDestination))
-                )
-                text " - "
-                Doc.Button "Stop" [] (fun () ->
-                    Server.SendOrder(OrderAndPolicy(FormationStop, None).ToServerInput(chosenPlatoon.Value, compressDestination))
-                )
-                text " "
-                Doc.Button "Continue" [] (fun () ->
-                    Server.SendOrder(OrderAndPolicy(FormationContinue, None).ToServerInput(chosenPlatoon.Value, compressDestination))
-                )
-            ] :> Doc
-
-        let numRows =
-            min (List.length platoons) 6
-        div [
-            for i in 0..numRows-1 do
-                yield mkRow i
-        ]
+        View.Map commandSection (View.FromVar rvState)
+        |> Doc.EmbedView
 
     let ShowResult(result) =
         result
@@ -195,49 +276,29 @@ module WebCommander =
         |> List.map text
         |> div
 
-    let ShowPlayers(players : RemoteConsole.PlayerData[]) =
+    type PlayerData =
+        { Name : string
+          Ping : int
+        }
+
+    let ShowPlayers(players : PlayerData[]) =
         table [
             yield tr [
-                td [ text "Client ID" ] :> Doc
-                td [ text "Status" ] :> Doc
                 td [ text "Name" ] :> Doc
+                td [ text "Ping" ] :> Doc
             ] :> Doc
             for player in players do
                 yield tr [
-                    td [ sprintf "%02d" player.ClientId |> text ] :> Doc
-                    td [ sprintf "%d" player.Status |> text] :> Doc
                     td [ sprintf "%s" player.Name |> text] :> Doc
+                    td [ sprintf "%3d" player.Ping |> text] :> Doc
                 ] :> Doc
         ]
 
-    let Login() =
-        let password = Var.Create "AAA1234"
-        let status = Var.Create "Please enter the pin code provided to you in the game chat"
-        div [
-            div [
-                text "Your password: "
-                Doc.Input [] password
-                Doc.Button "Log in" [] (fun () ->
-                    async {
-                        let! username = Server.TryLogin(password.Value)
-                        match username with
-                        | Some username ->
-                            Var.Set status (sprintf "Welcome %s" username)
-                        | None ->
-                            Var.Set status "Incorrect pin code"
-                    }
-                    |> Async.Start
-                )
-            ]
-            Doc.TextView (View.FromVar status)
-        ]
 
 type EndPoint =
-    | [<EndPoint "GET /login">] Login
     | [<EndPoint "GET /">] Home
     | [<EndPoint "GET /players">] Players
     | [<EndPoint "GET /apiPlayerList">] ApiPlayers
-    | [<EndPoint "GET /orders">] Orders
 
 /// <summary>
 /// Build a WebSharper application.
@@ -245,64 +306,31 @@ type EndPoint =
 /// <param name="waypoints">Names of waypoints.</param>
 /// <param name="platoons">Names of platoons.</param>
 let MySite(waypoints, platoons) =
-    let menu (ctx : Context<_>) =
-        div [
-            aAttr [ Attr.Create "href" (ctx.Link Home) ] [ text "Home" ]
-            text " - "
-            aAttr [ Attr.Create "href" (ctx.Link Login) ] [ text "Log in" ]
-            text " - "
-            aAttr [ Attr.Create "href" (ctx.Link Orders) ] [ text "Orders" ]
-        ]
-
-    let login ctx =
-        async {
-            Server.UpdateUserDb()
-            return!
-                Content.Page(
-                    Body = [
-                        menu ctx
-                        div [ client <@ WebCommander.Login() @> ]
-                    ]
-                )
-        }
 
     Application.MultiPage(fun ctx ->
         function
         | Home ->
             Content.Page(
-                Title = "IL-2 Sturmovik Ground Forces Commander",
-                Body = [ menu ctx ]
+                Title = "Orders",
+                Body = [
+                    div [ client <@ WebCommander.TakeOrders(waypoints, platoons) @> ]
+                ]
             )
-        | Login ->
-            login ctx
-        | Orders ->
-            async {
-                let! user = ctx.UserSession.GetLoggedInUser()
-                match user with
-                | None
-                | Some _ ->
-                    return!
-                        Content.Page(
-                            Title = "Orders",
-                            Body = [
-                                menu ctx
-                                div [ client <@ WebCommander.TakeOrders(waypoints, platoons) @> ]
-                            ]
-                        )
-                | None ->
-                    return!
-                        Content.RedirectTemporary Login
-            }
         | Players ->
             async {
                 let! players = CentralAgent.agent.PostAndAsyncReply(fun reply -> CentralAgent.GetPlayerList reply)
                 return!
                     match players with
                     | Some players ->
+                        let players =
+                            players
+                            |> Array.map (fun data ->
+                                { WebCommander.Name = data.Name
+                                  WebCommander.Ping = data.Ping
+                                })
                         Content.Page(
                             Title = "Player list",
                             Body = [
-                                menu ctx
                                 div [ client <@ WebCommander.ShowPlayers(players) @> ]
                             ]
                         )
