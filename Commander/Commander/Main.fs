@@ -1,7 +1,4 @@
-﻿// Learn more about F# at http://fsharp.net
-// See the 'F# Tutorial' project for more help.
 module Commander
-
 open System
 open System.Net
 open System.Text
@@ -235,27 +232,12 @@ module WebCommander =
             Doc.TextView (View.FromVar status)
         ]
 
-[<JavaScript>]
-let SimpleFun() =
-    div [] :> IControlBody
-
-let MySimplePage =
-    Application.SinglePage(fun ctx ->
-        Content.Page(
-            Title = "Simple",
-            Body = [
-                div [ client <@ SimpleFun() @> ]
-            ]
-        )
-    )
-
 type EndPoint =
     | [<EndPoint "GET /login">] Login
     | [<EndPoint "GET /">] Home
     | [<EndPoint "GET /players">] Players
     | [<EndPoint "GET /apiPlayerList">] ApiPlayers
     | [<EndPoint "GET /orders">] Orders
-    | [<EndPoint "GET /simple">] Simple
 
 /// <summary>
 /// Build a WebSharper application.
@@ -332,14 +314,6 @@ let MySite(waypoints, platoons) =
                 let! players = CentralAgent.agent.PostAndAsyncReply(fun reply -> CentralAgent.GetPlayerList reply)
                 return! Content.Json players
             }
-        | Simple ->
-            Content.Page(
-                Title = "Simple",
-                Body = [
-                    menu ctx
-                    div [ client <@ SimpleFun() @> ]
-                ]
-            )
     )
 
 open SturmovikMissionTypes
@@ -380,15 +354,14 @@ let main argv =
         Async.Start(welcome())
         let myConfig = 
             { defaultConfig with
-                logger = Suave.Logging.Loggers.ConsoleWindowLogger(Suave.Logging.LogLevel.Verbose)
+                //logger = Suave.Logging.Loggers.ConsoleWindowLogger(Suave.Logging.LogLevel.Verbose)
                 bindings =
                 [
                     HttpBinding.mk' HTTP "192.168.0.100" 9000
                     HttpBinding.mk' HTTP "127.0.0.1" 9000
                 ]
             }
-        //startWebServer myConfig (WebSharperAdapter.ToWebPart <| MySite(waypoints, platoons))
-        startWebServer myConfig (WebSharperAdapter.ToWebPart <| MySimplePage)
+        startWebServer myConfig (WebSharperAdapter.ToWebPart <| MySite(waypoints, platoons))
         0
     with
         | exc ->
