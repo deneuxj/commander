@@ -267,7 +267,7 @@ with
             |> List.concat
 
         let all : McuBase list =
-            vehicleLogic @@ wpCmds @@ travelOrders @@ [ stopSi ; contSi ; onRoadSi ; attackSi ; columnSi ; flareRedSi ; flareGreenSi ] @@ []
+            vehicleLogic @@ wpCmds @@ travelOrders @@ [ stopSi ; contSi ; onRoadSi ; attackSi ; columnSi ; (*flareRedSi ; flareGreenSi*) ] @@ []
 
         { Leader = leader
           All = all
