@@ -43,7 +43,9 @@ let updateUserDb (client : RemoteConsole.Client) (usersDb : Users.UsersData) =
             let user = Users.Named username
             usersDb := usersDb.Value.SetClientId(user, clientId)
             if Set.contains username newUsers then
-                do! client.MessagePlayer(clientId, sprintf "Your pin code: %s" usersDb.Value.Passwords.[user])
+                if Configuration.values.WebListeningAddresses |> Array.isEmpty |> not then
+                    do! client.MessagePlayer(clientId, sprintf "Ground commander at %s" Configuration.values.WebListeningAddresses.[0])
+                do! client.MessagePlayer(clientId, sprintf "Your pin code: %s" usersDb.Value.Passwords.[user])                
         return usersDb.Value
     }
 
