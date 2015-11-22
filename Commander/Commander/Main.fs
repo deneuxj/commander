@@ -204,8 +204,8 @@ module WebCommander =
                     [ FormationOnRoad
                       FormationColumn
                       FormationAttack
-                      FlareGreen
-                      FlareRed
+                      //FlareGreen
+                      //FlareRed
                     ]
 
                 let speedList = [ Slow ; Fast ]
