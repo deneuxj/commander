@@ -164,7 +164,7 @@ with
             Array2D.init 3 3 (fun prio speed ->
                 let prio : WaypointPriority = enum prio
                 let speed : TravelSpeed = enum speed
-                // Skip some of the
+                // Skip some of the combinations. Too many waypoints leads to a crash in the mission editor.
                 match speed, prio with
                 | TravelSpeed.Normal, _
                 | _, WaypointPriority.High -> []
@@ -260,14 +260,19 @@ with
 
         let travelOrders =
             [
-                for i in 0..2 do
-                    for j in 0..2 do
-                        yield travelOrders.[i,j]
+                for prio in 0..2 do
+                    for speed in 0..2 do
+                        match enum speed, enum prio with
+                        | TravelSpeed.Normal, _
+                        | _, WaypointPriority.High ->
+                            ()
+                        | _ ->
+                            yield travelOrders.[prio,speed]
             ]
             |> List.concat
 
         let all : McuBase list =
-            vehicleLogic @@ wpCmds @@ travelOrders @@ [ stopSi ; contSi ; onRoadSi ; attackSi ; columnSi ; (*flareRedSi ; flareGreenSi*) ] @@ []
+            vehicleLogic @@ wpCmds @@ travelOrders @@ [ stopSi ; contSi ; onRoadSi ; attackSi ; columnSi ; flareRedSi ; flareGreenSi ] @@ []
 
         { Leader = leader
           All = all
@@ -489,14 +494,14 @@ let buildMission(outdir, basename) =
             |> Seq.map (fun mcu -> mcu.AsString())
             |> String.concat "\n"
         file.Write(groundStr)
-        for platoon in vehicles do
-            file.Write(asString platoon)
         for defense in defenses do
             file.Write(asString defense)
         for af in airfields do
             file.Write(af.AsString())
         for label in waypointLabels.Labels do
             file.Write(label.AsString())
+        for platoon in vehicles do
+            file.Write(asString platoon)
         file.WriteLine ""
         file.WriteLine "# end of file"
     )
