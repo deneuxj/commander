@@ -3,7 +3,7 @@
     "rconPassword": "com123",
     "rconAddress": "127.0.0.1",
     "rconPort": 8991,
-    "webListeningAddresses": [ "http://groundcommander.chickenkiller.com:9000/" ],
+    "webListeningAddresses": [ "http://bosgc.chickenkiller.com:9000/" ],
     "waypointsFilename": "../../Stalingrad/Waypoints.Group",
     "platoonsFilename": "../../Stalingrad/Platoons.Group"
 }

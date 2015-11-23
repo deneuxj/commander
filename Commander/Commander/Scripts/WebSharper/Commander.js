@@ -409,10 +409,6 @@
        $:2
       }),Runtime.New(Order,{
        $:4
-      }),Runtime.New(Order,{
-       $:5
-      }),Runtime.New(Order,{
-       $:6
       })]);
       speedList=List.ofArray([Runtime.New(Speed,{
        $:0

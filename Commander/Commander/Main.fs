@@ -351,7 +351,7 @@ open Suave.Web
 open Suave.Types
 open WebSharper.Suave
 
-type T = Provider<"Sample.Mission", library="Sample.Mission">
+type T = Provider<"../../Lib/Sample.Mission", library="../../Lib/Sample.Mission">
 
 let parseGroup filename =
     let s = SturmovikMission.DataProvider.Parsing.Stream.FromFile(Path.Combine(T.ResolutionFolder, filename))
