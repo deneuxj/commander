@@ -43,9 +43,10 @@
     <Content Include="Main.html" />
     <None Include="App.config" />
     <Content Include="packages.config" />
-    <None Include="SampleConfig.json">
+    <None Include="Configuration.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="SampleConfig.json" />
   </ItemGroup>
   <Target Name="IncludeContent" BeforeTargets="Compile">
     <ItemGroup>

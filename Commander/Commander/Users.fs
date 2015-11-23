@@ -1,16 +1,32 @@
 ﻿module Users
 
-type Coalition = Axis | Allies
+open WebSharper
 
-type Coalition with
+[<JavaScript>]
+type Coalition = Axis | Allies with
     member this.AsString() =
         match this with
         | Axis -> "Axis"
         | Allies -> "Allies"
 
-type Unit = Platoon of string
+    static member IdOf(coalition) =
+        match coalition with
+        | Axis -> 2
+        | Allies -> 1
 
+[<JavaScript>]
+type Unit = Platoon of string
+with
+    member this.AsString() =
+        match this with
+        | Platoon name -> name
+
+[<JavaScript>]
 type User = Named of string
+with
+    member this.AsString() =
+        match this with
+        | Named name -> name
 
 let newCoallitionPassword =
     let random = System.Random()
@@ -83,6 +99,24 @@ with
             ControlledBy = this.ControlledBy |> Map.filter (fun _ owner -> owner <> user)
         }
 
+    member this.AddUsers(usernames) =
+        let newUsers =
+            usernames
+            |> Seq.filter (fun username ->
+                this.UserNames
+                |> List.exists (fun (Named user) -> user = username)
+                |> not
+            )
+            |> Set.ofSeq
+        let next =
+            usernames
+            |> Seq.fold(fun (data : UsersData) username -> data.AddUser(Named username)) this
+        next, newUsers
+
+    member this.RemoveUsers(usernames) =        
+        usernames
+        |> Seq.fold(fun (data : UsersData) username -> data.RemoveUser(Named username)) this
+
     member this.TryGetPasswordOwner(password) =
         this.Passwords
         |> Map.tryPick(fun user pwd ->
@@ -115,21 +149,36 @@ with
         { this with
             Coalitions = coalition2
             ControlledBy = controlled2 }
-        
-    member this.AddUsers(usernames) =
-        let newUsers =
-            usernames
-            |> Seq.filter (fun username ->
-                this.UserNames
-                |> List.exists (fun (Named user) -> user = username)
-                |> not
-            )
-            |> Set.ofSeq
-        let next =
-            usernames
-            |> Seq.fold(fun (data : UsersData) username -> data.AddUser(Named username)) this
-        next, newUsers
 
-    member this.RemoveUsers(usernames) =        
-        usernames
-        |> Seq.fold(fun (data : UsersData) username -> data.RemoveUser(Named username)) this
+    member this.FilterAvailable(platoons) =
+        let allocated =
+            this.ControlledBy
+            |> Seq.map (fun kvp -> kvp.Key)
+            |> Set.ofSeq
+        platoons
+        |> List.filter (fun platoon -> allocated |> Set.contains platoon |> not)
+
+    member this.Grab(user, platoon) =
+        let x =
+            this.ControlledBy
+            |> Map.add platoon user
+        { this with ControlledBy = x }
+
+    member this.Release(user, platoon) =
+        match Map.tryFind platoon this.ControlledBy with
+        | Some owner when owner = user ->
+            { this with ControlledBy = Map.remove platoon this.ControlledBy }
+        | Some _
+        | None ->
+            this
+
+    member this.UserControls(user, platoon) =
+        match Map.tryFind platoon this.ControlledBy with
+        | Some x -> x = user
+        | None -> false
+
+    member this.UnitsOf(user) =
+        this.ControlledBy
+        |> Map.filter (fun platoon owner -> owner = user)
+        |> Seq.map (fun kvp -> kvp.Key)
+        |> List.ofSeq

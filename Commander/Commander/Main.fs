@@ -14,7 +14,7 @@ module Server =
     [<Rpc>]
     let SendOrder cmd =
         printfn "Order sent: %s" cmd
-        CentralAgent.agent.Post (CentralAgent.SendOrder cmd)
+        CentralAgent.agent.Post(CentralAgent.SendOrder cmd)
 
     [<Rpc>]
     let GetPlayerList() =
@@ -26,7 +26,32 @@ module Server =
 
     [<Rpc>]
     let UpdateUserDb() =
-        CentralAgent.agent.Post (CentralAgent.UpdateUserDb)
+        CentralAgent.agent.Post(CentralAgent.UpdateUserDb)
+
+    [<Rpc>]
+    let FilterAvailable(platoons) =
+        CentralAgent.agent.PostAndAsyncReply(fun reply -> CentralAgent.FilterAvailable(platoons, reply))
+
+    [<Rpc>]
+    let TryGrab(user, platoon) =
+        CentralAgent.agent.PostAndAsyncReply(fun reply -> CentralAgent.TryGrab(user, platoon, reply))
+
+    [<Rpc>]
+    let Release(user, platoon) =
+        CentralAgent.agent.Post(CentralAgent.Release(user, platoon))
+
+    [<Rpc>]
+    let UserControls(user, platoon) =
+        CentralAgent.agent.PostAndAsyncReply(fun reply -> CentralAgent.UserControls(user, platoon, reply))
+
+    [<Rpc>]
+    let GetUserPlatoons(user) =
+        CentralAgent.agent.PostAndAsyncReply(fun reply -> CentralAgent.GetUserPlatoons(user, reply))
+
+    [<Rpc>]
+    let Logout(user) =
+        CentralAgent.agent.Post(CentralAgent.Logout user)
+
 
 /// Client-side code.
 [<JavaScript>]
@@ -110,16 +135,24 @@ module WebCommander =
                 OrderAndPolicy(Move dest, Some { Speed = Normal ; FireControl = ReturnFire }).ToServerInput(platoon, compressDestination)
 
     type State =
-        { User : string option
-          Platoons : string list
+        { User : Users.User option
+          Coalition : Users.Coalition option
+          Available : Users.Unit list
+          Platoons : Users.Unit list
           LoginMessage : string option
+          GrabMessage : string option
+          OrderMessage : string option
         }
 
-    let TakeOrders(waypoints, platoons) =
+    let TakeOrders(waypoints, axisPlatoons, alliedPlatoons) =
         let rvState =
             { User = None
+              Coalition = None
+              Available = []
               Platoons = []
               LoginMessage = None
+              GrabMessage = None
+              OrderMessage = None
             }
             |> Var.Create
 
@@ -137,14 +170,20 @@ module WebCommander =
                             text " "
                             Doc.Button "Log in" [] (fun () ->
                                 async {
-                                    let! username = Server.TryLogin(userPwd.Value, coalitionPwd.Value.ToUpper())
-                                    let user, status =
-                                        match username with
-                                        | Some(username, coalition) ->
-                                            Some username, Some (sprintf "Welcome %s in coalition %s" username coalition)
+                                    let! userData = Server.TryLogin(userPwd.Value, coalitionPwd.Value.ToUpper())
+                                    let user, coalition, status =
+                                        match userData with
+                                        | Some(Users.Named username as user, coalition) ->
+                                            Some user, Some coalition, Some (sprintf "Welcome %s in coalition %s" username (coalition.AsString()))
                                         | None ->
-                                            None, Some "Incorrect pin code"
-                                    Var.Set rvState { state with User = user; LoginMessage = status }
+                                            None, None, Some "Incorrect pin code"
+                                    let! available =
+                                        match coalition with
+                                        | Some Users.Allies -> alliedPlatoons
+                                        | Some Users.Axis -> axisPlatoons
+                                        | None -> []
+                                        |> Server.FilterAvailable
+                                    Var.Set rvState { state with User = user; Coalition = coalition; Available = available; LoginMessage = status }
                                 }
                                 |> Async.Start
                             )
@@ -155,27 +194,45 @@ module WebCommander =
                         ]
                         text (match state.LoginMessage with None -> "" | Some msg -> msg)
                     ] :> Doc
-                | Some user ->
+                | Some (Users.Named user) ->
                     Doc.TextNode <| sprintf "Command panel for %s" user
 
             let platoonSelection =
-                match state.User with
-                | None ->
+                match state.User, state.Coalition with
+                | _, None
+                | None, _ ->
                     Doc.Empty
-                | Some user ->
-                    let available =
-                        platoons
-                        |> List.filter(fun platoon -> List.contains platoon state.Platoons |> not)
-                    match available with
+                | Some user, Some coalition ->
+                    match state.Available with
                     | [] ->
                         text "All platoons assigned"
                     | first :: _ ->
                         let chosen = Var.Create first
                         div [
-                            Doc.Select [] id available chosen
+                            Doc.Select [] (fun (x : Users.Unit) -> x.AsString()) state.Available chosen
                             Doc.ButtonView "Add" [] (View.FromVar chosen) (fun platoon ->
-                                let state2 = { state with Platoons = platoon :: state.Platoons }
-                                Var.Set rvState state2
+                                async {
+                                    let! grabbed = Server.TryGrab(user, platoon)
+                                    let! available =
+                                        match coalition with
+                                        | Users.Allies -> alliedPlatoons
+                                        | Users.Axis -> axisPlatoons
+                                        |> Server.FilterAvailable
+                                    if grabbed then
+                                        { state with
+                                            Platoons = platoon :: state.Platoons
+                                            GrabMessage = Some(sprintf "Platoon grabbed: %s" (platoon.AsString()))
+                                            Available = available
+                                        }
+                                        |> Var.Set rvState
+                                    else
+                                        { state with
+                                            GrabMessage = Some(sprintf "Could not grab control of %s" (platoon.AsString()))
+                                            Available = available
+                                        }
+                                        |> Var.Set rvState
+                                }
+                                |> Async.Start
                             )
                         ] :> Doc
 
@@ -215,45 +272,103 @@ module WebCommander =
                 let speedList = [ Slow ; Fast ]
                 let fireList = [ FreeFire ; ReturnFire ]
 
-                let mkRow(platoon) =
-                    let chosenOrder = Var.Create (List.head orderList)
-                    let chosenDestination = Var.Create (List.head moveTo)
-                    let chosenSpeed = Var.Create (List.head speedList)
-                    let chosenFire = Var.Create (List.head fireList)
-                    div [
-                        Doc.TextNode platoon
-                        Doc.Select [] Order.Show orderList chosenOrder
-                        Doc.Button "Order" [] (fun () ->
-                            let orderAndPolicy =
-                                OrderAndPolicy(chosenOrder.Value, None)
-                            Server.SendOrder(orderAndPolicy.ToServerInput(platoon, compressDestination))
-                        )
-                        text " - "
-                        text "Move towards..."
-                        Doc.Select [] Order.Show moveTo chosenDestination
-                        text " at "
-                        Doc.Select [] Speed.Show speedList chosenSpeed
-                        text ", "
-                        Doc.Select [] FireControl.Show fireList chosenFire
-                        Doc.Button "Move" [] (fun () ->
-                            let orderAndPolicy =
-                                OrderAndPolicy(chosenDestination.Value, Some { Speed = chosenSpeed.Value ; FireControl = chosenFire.Value })
-                            Server.SendOrder(orderAndPolicy.ToServerInput(platoon, compressDestination))
-                        )
-                        text " - "
-                        Doc.Button "Stop" [] (fun () ->
-                            Server.SendOrder(OrderAndPolicy(FormationStop, None).ToServerInput(platoon, compressDestination))
-                        )
-                        text " "
-                        Doc.Button "Continue" [] (fun () ->
-                            Server.SendOrder(OrderAndPolicy(FormationContinue, None).ToServerInput(platoon, compressDestination))
-                        )
-                    ] :> Doc
+                match state.User with
+                | Some user ->
+                    let tryGiveOrder platoon (orderAndPolicy : OrderAndPolicy) =
+                        async {
+                            let! ok = Server.UserControls(user, platoon)
+                            let! status =
+                                if ok then
+                                    let orderString = orderAndPolicy.ToServerInput(platoon.AsString(), compressDestination)
+                                    async {
+                                        Server.SendOrder(orderString)                                
+                                        return Some(sprintf "Order sent to %s" (platoon.AsString()))
+                                    }
+                                else
+                                    async {
+                                        let! underControl = Server.GetUserPlatoons(user)
+                                        Var.Set rvState {
+                                            state with Platoons = underControl
+                                        }
+                                        return Some(sprintf "Failed to issue order, possibly because you no longer have control over %s" (platoon.AsString()))
+                                    }
+                            Var.Set rvState {
+                                state with
+                                    OrderMessage = status
+                            }
+                        }                    
 
-                div [
-                    for platoon in state.Platoons do
-                        yield mkRow platoon
-                ]
+                    let mkRow(platoon : Users.Unit) =
+                        let chosenOrder = Var.Create (List.head orderList)
+                        let chosenDestination = Var.Create (List.head moveTo)
+                        let chosenSpeed = Var.Create (List.head speedList)
+                        let chosenFire = Var.Create (List.head fireList)
+                        div [
+                            Doc.Button "X" [] (fun() ->
+                                async {
+                                    Server.Release(user, platoon)
+                                    let! underControl = Server.GetUserPlatoons(user)
+                                    let! available =
+                                        match state.Coalition with
+                                        | Some Users.Allies -> alliedPlatoons
+                                        | Some Users.Axis -> axisPlatoons
+                                        | None -> []
+                                        |> Server.FilterAvailable
+                                    Var.Set rvState {
+                                        state with
+                                            Platoons = underControl
+                                            Available = available
+                                    }
+                                }
+                                |> Async.Start
+                            )
+                            text " "
+                            Doc.TextNode (platoon.AsString())
+                            text " "
+                            Doc.Select [] Order.Show orderList chosenOrder
+                            text " "
+                            Doc.Button "Order" [] (fun () ->
+                                OrderAndPolicy(chosenOrder.Value, None)
+                                |> tryGiveOrder platoon
+                                |> Async.Start
+                            )
+                            text " - "
+                            text "Move towards..."
+                            Doc.Select [] Order.Show moveTo chosenDestination
+                            text " at "
+                            Doc.Select [] Speed.Show speedList chosenSpeed
+                            text ", "
+                            Doc.Select [] FireControl.Show fireList chosenFire
+                            Doc.Button "Move" [] (fun () ->
+                                OrderAndPolicy(chosenDestination.Value, Some { Speed = chosenSpeed.Value ; FireControl = chosenFire.Value })
+                                |> tryGiveOrder platoon
+                                |> Async.Start
+                            )
+                            text " - "
+                            Doc.Button "Stop" [] (fun () ->
+                                OrderAndPolicy(FormationStop, None)
+                                |> tryGiveOrder platoon
+                                |> Async.Start
+                            )
+                            text " "
+                            Doc.Button "Continue" [] (fun () ->
+                                OrderAndPolicy(FormationContinue, None)
+                                |> tryGiveOrder platoon
+                                |> Async.Start
+                            )
+                        ] :> Doc
+
+                    div [
+                        for platoon in state.Platoons do
+                            yield mkRow platoon
+                        match state.OrderMessage with
+                        | Some msg ->
+                            yield text msg
+                        | None ->
+                            ()
+                    ] :> Doc
+                | None ->
+                    Doc.Empty
 
             let logout =
                 match state.User with
@@ -261,7 +376,8 @@ module WebCommander =
                     Doc.Empty
                 | Some user ->
                     Doc.Button "Log out" [] (fun () ->
-                        Var.Set rvState { state with User = None; Platoons = [] }
+                        Server.Logout(user)
+                        Var.Set rvState { state with User = None; Platoons = []; Coalition = None; LoginMessage = None }
                     ) :> Doc
 
             div [
@@ -309,7 +425,7 @@ type EndPoint =
 /// </summary>
 /// <param name="waypoints">Names of waypoints.</param>
 /// <param name="platoons">Names of platoons.</param>
-let MySite(waypoints, platoons) =
+let MySite(waypoints, axisPlatoons, alliedPlatoons) =
 
     Application.MultiPage(fun ctx ->
         function
@@ -317,7 +433,7 @@ let MySite(waypoints, platoons) =
             Content.Page(
                 Title = "Orders",
                 Body = [
-                    div [ client <@ WebCommander.TakeOrders(waypoints, platoons) @> ]
+                    div [ client <@ WebCommander.TakeOrders(waypoints, axisPlatoons, alliedPlatoons) @> ]
                 ]
             )
         | Players ->
@@ -370,9 +486,15 @@ let main argv =
         |> List.map (fun wp -> wp.Name.Value)
         |> List.sort
 
-    let platoons =
+    let axisPlatoons =
         (parseGroup config.PlatoonsFilename).ListOfVehicle
-        |> List.map (fun platoon -> platoon.Name.Value)
+        |> List.filter(fun platoon -> platoon.Country.Value = 201)
+        |> List.map (fun platoon -> Users.Platoon platoon.Name.Value)
+
+    let alliedPlatoons =
+        (parseGroup config.PlatoonsFilename).ListOfVehicle
+        |> List.filter(fun platoon -> platoon.Country.Value = 101)
+        |> List.map (fun platoon -> Users.Platoon platoon.Name.Value)
 
     let rec welcome() =
         async {
@@ -393,7 +515,7 @@ let main argv =
                     HttpBinding.mk' HTTP "127.0.0.1" 9000
                 ]
             }
-        startWebServer myConfig (WebSharperAdapter.ToWebPart <| MySite(waypoints, platoons))
+        startWebServer myConfig (WebSharperAdapter.ToWebPart <| MySite(waypoints, axisPlatoons, alliedPlatoons))
         0
     with
         | exc ->

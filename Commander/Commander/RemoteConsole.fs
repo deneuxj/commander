@@ -4,7 +4,9 @@ open System.Net
 open System.Text
 open System.Web
 open System
+open WebSharper
 
+[<JavaScript>]
 type PlayerData =
     { ClientId : int
       Status : int
