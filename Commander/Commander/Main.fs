@@ -473,8 +473,8 @@ open WebSharper.Suave
 
 type T = Provider<"../../Lib/Sample.Mission", library="../../Lib/Sample.Mission">
 
-let parseGroup filename =
-    let s = SturmovikMission.DataProvider.Parsing.Stream.FromFile(Path.Combine(T.ResolutionFolder, filename))
+let parseGroup filename =    
+    let s = SturmovikMission.DataProvider.Parsing.Stream.FromFile(filename)
     T.GroupData(s)
 
 [<EntryPoint>]
@@ -510,10 +510,17 @@ let main argv =
             { defaultConfig with
                 //logger = Suave.Logging.Loggers.ConsoleWindowLogger(Suave.Logging.LogLevel.Verbose)
                 bindings =
-                [
-                    HttpBinding.mk' HTTP "192.168.0.100" 9000
-                    HttpBinding.mk' HTTP "127.0.0.1" 9000
-                ]
+                    Configuration.values.Bindings
+                    |> Array.map (fun binding ->
+                        match binding.Split(':') with
+                        | [| ip; port |] ->
+                            match System.Int32.TryParse(port) with
+                            | true, port -> HttpBinding.mk' HTTP ip port
+                            | false, _ -> failwithf "Port %s is not a valid port number" port 
+                        | _ ->
+                            failwithf "Ill-formed binding '%s'. Should be of the form ip:port" binding
+                    )
+                    |> List.ofArray
             }
         startWebServer myConfig (WebSharperAdapter.ToWebPart <| MySite(waypoints, axisPlatoons, alliedPlatoons))
         0

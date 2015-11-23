@@ -4,6 +4,7 @@
     "rconAddress": "127.0.0.1",
     "rconPort": 8991,
     "webListeningAddresses": [ "http://bosgc.chickenkiller.com:9000/" ],
+	"bindings" : [ "127.0.0.1:9000", "192.168.0.123:9000" ],
     "waypointsFilename": "../../Stalingrad/Waypoints.Group",
     "platoonsFilename": "../../Stalingrad/Platoons.Group"
 }

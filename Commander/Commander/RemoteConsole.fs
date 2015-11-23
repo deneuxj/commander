@@ -23,7 +23,13 @@ type PlayerData =
 type Client(address : IPAddress, port, login, password) as this =
     inherit Sockets.TcpClient()
 
-    do base.Connect(address, port)
+    do
+        try
+            base.Connect(address, port)
+        with
+        | exc ->
+            printfn "Failed to connect to game server: %s" exc.Message
+            raise exc
     let stream = this.GetStream()
 
     let send(buff, idx, len) = Async.FromBeginEnd((fun (cb, par) -> stream.BeginWrite(buff, idx, len, cb, par)), stream.EndWrite)
