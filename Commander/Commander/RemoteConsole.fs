@@ -108,3 +108,13 @@ type Client(address : IPAddress, port, login, password) as this =
             let! response = getResponse stream
             return()
         }
+
+    member this.MessageTeam(teamId, msg) =
+        async {
+            let buff =
+                sprintf "chatmsg 1 %d %s" teamId msg
+                |> encode
+            do! send(buff, 0, buff.Length)
+            let! response = getResponse stream
+            return()
+        }

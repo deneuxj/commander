@@ -221,7 +221,7 @@
      rvState=Var.Create(arg00);
      commandSection=function(state)
      {
-      var matchValue,login,_,user,arg001,password,arg20,arg201,attrs,arg202,matchValue1,_2,msg,matchValue2,platoonSelection,_3,user1,predicate,available,_4,first,chosen,arg203,arg30,mapping,x1,folder,state1,wpRank,compressDestination,projection,mapping1,list,moveTo,orderList,speedList,fireList,mkRow,arg209,orderAssignment,matchValue3,logout,_5,arg20a,arg20b;
+      var matchValue,login,_,user,arg001,coalitionPwd,userPwd,arg20,arg201,attrs,arg202,matchValue1,_2,msg,matchValue2,platoonSelection,_3,user2,predicate,available,_4,first,chosen,arg203,arg30,mapping,x1,folder,state1,wpRank,compressDestination,projection,mapping1,list,moveTo,orderList,speedList,fireList,mkRow,arg209,orderAssignment,matchValue3,logout,_5,arg20a,arg20b;
       matchValue=state.User;
       if(matchValue.$==1)
        {
@@ -231,7 +231,8 @@
        }
       else
        {
-        password=Var.Create("AAA1234");
+        coalitionPwd=Var.Create("AAA");
+        userPwd=Var.Create("1234");
         attrs=Runtime.New(T,{
          $:0
         });
@@ -239,36 +240,46 @@
         {
          return AjaxRemotingProvider.Send("Commander:3",[]);
         };
-        arg201=List.ofArray([Doc.TextNode("Your PIN: "),Doc.Input(Runtime.New(T,{
+        arg201=List.ofArray([Doc.TextNode("Your coalition code (3 letters) and your pin (4 digits):"),Doc.Input(Runtime.New(T,{
          $:0
-        }),password),Doc.Button("Log in",attrs,function()
+        }),coalitionPwd),Doc.Input(Runtime.New(T,{
+         $:0
+        }),userPwd),Doc.TextNode(" "),Doc.Button("Log in",attrs,function()
         {
          var arg002;
          arg002=Concurrency.Delay(function()
          {
           var x;
-          x=AjaxRemotingProvider.Async("Commander:2",[Var1.Get(password)]);
+          x=AjaxRemotingProvider.Async("Commander:2",[Var1.Get(userPwd),Var1.Get(coalitionPwd).toUpperCase()]);
           return Concurrency.Bind(x,function(_arg1)
           {
-           var status,_1,username,arg10;
+           var patternInput,_1,username,coalition,user1,status,arg10;
            if(_arg1.$==0)
             {
-             _1={
+             _1=[{
+              $:0
+             },{
               $:1,
               $0:"Incorrect pin code"
-             };
+             }];
             }
            else
             {
-             username=_arg1.$0;
-             _1={
+             username=_arg1.$0[0];
+             coalition=_arg1.$0[1];
+             _1=[{
               $:1,
-              $0:"Welcome "+PrintfHelpers.toSafe(username)
-             };
+              $0:username
+             },{
+              $:1,
+              $0:"Welcome "+PrintfHelpers.toSafe(username)+" in coalition "+PrintfHelpers.toSafe(coalition)
+             }];
             }
-           status=_1;
+           patternInput=_1;
+           user1=patternInput[0];
+           status=patternInput[1];
            arg10={
-            User:_arg1,
+            User:user1,
             Platoons:state.Platoons,
             LoginMessage:status
            };
@@ -279,7 +290,7 @@
          return Concurrency.Start(arg002,{
           $:0
          });
-        }),Doc.Button("Request PIN",Runtime.New(T,{
+        }),Doc.TextNode(" "),Doc.Button("Request PIN",Runtime.New(T,{
          $:0
         }),arg202)]);
         matchValue1=state.LoginMessage;
@@ -299,7 +310,7 @@
       matchValue2=state.User;
       if(matchValue2.$==1)
        {
-        user1=matchValue2.$0;
+        user2=matchValue2.$0;
         predicate=function(platoon)
         {
          var value;

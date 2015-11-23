@@ -10,7 +10,7 @@ type Request =
     | UpdateUserDb
     | SendOrder of string
     | GetPlayerList of AsyncReplyChannel<RemoteConsole.PlayerData [] option>
-    | TryLogin of string * AsyncReplyChannel<string option>
+    | TryLogin of userPwd : string * coalitionPwd : string * AsyncReplyChannel<(string * string) option>
 
 let connect =
     async {
@@ -45,7 +45,9 @@ let updateUserDb (client : RemoteConsole.Client) (usersDb : Users.UsersData) =
             if Set.contains username newUsers then
                 if Configuration.values.WebListeningAddresses |> Array.isEmpty |> not then
                     do! client.MessagePlayer(clientId, sprintf "Ground commander at %s" Configuration.values.WebListeningAddresses.[0])
-                do! client.MessagePlayer(clientId, sprintf "Your pin code: %s" usersDb.Value.Passwords.[user])                
+                do! client.MessageTeam(2, sprintf "Team password: %s" usersDb.Value.CoalitionPasswords.[Users.Axis])
+                do! client.MessageTeam(1, sprintf "Team password: %s" usersDb.Value.CoalitionPasswords.[Users.Allies])
+                do! client.MessagePlayer(clientId, sprintf "Your pin code: %s" usersDb.Value.Passwords.[user])
         return usersDb.Value
     }
 
@@ -69,33 +71,34 @@ let agent = MailboxProcessor.Start(fun inbox ->
             printfn "Done."
             reply.Reply players
             return! loop client state
-        | TryLogin(password, reply) ->
-            printfn "Trying to login user with pin code %s..." password
-            //let! users = updateUserDb client state.UsersDb
-            let! result =
-                match state.UsersDb.TryGetPasswordOwner(password) with
-                | Some(Users.Named name) ->
+        | TryLogin(userPwd, coalitionPwd, reply) ->
+            printfn "Trying to login user with pin code %s..." (coalitionPwd + userPwd)
+            let! result, usersDb2 =
+                match state.UsersDb.TryGetPasswordOwner(userPwd), state.UsersDb.TryGetCoalition(coalitionPwd) with
+                | Some((Users.Named name) as usr), Some(coalition) ->
                     async {
-                        try
-                            printfn "Succeeded."
-                            return Some name
-                        with
-                        | exc ->
-                            printfn "Failed with exception: %A" exc
-                            return None
+                        printfn "Succeeded in coalition %A" coalition
+                        return Some(name, coalition.AsString()), state.UsersDb.Login(usr, coalition)
                     }
-                | None ->
+                | _, None
+                | None, _ ->
                     async {
                         printfn "Failed."
-                        return None
+                        return None, state.UsersDb
                     }
             reply.Reply result
-            return! loop client state
+            return! loop client { state with UsersDb = usersDb2 }
         return! loop client state
     }
     async {
         let state =
-            { UsersDb = Users.UsersData.Default
+            { UsersDb =
+                { Users.UsersData.Default with
+                    CoalitionPasswords =
+                        Map.ofList [
+                            (Users.Axis, Users.newCoallitionPassword())
+                            (Users.Allies, Users.newCoallitionPassword())]
+                }
             }
         use! client = connect
         return! loop client state

@@ -21,8 +21,8 @@ module Server =
         CentralAgent.agent.PostAndAsyncReply(fun reply -> CentralAgent.GetPlayerList reply)
 
     [<Rpc>]
-    let TryLogin(password) =
-        CentralAgent.agent.PostAndAsyncReply(fun reply -> CentralAgent.TryLogin(password, reply))
+    let TryLogin(userPwd, coalitionPwd) =
+        CentralAgent.agent.PostAndAsyncReply(fun reply -> CentralAgent.TryLogin(userPwd, coalitionPwd, reply))
 
     [<Rpc>]
     let UpdateUserDb() =
@@ -127,24 +127,28 @@ module WebCommander =
             let login =
                 match state.User with
                 | None ->
-                    let password = Var.Create "AAA1234"
+                    let coalitionPwd = Var.Create "AAA"
+                    let userPwd = Var.Create "1234"
                     div [
                         div [
-                            text "Your PIN: "
-                            Doc.Input [] password
+                            text "Your coalition code (3 letters) and your pin (4 digits):"
+                            Doc.Input [] coalitionPwd
+                            Doc.Input [] userPwd
+                            text " "
                             Doc.Button "Log in" [] (fun () ->
                                 async {
-                                    let! username = Server.TryLogin(password.Value)
-                                    let status =
+                                    let! username = Server.TryLogin(userPwd.Value, coalitionPwd.Value.ToUpper())
+                                    let user, status =
                                         match username with
-                                        | Some username ->
-                                            Some (sprintf "Welcome %s" username)
+                                        | Some(username, coalition) ->
+                                            Some username, Some (sprintf "Welcome %s in coalition %s" username coalition)
                                         | None ->
-                                            Some "Incorrect pin code"
-                                    Var.Set rvState { state with User = username; LoginMessage = status }
+                                            None, Some "Incorrect pin code"
+                                    Var.Set rvState { state with User = user; LoginMessage = status }
                                 }
                                 |> Async.Start
                             )
+                            text " "
                             Doc.Button "Request PIN" [] (fun () ->
                                 Server.UpdateUserDb()
                             )
