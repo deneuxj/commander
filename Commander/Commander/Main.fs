@@ -508,7 +508,11 @@ let main argv =
         Async.Start(welcome())
         let myConfig = 
             { defaultConfig with
-                //logger = Suave.Logging.Loggers.ConsoleWindowLogger(Suave.Logging.LogLevel.Verbose)
+                logger =
+                    if not Configuration.values.Logging then
+                        defaultConfig.logger
+                    else
+                        upcast Suave.Logging.Loggers.ConsoleWindowLogger(Suave.Logging.LogLevel.Verbose)
                 bindings =
                     Configuration.values.Bindings
                     |> Array.map (fun binding ->
