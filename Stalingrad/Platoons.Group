@@ -1,19 +1,19 @@
 Group
 {
   Name = "Platoons";
-  Index = 14029;
+  Index = 6798;
   Desc = "";
   Vehicle
   {
     Name = "T34-2";
-    Index = 14030;
-    LinkTrId = 14058;
-    XPos = 136822.478;
-    YPos = 132.661;
-    ZPos = 252914.477;
-    XOri = 0.00;
-    YOri = 315.08;
-    ZOri = 0.00;
+    Index = 6799;
+    LinkTrId = 6800;
+    XPos = 143167.222;
+    YPos = 142.619;
+    ZPos = 245523.945;
+    XOri = 358.18;
+    YOri = 70.39;
+    ZOri = 358.26;
     Script = "LuaScripts\WorldObjects\vehicles\t34-76stz.txt";
     Model = "graphics\vehicles\t34-76stz\t34-76stz.mgm";
     Desc = "";
@@ -36,14 +36,14 @@ Group
   Vehicle
   {
     Name = "T70-2";
-    Index = 14031;
-    LinkTrId = 14059;
-    XPos = 137177.167;
-    YPos = 132.661;
-    ZPos = 253171.701;
-    XOri = 0.00;
-    YOri = 140.57;
-    ZOri = 0.00;
+    Index = 6801;
+    LinkTrId = 6802;
+    XPos = 143549.850;
+    YPos = 144.905;
+    ZPos = 245533.674;
+    XOri = 357.94;
+    YOri = 248.11;
+    ZOri = 359.28;
     Script = "LuaScripts\WorldObjects\vehicles\t70.txt";
     Model = "graphics\vehicles\t70\t70.mgm";
     Desc = "";
@@ -66,14 +66,14 @@ Group
   Vehicle
   {
     Name = "ba10m-2";
-    Index = 14032;
-    LinkTrId = 14060;
-    XPos = 136584.675;
-    YPos = 132.661;
-    ZPos = 253430.807;
-    XOri = 0.00;
-    YOri = 55.64;
-    ZOri = 0.00;
+    Index = 6803;
+    LinkTrId = 6804;
+    XPos = 142993.427;
+    YPos = 141.109;
+    ZPos = 245685.231;
+    XOri = 2.91;
+    YOri = 297.95;
+    ZOri = 359.14;
     Script = "LuaScripts\WorldObjects\vehicles\ba10m.txt";
     Model = "graphics\vehicles\ba10m\ba10m.mgm";
     Desc = "";
@@ -96,14 +96,14 @@ Group
   Vehicle
   {
     Name = "bm13-2";
-    Index = 14033;
-    LinkTrId = 14061;
-    XPos = 137006.257;
-    YPos = 132.661;
-    ZPos = 253425.886;
-    XOri = 0.00;
-    YOri = 254.41;
-    ZOri = 0.00;
+    Index = 6805;
+    LinkTrId = 6806;
+    XPos = 143296.470;
+    YPos = 137.316;
+    ZPos = 245814.781;
+    XOri = 0.93;
+    YOri = 201.69;
+    ZOri = 359.13;
     Script = "LuaScripts\WorldObjects\vehicles\bm13.txt";
     Model = "graphics\vehicles\zis\bm13.mgm";
     Desc = "";
@@ -126,14 +126,14 @@ Group
   Vehicle
   {
     Name = "T34-1";
-    Index = 14034;
-    LinkTrId = 14062;
-    XPos = 148266.805;
-    YPos = 132.661;
-    ZPos = 253950.137;
-    XOri = 1.70;
-    YOri = 295.93;
-    ZOri = 358.95;
+    Index = 6807;
+    LinkTrId = 6808;
+    XPos = 136827.736;
+    YPos = 97.701;
+    ZPos = 220815.392;
+    XOri = 358.93;
+    YOri = 214.75;
+    ZOri = 0.25;
     Script = "LuaScripts\WorldObjects\vehicles\t34-76stz.txt";
     Model = "graphics\vehicles\t34-76stz\t34-76stz.mgm";
     Desc = "";
@@ -156,14 +156,14 @@ Group
   Vehicle
   {
     Name = "T70-1";
-    Index = 14035;
-    LinkTrId = 14063;
-    XPos = 148324.231;
-    YPos = 132.661;
-    ZPos = 253772.840;
-    XOri = 0.58;
-    YOri = 107.24;
-    ZOri = 0.46;
+    Index = 6809;
+    LinkTrId = 6810;
+    XPos = 136661.389;
+    YPos = 97.499;
+    ZPos = 220731.363;
+    XOri = 0.38;
+    YOri = 26.06;
+    ZOri = 358.98;
     Script = "LuaScripts\WorldObjects\vehicles\t70.txt";
     Model = "graphics\vehicles\t70\t70.mgm";
     Desc = "";
@@ -186,14 +186,14 @@ Group
   Vehicle
   {
     Name = "ba10m-1";
-    Index = 14036;
-    LinkTrId = 14064;
-    XPos = 150081.981;
-    YPos = 132.661;
-    ZPos = 253997.213;
-    XOri = 0.33;
-    YOri = 243.19;
-    ZOri = 358.97;
+    Index = 6811;
+    LinkTrId = 6812;
+    XPos = 137153.619;
+    YPos = 93.508;
+    ZPos = 219029.088;
+    XOri = 0.52;
+    YOri = 162.01;
+    ZOri = 0.32;
     Script = "LuaScripts\WorldObjects\vehicles\ba10m.txt";
     Model = "graphics\vehicles\ba10m\ba10m.mgm";
     Desc = "";
@@ -216,14 +216,14 @@ Group
   Vehicle
   {
     Name = "bm13-1";
-    Index = 14037;
-    LinkTrId = 14065;
-    XPos = 150046.680;
-    YPos = 132.661;
-    ZPos = 253884.733;
-    XOri = 359.84;
-    YOri = 72.91;
-    ZOri = 359.39;
+    Index = 6813;
+    LinkTrId = 6814;
+    XPos = 137037.046;
+    YPos = 95.247;
+    ZPos = 219046.657;
+    XOri = 359.14;
+    YOri = 351.73;
+    ZOri = 359.99;
     Script = "LuaScripts\WorldObjects\vehicles\bm13.txt";
     Model = "graphics\vehicles\zis\bm13.mgm";
     Desc = "";
@@ -246,14 +246,14 @@ Group
   Vehicle
   {
     Name = "Pz3-1";
-    Index = 14038;
-    LinkTrId = 14039;
-    XPos = 126130.875;
-    YPos = 132.661;
-    ZPos = 202812.688;
-    XOri = 1.59;
-    YOri = 106.54;
-    ZOri = 1.73;
+    Index = 6815;
+    LinkTrId = 6816;
+    XPos = 137927.431;
+    YPos = 128.847;
+    ZPos = 236974.835;
+    XOri = 358.64;
+    YOri = 40.80;
+    ZOri = 0.15;
     Script = "LuaScripts\WorldObjects\vehicles\pziii-l.txt";
     Model = "graphics\vehicles\pziii-l\pziii-l.mgm";
     Desc = "";
@@ -275,33 +275,33 @@ Group
 
   MCU_TR_Entity
   {
-    Index = 14039;
+    Index = 6816;
     Name = "Pzr3 entity";
     Desc = "";
     Targets = [];
     Objects = [];
-    XPos = 126130.875;
-    YPos = 132.861;
-    ZPos = 202812.688;
+    XPos = 137927.431;
+    YPos = 129.047;
+    ZPos = 236974.835;
     XOri = 0.00;
     YOri = 0.00;
     ZOri = 0.00;
     Enabled = 1;
-    MisObjID = 14038;
+    MisObjID = 6815;
   }
   
 
   Vehicle
   {
     Name = "Pz4-1";
-    Index = 14041;
-    LinkTrId = 14042;
-    XPos = 126053.427;
-    YPos = 132.661;
-    ZPos = 203071.718;
-    XOri = 0.67;
-    YOri = 106.54;
-    ZOri = 0.55;
+    Index = 6818;
+    LinkTrId = 6819;
+    XPos = 138131.851;
+    YPos = 124.257;
+    ZPos = 237151.773;
+    XOri = 357.46;
+    YOri = 40.80;
+    ZOri = 357.49;
     Script = "LuaScripts\WorldObjects\vehicles\pziii-l.txt";
     Model = "graphics\vehicles\pziii-l\pziii-l.mgm";
     Desc = "";
@@ -323,33 +323,33 @@ Group
 
   MCU_TR_Entity
   {
-    Index = 14042;
+    Index = 6819;
     Name = "Pzr3 entity";
     Desc = "";
     Targets = [];
     Objects = [];
-    XPos = 126053.427;
-    YPos = 132.861;
-    ZPos = 203071.718;
+    XPos = 138131.851;
+    YPos = 124.457;
+    ZPos = 237151.773;
     XOri = 0.00;
     YOri = 0.00;
     ZOri = 0.00;
     Enabled = 1;
-    MisObjID = 14041;
+    MisObjID = 6818;
   }
   
 
   Vehicle
   {
     Name = "1c-1";
-    Index = 14044;
-    LinkTrId = 14056;
-    XPos = 125076.866;
-    YPos = 132.661;
-    ZPos = 202807.297;
-    XOri = 0.75;
-    YOri = 307.99;
-    ZOri = 0.32;
+    Index = 6821;
+    LinkTrId = 6822;
+    XPos = 137489.914;
+    YPos = 118.004;
+    ZPos = 237933.763;
+    XOri = 359.69;
+    YOri = 242.25;
+    ZOri = 3.49;
     Script = "LuaScripts\WorldObjects\vehicles\sdkfz251-1c.txt";
     Model = "graphics\vehicles\sdkfz251\sdkfz251-1c.mgm";
     Desc = "";
@@ -372,14 +372,14 @@ Group
   Vehicle
   {
     Name = "szf-1";
-    Index = 14045;
-    LinkTrId = 14057;
-    XPos = 125090.566;
-    YPos = 132.661;
-    ZPos = 202597.873;
-    XOri = 0.59;
-    YOri = 127.30;
-    ZOri = 359.89;
+    Index = 6823;
+    LinkTrId = 6824;
+    XPos = 137304.566;
+    YPos = 123.535;
+    ZPos = 237835.315;
+    XOri = 359.12;
+    YOri = 61.56;
+    ZOri = 358.18;
     Script = "LuaScripts\WorldObjects\vehicles\sdkfz251-szf.txt";
     Model = "graphics\vehicles\sdkfz251\sdkfz251-szf.mgm";
     Desc = "";
@@ -402,14 +402,14 @@ Group
   Vehicle
   {
     Name = "Pz3-2";
-    Index = 14046;
-    LinkTrId = 14047;
-    XPos = 131968.675;
-    YPos = 132.661;
-    ZPos = 201932.458;
-    XOri = 0.00;
-    YOri = 273.67;
-    ZOri = 0.00;
+    Index = 6825;
+    LinkTrId = 6826;
+    XPos = 134566.487;
+    YPos = 60.814;
+    ZPos = 212464.370;
+    XOri = 359.99;
+    YOri = 258.78;
+    ZOri = 0.04;
     Script = "LuaScripts\WorldObjects\vehicles\pziii-l.txt";
     Model = "graphics\vehicles\pziii-l\pziii-l.mgm";
     Desc = "";
@@ -431,33 +431,33 @@ Group
 
   MCU_TR_Entity
   {
-    Index = 14047;
+    Index = 6826;
     Name = "Pzr3 entity";
     Desc = "";
     Targets = [];
     Objects = [];
-    XPos = 131968.675;
-    YPos = 132.861;
-    ZPos = 201932.458;
+    XPos = 134566.487;
+    YPos = 61.014;
+    ZPos = 212464.370;
     XOri = 0.00;
     YOri = 0.00;
     ZOri = 0.00;
     Enabled = 1;
-    MisObjID = 14046;
+    MisObjID = 6825;
   }
   
 
   Vehicle
   {
     Name = "Pz4-2";
-    Index = 14049;
-    LinkTrId = 14050;
-    XPos = 131942.819;
-    YPos = 132.661;
-    ZPos = 201791.653;
-    XOri = 0.00;
-    YOri = 87.88;
-    ZOri = 0.00;
+    Index = 6828;
+    LinkTrId = 6829;
+    XPos = 134505.306;
+    YPos = 61.395;
+    ZPos = 212334.942;
+    XOri = 0.16;
+    YOri = 72.99;
+    ZOri = 359.51;
     Script = "LuaScripts\WorldObjects\vehicles\pziii-l.txt";
     Model = "graphics\vehicles\pziii-l\pziii-l.mgm";
     Desc = "";
@@ -479,33 +479,33 @@ Group
 
   MCU_TR_Entity
   {
-    Index = 14050;
+    Index = 6829;
     Name = "Pzr3 entity";
     Desc = "";
     Targets = [];
     Objects = [];
-    XPos = 131942.819;
-    YPos = 132.861;
-    ZPos = 201791.653;
+    XPos = 134505.306;
+    YPos = 61.595;
+    ZPos = 212334.942;
     XOri = 0.00;
     YOri = 0.00;
     ZOri = 0.00;
     Enabled = 1;
-    MisObjID = 14049;
+    MisObjID = 6828;
   }
   
 
   Vehicle
   {
     Name = "1c-2";
-    Index = 14052;
-    LinkTrId = 14055;
-    XPos = 132617.586;
-    YPos = 132.661;
-    ZPos = 201653.916;
-    XOri = 0.17;
-    YOri = 73.99;
-    ZOri = 0.01;
+    Index = 6831;
+    LinkTrId = 6832;
+    XPos = 135121.994;
+    YPos = 68.192;
+    ZPos = 212028.385;
+    XOri = 0.71;
+    YOri = 59.10;
+    ZOri = 359.03;
     Script = "LuaScripts\WorldObjects\vehicles\sdkfz251-1c.txt";
     Model = "graphics\vehicles\sdkfz251\sdkfz251-1c.mgm";
     Desc = "";
@@ -528,14 +528,14 @@ Group
   Vehicle
   {
     Name = "szf-2";
-    Index = 14053;
-    LinkTrId = 14054;
-    XPos = 132692.342;
-    YPos = 132.661;
-    ZPos = 201813.185;
-    XOri = 359.80;
-    YOri = 253.30;
-    ZOri = 359.98;
+    Index = 6833;
+    LinkTrId = 6834;
+    XPos = 135235.178;
+    YPos = 65.621;
+    ZPos = 212163.087;
+    XOri = 359.26;
+    YOri = 238.41;
+    ZOri = 0.97;
     Script = "LuaScripts\WorldObjects\vehicles\sdkfz251-szf.txt";
     Model = "graphics\vehicles\sdkfz251\sdkfz251-szf.mgm";
     Desc = "";
@@ -557,217 +557,217 @@ Group
 
   MCU_TR_Entity
   {
-    Index = 14054;
+    Index = 6834;
     Name = "szf-2 entity";
     Desc = "";
     Targets = [];
     Objects = [];
-    XPos = 132692.342;
-    YPos = 132.861;
-    ZPos = 201813.185;
+    XPos = 135235.178;
+    YPos = 65.821;
+    ZPos = 212163.087;
     XOri = 0.00;
     YOri = 0.00;
     ZOri = 0.00;
     Enabled = 1;
-    MisObjID = 14053;
+    MisObjID = 6833;
   }
   
 
   MCU_TR_Entity
   {
-    Index = 14055;
+    Index = 6832;
     Name = "1c-2 entity";
     Desc = "";
     Targets = [];
     Objects = [];
-    XPos = 132617.586;
-    YPos = 132.861;
-    ZPos = 201653.916;
+    XPos = 135121.994;
+    YPos = 68.392;
+    ZPos = 212028.385;
     XOri = 0.00;
     YOri = 0.00;
     ZOri = 0.00;
     Enabled = 1;
-    MisObjID = 14052;
+    MisObjID = 6831;
   }
   
 
   MCU_TR_Entity
   {
-    Index = 14056;
+    Index = 6822;
     Name = "1c-1 entity";
     Desc = "";
     Targets = [];
     Objects = [];
-    XPos = 125076.866;
-    YPos = 132.861;
-    ZPos = 202807.297;
+    XPos = 137489.914;
+    YPos = 118.204;
+    ZPos = 237933.763;
     XOri = 0.00;
     YOri = 0.00;
     ZOri = 0.00;
     Enabled = 1;
-    MisObjID = 14044;
+    MisObjID = 6821;
   }
   
 
   MCU_TR_Entity
   {
-    Index = 14057;
+    Index = 6824;
     Name = "szf-1 entity";
     Desc = "";
     Targets = [];
     Objects = [];
-    XPos = 125090.566;
-    YPos = 132.861;
-    ZPos = 202597.873;
+    XPos = 137304.566;
+    YPos = 123.735;
+    ZPos = 237835.315;
     XOri = 0.00;
     YOri = 0.00;
     ZOri = 0.00;
     Enabled = 1;
-    MisObjID = 14045;
+    MisObjID = 6823;
   }
   
 
   MCU_TR_Entity
   {
-    Index = 14058;
+    Index = 6800;
     Name = "T34-2 entity";
     Desc = "";
     Targets = [];
     Objects = [];
-    XPos = 136822.478;
-    YPos = 132.861;
-    ZPos = 252914.477;
+    XPos = 143167.222;
+    YPos = 142.819;
+    ZPos = 245523.945;
     XOri = 0.00;
     YOri = 0.00;
     ZOri = 0.00;
     Enabled = 1;
-    MisObjID = 14030;
+    MisObjID = 6799;
   }
   
 
   MCU_TR_Entity
   {
-    Index = 14059;
+    Index = 6802;
     Name = "T70-2 entity";
     Desc = "";
     Targets = [];
     Objects = [];
-    XPos = 137177.167;
-    YPos = 132.861;
-    ZPos = 253171.701;
+    XPos = 143549.850;
+    YPos = 145.105;
+    ZPos = 245533.674;
     XOri = 0.00;
     YOri = 0.00;
     ZOri = 0.00;
     Enabled = 1;
-    MisObjID = 14031;
+    MisObjID = 6801;
   }
   
 
   MCU_TR_Entity
   {
-    Index = 14060;
+    Index = 6804;
     Name = "ba10m-2 entity";
     Desc = "";
     Targets = [];
     Objects = [];
-    XPos = 136584.675;
-    YPos = 132.861;
-    ZPos = 253430.807;
+    XPos = 142993.427;
+    YPos = 141.309;
+    ZPos = 245685.231;
     XOri = 0.00;
     YOri = 0.00;
     ZOri = 0.00;
     Enabled = 1;
-    MisObjID = 14032;
+    MisObjID = 6803;
   }
   
 
   MCU_TR_Entity
   {
-    Index = 14061;
+    Index = 6806;
     Name = "bm13-2 entity";
     Desc = "";
     Targets = [];
     Objects = [];
-    XPos = 137006.257;
-    YPos = 132.861;
-    ZPos = 253425.886;
+    XPos = 143296.470;
+    YPos = 137.516;
+    ZPos = 245814.781;
     XOri = 0.00;
     YOri = 0.00;
     ZOri = 0.00;
     Enabled = 1;
-    MisObjID = 14033;
+    MisObjID = 6805;
   }
   
 
   MCU_TR_Entity
   {
-    Index = 14062;
+    Index = 6808;
     Name = "T34-1 entity";
     Desc = "";
     Targets = [];
     Objects = [];
-    XPos = 148266.805;
-    YPos = 132.861;
-    ZPos = 253950.137;
+    XPos = 136827.736;
+    YPos = 97.901;
+    ZPos = 220815.392;
     XOri = 0.00;
     YOri = 0.00;
     ZOri = 0.00;
     Enabled = 1;
-    MisObjID = 14034;
+    MisObjID = 6807;
   }
   
 
   MCU_TR_Entity
   {
-    Index = 14063;
+    Index = 6810;
     Name = "T70-1 entity";
     Desc = "";
     Targets = [];
     Objects = [];
-    XPos = 148324.231;
-    YPos = 132.861;
-    ZPos = 253772.840;
+    XPos = 136661.389;
+    YPos = 97.699;
+    ZPos = 220731.363;
     XOri = 0.00;
     YOri = 0.00;
     ZOri = 0.00;
     Enabled = 1;
-    MisObjID = 14035;
+    MisObjID = 6809;
   }
   
 
   MCU_TR_Entity
   {
-    Index = 14064;
+    Index = 6812;
     Name = "ba10m-1 entity";
     Desc = "";
     Targets = [];
     Objects = [];
-    XPos = 150081.981;
-    YPos = 132.861;
-    ZPos = 253997.213;
+    XPos = 137153.619;
+    YPos = 93.708;
+    ZPos = 219029.088;
     XOri = 0.00;
     YOri = 0.00;
     ZOri = 0.00;
     Enabled = 1;
-    MisObjID = 14036;
+    MisObjID = 6811;
   }
   
 
   MCU_TR_Entity
   {
-    Index = 14065;
+    Index = 6814;
     Name = "bm13-1 entity";
     Desc = "";
     Targets = [];
     Objects = [];
-    XPos = 150046.680;
-    YPos = 132.861;
-    ZPos = 253884.733;
+    XPos = 137037.046;
+    YPos = 95.447;
+    ZPos = 219046.657;
     XOri = 0.00;
     YOri = 0.00;
     ZOri = 0.00;
     Enabled = 1;
-    MisObjID = 14037;
+    MisObjID = 6813;
   }
   
 
