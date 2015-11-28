@@ -12,9 +12,9 @@ open WebSharper.UI.Next.Server
 module Server =
 
     [<Rpc>]
-    let SendOrder cmd =
-        printfn "Order sent: %s" cmd
-        CentralAgent.agent.Post(CentralAgent.SendOrder cmd)
+    let SendOrder(cmd, user, desc) =
+        printfn "Send order: %s" cmd
+        CentralAgent.agent.Post(CentralAgent.SendOrder(cmd, user, desc))
 
     [<Rpc>]
     let GetPlayerList() =
@@ -25,8 +25,8 @@ module Server =
         CentralAgent.agent.PostAndAsyncReply(fun reply -> CentralAgent.TryLogin(userPwd, coalitionPwd, reply))
 
     [<Rpc>]
-    let UpdateUserDb() =
-        CentralAgent.agent.Post(CentralAgent.UpdateUserDb)
+    let UpdateUserDb(forceTeamMessage) =
+        CentralAgent.agent.Post(CentralAgent.UpdateUserDb forceTeamMessage)
 
     [<Rpc>]
     let FilterAvailable(platoons) =
@@ -134,6 +134,31 @@ module WebCommander =
             | OrderAndPolicy (Move dest, None) ->
                 OrderAndPolicy(Move dest, Some { Speed = Normal ; FireControl = ReturnFire }).ToServerInput(platoon, compressDestination)
 
+        member this.Description(platoon) =
+            match this with
+            | OrderAndPolicy (FormationStop, _) -> sprintf "%s: Stop" platoon
+            | OrderAndPolicy (FormationContinue, _) -> sprintf "%s: Continue" platoon
+            | OrderAndPolicy (FormationColumn, _) -> sprintf "%s: Column" platoon
+            | OrderAndPolicy (FormationOnRoad, _) -> sprintf "%s: On road" platoon
+            | OrderAndPolicy (FormationAttack, _) -> sprintf "%s: Attack formation" platoon
+            | OrderAndPolicy (FlareGreen, _) -> sprintf "%s: Fire green flare" platoon
+            | OrderAndPolicy (FlareRed, _) -> sprintf "%s: Fire red flare" platoon
+            | OrderAndPolicy (Move dest, Some policy) ->
+                let prefix1 =
+                    match policy.FireControl with
+                    | FreeFire -> "free fire"
+                    | ReturnFire -> "return fire"
+                    | HoldFire -> "hold fire"
+                let prefix2 =
+                    match policy.Speed with
+                    | Slow -> "slow"
+                    | Normal -> "normal"
+                    | Fast -> "fast"
+                sprintf "%s: Move to %s at %s speed, %s" platoon dest prefix2 prefix1
+            | OrderAndPolicy (Move dest, None) ->
+                OrderAndPolicy(Move dest, Some { Speed = Normal ; FireControl = ReturnFire }).Description(platoon)
+
+
     type State =
         { User : Users.User option
           Coalition : Users.Coalition option
@@ -141,7 +166,6 @@ module WebCommander =
           Platoons : Users.Unit list
           LoginMessage : string option
           GrabMessage : string option
-          OrderMessage : string option
         }
 
     let TakeOrders(waypoints, axisPlatoons, alliedPlatoons) =
@@ -152,7 +176,6 @@ module WebCommander =
               Platoons = []
               LoginMessage = None
               GrabMessage = None
-              OrderMessage = None
             }
             |> Var.Create
 
@@ -189,7 +212,7 @@ module WebCommander =
                             )
                             text " "
                             Doc.Button "Request PIN" [] (fun () ->
-                                Server.UpdateUserDb()
+                                Server.UpdateUserDb(true)
                             )
                         ]
                         text (match state.LoginMessage with None -> "" | Some msg -> msg)
@@ -277,25 +300,19 @@ module WebCommander =
                     let tryGiveOrder platoon (orderAndPolicy : OrderAndPolicy) =
                         async {
                             let! ok = Server.UserControls(user, platoon)
-                            let! status =
+                            return!
                                 if ok then
                                     let orderString = orderAndPolicy.ToServerInput(platoon.AsString(), compressDestination)
-                                    async {
-                                        Server.SendOrder(orderString)                                
-                                        return Some(sprintf "Order sent to %s" (platoon.AsString()))
-                                    }
+                                    Server.SendOrder(orderString, user, orderAndPolicy.Description(platoon.AsString()))
+                                    async { return() }
                                 else
                                     async {
                                         let! underControl = Server.GetUserPlatoons(user)
                                         Var.Set rvState {
                                             state with Platoons = underControl
                                         }
-                                        return Some(sprintf "Failed to issue order, possibly because you no longer have control over %s" (platoon.AsString()))
+                                        return()
                                     }
-                            Var.Set rvState {
-                                state with
-                                    OrderMessage = status
-                            }
                         }                    
 
                     let mkRow(platoon : Users.Unit) =
@@ -361,11 +378,6 @@ module WebCommander =
                     div [
                         for platoon in state.Platoons do
                             yield mkRow platoon
-                        match state.OrderMessage with
-                        | Some msg ->
-                            yield text msg
-                        | None ->
-                            ()
                     ] :> Doc
                 | None ->
                     Doc.Empty
@@ -498,7 +510,7 @@ let main argv =
 
     let rec welcome() =
         async {
-            CentralAgent.agent.Post(CentralAgent.UpdateUserDb)
+            CentralAgent.agent.Post(CentralAgent.UpdateUserDb false)
             printfn "Requested to update user DB"
             do! Async.Sleep 60000
             return! welcome()

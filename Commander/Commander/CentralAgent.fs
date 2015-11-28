@@ -7,14 +7,14 @@ type State =
     }
 
 type Request =
-    | UpdateUserDb
+    | UpdateUserDb of forceTeamMessage : bool
     | TryLogin of userPwd : string * coalitionPwd : string * AsyncReplyChannel<(Users.User * Users.Coalition) option>
     | FilterAvailable of platoons : Users.Unit list * AsyncReplyChannel<Users.Unit list>
     | TryGrab of user : Users.User * platoon : Users.Unit * AsyncReplyChannel<bool>
     | Release of user : Users.User * platoon : Users.Unit
     | UserControls of user : Users.User * platoon : Users.Unit * AsyncReplyChannel<bool>
     | GetUserPlatoons of user : Users.User * AsyncReplyChannel<Users.Unit list>
-    | SendOrder of string
+    | SendOrder of serverInput : string * user : Users.User * desc : string
     | Logout of user : Users.User
     | GetPlayerList of AsyncReplyChannel<RemoteConsole.PlayerData [] option>
 
@@ -27,7 +27,7 @@ let connect =
         return client
     }
 
-let updateUserDb (client : RemoteConsole.Client) (usersDb : Users.UsersData) =
+let updateUserDb (client : RemoteConsole.Client) (forceTeamMessage : bool) (usersDb : Users.UsersData) =
     async {
         let! players = client.GetPlayerList()
         let usernames =
@@ -45,16 +45,19 @@ let updateUserDb (client : RemoteConsole.Client) (usersDb : Users.UsersData) =
             |> List.map (fun (Users.Named name) -> name)
         let usersDb = usersDb.RemoveUsers oldUsers
         let usersDb = ref usersDb
-        if not newUsers.IsEmpty then
-            do! client.MessageTeam(2, sprintf "Team password: %s" usersDb.Value.CoalitionPasswords.[Users.Axis])
-            do! client.MessageTeam(1, sprintf "Team password: %s" usersDb.Value.CoalitionPasswords.[Users.Allies])
         for username, clientId in usernames do
             let user = Users.Named username
             usersDb := usersDb.Value.SetClientId(user, clientId)
             if Set.contains username newUsers then
                 if Configuration.values.WebListeningAddresses |> Array.isEmpty |> not then
-                    do! client.MessagePlayer(clientId, sprintf "Ground commander at %s" Configuration.values.WebListeningAddresses.[0])
-                do! client.MessagePlayer(clientId, sprintf "Your pin code: %s" usersDb.Value.Passwords.[user])
+                    let! _ = client.MessagePlayer(clientId, sprintf "Ground commander at %s" Configuration.values.WebListeningAddresses.[0])
+                    do()
+                let! _ = client.MessagePlayer(clientId, sprintf "Your pin code: %s" usersDb.Value.Passwords.[user])
+                do()
+        if forceTeamMessage || not newUsers.IsEmpty then
+            let! _ = client.MessageTeam(2, sprintf "Team password: %s" usersDb.Value.CoalitionPasswords.[Users.Axis])
+            let! _ = client.MessageTeam(1, sprintf "Team password: %s" usersDb.Value.CoalitionPasswords.[Users.Allies])
+            do()
         return usersDb.Value
     }
 
@@ -62,9 +65,9 @@ let agent = MailboxProcessor.Start(fun inbox ->
     let rec loop client state = async {
         let! msg = inbox.Receive()
         match msg with
-        | UpdateUserDb ->
+        | UpdateUserDb forceTeamMessage ->
             printfn "Updating user db..."
-            let! users = updateUserDb client state.UsersDb
+            let! users = updateUserDb client forceTeamMessage state.UsersDb
             printfn "Done."
             return! loop client { state with UsersDb = users }
         | TryLogin(userPwd, coalitionPwd, reply) ->
@@ -110,15 +113,23 @@ let agent = MailboxProcessor.Start(fun inbox ->
         | GetUserPlatoons(user, reply) ->
             reply.Reply <| state.UsersDb.UnitsOf(user)
             return! loop client state
-        | SendOrder order ->
+        | SendOrder(order, user, desc) ->
             printfn "Sending an order..."
-            let! _ = client.ServerInput(order)
-            printfn "Done."
+            let! response = client.ServerInput(order)
+            // Work around bug: server input not sent if new command sent too soon.
+            do! Async.Sleep(500)
+            printfn "Done (%s)" response
+            let! response =
+                match Map.tryFind user state.UsersDb.ClientIds with
+                | Some id ->
+                    client.MessagePlayer(id, desc)
+                | None ->
+                    async { return sprintf "No such player %s" (user.AsString()) }
             return! loop client state
         | Logout user ->
             printfn "Logging out %s" (user.AsString())
             let users2 = state.UsersDb.RemoveUser(user)
-            let! users3 = updateUserDb client users2
+            let! users3 = updateUserDb client false users2
             return! loop client { state with UsersDb = users3 }
         | GetPlayerList reply ->
             printfn "Getting player list..."

@@ -114,7 +114,7 @@ type Client(address : IPAddress, port, login, password) as this =
                 |> encode
             do! send(buff, 0, buff.Length)
             let! response = getResponse stream
-            return()
+            return response
         }
 
     member this.MessageTeam(teamId, msg) =
@@ -124,5 +124,5 @@ type Client(address : IPAddress, port, login, password) as this =
                 |> encode
             do! send(buff, 0, buff.Length)
             let! response = getResponse stream
-            return()
+            return response
         }
