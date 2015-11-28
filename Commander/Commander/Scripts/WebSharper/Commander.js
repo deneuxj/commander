@@ -1,6 +1,6 @@
 (function()
 {
- var Global=this,Runtime=this.IntelliFactory.Runtime,PrintfHelpers,Commander,WebCommander,OrderAndPolicy,Order,Speed,FireControl,Seq,List,UI,Next,Doc,Strings,T,Var,Concurrency,Remoting,AjaxRemotingProvider,Var1,Collections,FSharpMap,View;
+ var Global=this,Runtime=this.IntelliFactory.Runtime,PrintfHelpers,Commander,WebCommander,OrderAndPolicy,Order,Speed,FireControl,Seq,List,UI,Next,Doc,Strings,T,Var,Remoting,AjaxRemotingProvider,Var1,Concurrency,Collections,FSharpMap,Unchecked,View;
  Runtime.Define(Global,{
   Commander:{
    WebCommander:{
@@ -293,7 +293,7 @@
     }),
     TakeOrders:function(waypoints,axisPlatoons,alliedPlatoons)
     {
-     var arg00,rvState,commandSection,arg102,_arg00_;
+     var arg00,rvState,rvAvailable,rvMessage,loginSection,platoonSelection,orderAssignment,arg206,arg10,_arg00_,arg101,arg207,_arg00_1,arg102,_arg00_2;
      arg00={
       User:{
        $:0
@@ -301,52 +301,73 @@
       Coalition:{
        $:0
       },
-      Available:Runtime.New(T,{
-       $:0
-      }),
       Platoons:Runtime.New(T,{
        $:0
-      }),
-      LoginMessage:{
-       $:0
-      },
-      GrabMessage:{
-       $:0
-      }
+      })
      };
      rvState=Var.Create(arg00);
-     commandSection=function(state)
+     rvAvailable=Var.Create(Runtime.New(T,{
+      $:0
+     }));
+     rvMessage=Var.Create("Welcome to Coconut's 'Ground Commander' for IL-2 Sturmovik: Battle Of Stalingrad");
+     loginSection=function(state)
      {
-      var matchValue,login,_,user,arg001,coalitionPwd,userPwd,arg20,arg201,attrs,arg202,matchValue1,_3,msg,matchValue2,platoonSelection,_4,_5,coalition2,user3,matchValue3,_6,first,chosen,arg203,options,attrs1,view,mapping,x2,folder,state1,wpRank,compressDestination,projection,mapping1,list,moveTo,orderList,speedList,fireList,matchValue4,orderAssignment,_7,user4,tryGiveOrder,mkRow,arg209,matchValue6,logout,_8,user5,attrs3,arg20a;
+      var matchValue,_,user,arg20,coalitionPwd,userPwd,userName,arg201,arg202,arg30,arg203,attrs;
       matchValue=state.User;
       if(matchValue.$==1)
        {
-        user=matchValue.$0.$0;
-        arg001="Command panel for "+PrintfHelpers.toSafe(user);
-        _=Doc.TextNode(arg001);
+        user=matchValue.$0;
+        arg20=function()
+        {
+         var User,Platoons;
+         AjaxRemotingProvider.Send("Commander:10",[user]);
+         User={
+          $:0
+         };
+         Platoons=Runtime.New(T,{
+          $:0
+         });
+         Var1.Set(rvState,{
+          User:User,
+          Coalition:{
+           $:0
+          },
+          Platoons:Platoons
+         });
+         return Var1.Set(rvMessage,"");
+        };
+        _=Doc.Button("Log out",Runtime.New(T,{
+         $:0
+        }),arg20);
        }
       else
        {
         coalitionPwd=Var.Create("AAA");
         userPwd=Var.Create("1234");
+        userName=Var.Create("playerName");
+        arg30=function(userName1)
+        {
+         return AjaxRemotingProvider.Send("Commander:2",[userName1]);
+        };
+        arg202=List.ofArray([Doc.TextNode("Request PIN "),Doc.Input(Runtime.New(T,{
+         $:0
+        }),userName),Doc.ButtonView("Send PIN to my in-game chat",Runtime.New(T,{
+         $:0
+        }),userName.get_View(),arg30)]);
         attrs=Runtime.New(T,{
          $:0
         });
-        arg202=function()
-        {
-         return AjaxRemotingProvider.Send("Commander:3",[true]);
-        };
-        arg201=List.ofArray([Doc.TextNode("Your coalition code (3 letters) and your pin (4 digits):"),Doc.Input(Runtime.New(T,{
+        arg203=List.ofArray([Doc.TextNode("Your coalition code (3 letters) and your PIN (4 digits):"),Doc.Input(Runtime.New(T,{
          $:0
         }),coalitionPwd),Doc.Input(Runtime.New(T,{
          $:0
         }),userPwd),Doc.TextNode(" "),Doc.Button("Log in",attrs,function()
         {
-         var arg002;
-         arg002=Concurrency.Delay(function()
+         var arg001;
+         arg001=Concurrency.Delay(function()
          {
           var x;
-          x=AjaxRemotingProvider.Async("Commander:2",[Var1.Get(userPwd),Var1.Get(coalitionPwd).toUpperCase()]);
+          x=AjaxRemotingProvider.Async("Commander:3",[Var1.Get(userPwd),Var1.Get(coalitionPwd).toUpperCase()]);
           return Concurrency.Bind(x,function(_arg1)
           {
            var patternInput,_1,username,user1,coalition,_2,user2,status,coalition1,platoons;
@@ -356,10 +377,7 @@
               $:0
              },{
               $:0
-             },{
-              $:1,
-              $0:"Incorrect pin code"
-             }];
+             },"Incorrect coalition code or PIN"];
             }
            else
             {
@@ -373,10 +391,7 @@
              },{
               $:1,
               $0:coalition
-             },{
-              $:1,
-              $0:"Welcome "+PrintfHelpers.toSafe(username)+" in coalition "+PrintfHelpers.toSafe(_2)
-             }];
+             },"Welcome "+PrintfHelpers.toSafe(username)+" in coalition "+PrintfHelpers.toSafe(_2)];
             }
            patternInput=_1;
            user2=patternInput[0];
@@ -385,145 +400,133 @@
            platoons=coalition1.$==0?Runtime.New(T,{
             $:0
            }):coalition1.$0.$==0?axisPlatoons:alliedPlatoons;
-           return Concurrency.Bind(AjaxRemotingProvider.Async("Commander:4",[platoons]),function(_arg2)
+           return Concurrency.Bind(AjaxRemotingProvider.Async("Commander:5",[platoons]),function(_arg2)
            {
-            var arg10;
-            arg10={
+            Var1.Set(rvState,{
              User:user2,
              Coalition:coalition1,
-             Available:_arg2,
-             Platoons:state.Platoons,
-             LoginMessage:status,
-             GrabMessage:state.GrabMessage
-            };
-            Var1.Set(rvState,arg10);
+             Platoons:state.Platoons
+            });
+            Var1.Set(rvAvailable,_arg2);
+            Var1.Set(rvMessage,status);
             return Concurrency.Return(null);
            });
           });
          });
-         return Concurrency.Start(arg002,{
+         return Concurrency.Start(arg001,{
           $:0
          });
-        }),Doc.TextNode(" "),Doc.Button("Request PIN",Runtime.New(T,{
-         $:0
-        }),arg202)]);
-        matchValue1=state.LoginMessage;
-        if(matchValue1.$==1)
-         {
-          msg=matchValue1.$0;
-          _3=msg;
-         }
-        else
-         {
-          _3="";
-         }
-        arg20=List.ofArray([Doc.Element("div",[],arg201),Doc.TextNode(_3)]);
-        _=Doc.Element("div",[],arg20);
+        })]);
+        arg201=List.ofArray([Doc.Element("div",[],arg202),Doc.Element("div",[],arg203)]);
+        _=Doc.Element("div",[],arg201);
        }
-      login=_;
-      matchValue2=[state.User,state.Coalition];
-      if(matchValue2[1].$==1)
-       {
-        if(matchValue2[0].$==1)
-         {
-          coalition2=matchValue2[1].$0;
-          user3=matchValue2[0].$0;
-          matchValue3=state.Available;
-          if(matchValue3.$==1)
-           {
-            first=matchValue3.$0;
-            chosen=Var.Create(first);
-            options=state.Available;
-            attrs1=Runtime.New(T,{
-             $:0
-            });
-            view=chosen.get_View();
-            arg203=List.ofArray([Doc.Select(Runtime.New(T,{
-             $:0
-            }),function(x)
+      return _;
+     };
+     platoonSelection=function(state)
+     {
+      return function(available)
+      {
+       var matchValue,_,_1,coalition,user,_2,first,chosen,arg20,attrs,view,arg201;
+       matchValue=[state.User,state.Coalition];
+       if(matchValue[1].$==1)
+        {
+         if(matchValue[0].$==1)
+          {
+           coalition=matchValue[1].$0;
+           user=matchValue[0].$0;
+           if(available.$==1)
             {
-             return x.AsString();
-            },options,chosen),Doc.ButtonView("Add",attrs1,view,function(platoon)
-            {
-             var arg002;
-             arg002=Concurrency.Delay(function()
+             first=available.$0;
+             chosen=Var.Create(first);
+             attrs=Runtime.New(T,{
+              $:0
+             });
+             view=chosen.get_View();
+             arg20=List.ofArray([Doc.Button("Update",Runtime.New(T,{
+              $:0
+             }),function()
              {
-              var x;
-              x=AjaxRemotingProvider.Async("Commander:5",[user3,platoon]);
-              return Concurrency.Bind(x,function(_arg3)
+              var arg001;
+              arg001=Concurrency.Delay(function()
               {
-               var platoons,x1;
-               platoons=coalition2.$==0?axisPlatoons:alliedPlatoons;
-               x1=AjaxRemotingProvider.Async("Commander:4",[platoons]);
-               return Concurrency.Bind(x1,function(_arg4)
+               var platoons;
+               platoons=coalition.$==0?axisPlatoons:alliedPlatoons;
+               return Concurrency.Bind(AjaxRemotingProvider.Async("Commander:5",[platoons]),function(_arg3)
                {
-                var _1,Platoons,GrabMessage,arg10,GrabMessage1,arg101;
-                if(_arg3)
+                Var1.Set(rvAvailable,_arg3);
+                return Concurrency.Return(null);
+               });
+              });
+              return Concurrency.Start(arg001,{
+               $:0
+              });
+             }),Doc.TextNode(" "),Doc.Select(Runtime.New(T,{
+              $:0
+             }),function(x)
+             {
+              return x.AsString();
+             },available,chosen),Doc.TextNode(" "),Doc.ButtonView("Add",attrs,view,function(platoon)
+             {
+              var arg001;
+              arg001=Concurrency.Delay(function()
+              {
+               var x;
+               x=AjaxRemotingProvider.Async("Commander:6",[user,platoon]);
+               return Concurrency.Bind(x,function(_arg4)
+               {
+                var _3,Platoons;
+                if(_arg4)
                  {
                   Platoons=Runtime.New(T,{
                    $:1,
                    $0:platoon,
                    $1:state.Platoons
                   });
-                  GrabMessage={
-                   $:1,
-                   $0:"Platoon grabbed: "+PrintfHelpers.toSafe(platoon.AsString())
-                  };
-                  arg10={
+                  Var1.Set(rvState,{
                    User:state.User,
                    Coalition:state.Coalition,
-                   Available:_arg4,
-                   Platoons:Platoons,
-                   LoginMessage:state.LoginMessage,
-                   GrabMessage:GrabMessage
-                  };
-                  Var1.Set(rvState,arg10);
-                  _1=Concurrency.Return(null);
+                   Platoons:Platoons
+                  });
+                  Var1.Set(rvMessage,"Platoon grabbed: "+PrintfHelpers.toSafe(platoon.AsString()));
+                  _3=Concurrency.Return(null);
                  }
                 else
                  {
-                  GrabMessage1={
-                   $:1,
-                   $0:"Could not grab control of "+PrintfHelpers.toSafe(platoon.AsString())
-                  };
-                  arg101={
-                   User:state.User,
-                   Coalition:state.Coalition,
-                   Available:_arg4,
-                   Platoons:state.Platoons,
-                   LoginMessage:state.LoginMessage,
-                   GrabMessage:GrabMessage1
-                  };
-                  Var1.Set(rvState,arg101);
-                  _1=Concurrency.Return(null);
+                  Var1.Set(rvMessage,"Could not grab control of "+PrintfHelpers.toSafe(platoon.AsString()));
+                  _3=Concurrency.Return(null);
                  }
-                return _1;
+                return _3;
                });
               });
-             });
-             return Concurrency.Start(arg002,{
-              $:0
-             });
-            })]);
-            _6=Doc.Element("div",[],arg203);
-           }
-          else
-           {
-            _6=Doc.TextNode("All platoons assigned");
-           }
-          _5=_6;
-         }
-        else
-         {
-          _5=Doc.get_Empty();
-         }
-        _4=_5;
-       }
-      else
-       {
-        _4=Doc.get_Empty();
-       }
-      platoonSelection=_4;
+              return Concurrency.Start(arg001,{
+               $:0
+              });
+             })]);
+             _2=Doc.Element("div",[],arg20);
+            }
+           else
+            {
+             arg201=List.ofArray([Doc.TextNode("All platoons assigned")]);
+             _2=Doc.Element("div",[],arg201);
+            }
+           _1=_2;
+          }
+         else
+          {
+           _1=Doc.get_Empty();
+          }
+         _=_1;
+        }
+       else
+        {
+         _=Doc.get_Empty();
+        }
+       return _;
+      };
+     };
+     orderAssignment=function(state)
+     {
+      var mapping,x,folder,state1,wpRank,compressDestination,projection,mapping1,list,moveTo,orderList,speedList,fireList,matchValue,_,user,tryGiveOrder,mkRow,arg205;
       mapping=function(i)
       {
        return function(wp)
@@ -531,7 +534,7 @@
         return[wp,i];
        };
       };
-      x2=List.mapi(mapping,waypoints);
+      x=List.mapi(mapping,waypoints);
       folder=function(m)
       {
        return function(tupledArg)
@@ -543,7 +546,7 @@
        };
       };
       state1=FSharpMap.New1([]);
-      wpRank=Seq.fold(folder,state1,x2);
+      wpRank=Seq.fold(folder,state1,x);
       compressDestination=function(wp)
       {
        return"WP"+Global.String(wpRank.get_Item(wp));
@@ -597,53 +600,37 @@
       }),Runtime.New(FireControl,{
        $:1
       })]);
-      matchValue4=state.User;
-      if(matchValue4.$==0)
+      matchValue=state.User;
+      if(matchValue.$==0)
        {
-        _7=Doc.get_Empty();
+        _=Doc.get_Empty();
        }
       else
        {
-        user4=matchValue4.$0;
+        user=matchValue.$0;
         tryGiveOrder=function(platoon)
         {
          return function(orderAndPolicy)
          {
           return Concurrency.Delay(function()
           {
-           var x;
-           x=AjaxRemotingProvider.Async("Commander:7",[user4,platoon]);
-           return Concurrency.Bind(x,function(_arg6)
+           var x1;
+           x1=AjaxRemotingProvider.Async("Commander:8",[user,platoon]);
+           return Concurrency.Bind(x1,function(_arg6)
            {
-            var _1,orderString;
+            var _1,orderString,orderDesc;
             if(_arg6)
              {
               orderString=orderAndPolicy.ToServerInput(platoon.AsString(),compressDestination);
-              AjaxRemotingProvider.Send("Commander:0",[orderString,user4,orderAndPolicy.Description(platoon.AsString())]);
-              _1=Concurrency.Delay(function()
-              {
-               return Concurrency.Return(null);
-              });
+              orderDesc=orderAndPolicy.Description(platoon.AsString());
+              AjaxRemotingProvider.Send("Commander:0",[orderString,user,orderDesc]);
+              Var1.Set(rvMessage,orderDesc);
+              _1=Concurrency.Return(null);
              }
             else
              {
-              _1=Concurrency.Delay(function()
-              {
-               return Concurrency.Bind(AjaxRemotingProvider.Async("Commander:8",[user4]),function(_arg7)
-               {
-                var arg10;
-                arg10={
-                 User:state.User,
-                 Coalition:state.Coalition,
-                 Available:state.Available,
-                 Platoons:_arg7,
-                 LoginMessage:state.LoginMessage,
-                 GrabMessage:state.GrabMessage
-                };
-                Var1.Set(rvState,arg10);
-                return Concurrency.Return(null);
-               });
-              });
+              Var1.Set(rvMessage,"Failed to send order");
+              _1=Concurrency.Return(null);
              }
             return _1;
            });
@@ -652,33 +639,33 @@
         };
         mkRow=function(platoon)
         {
-         var chosenOrder,chosenDestination,chosenSpeed,chosenFire,arg204,attrs2,arg205,arg206,arg207,arg208;
+         var chosenOrder,chosenDestination,chosenSpeed,chosenFire,arg20,attrs,arg201,arg202,arg203,arg204;
          chosenOrder=Var.Create(List.head(orderList));
          chosenDestination=Var.Create(List.head(moveTo));
          chosenSpeed=Var.Create(List.head(speedList));
          chosenFire=Var.Create(List.head(fireList));
-         attrs2=Runtime.New(T,{
+         attrs=Runtime.New(T,{
           $:0
          });
-         arg205=function()
+         arg201=function()
          {
-          var x,arg002;
-          x=Runtime.New(OrderAndPolicy,{
+          var x1,arg001;
+          x1=Runtime.New(OrderAndPolicy,{
            $:0,
            $0:Var1.Get(chosenOrder),
            $1:{
             $:0
            }
           });
-          arg002=(tryGiveOrder(platoon))(x);
-          return Concurrency.Start(arg002,{
+          arg001=(tryGiveOrder(platoon))(x1);
+          return Concurrency.Start(arg001,{
            $:0
           });
          };
-         arg206=function()
+         arg202=function()
          {
-          var x,arg002;
-          x=Runtime.New(OrderAndPolicy,{
+          var x1,arg001;
+          x1=Runtime.New(OrderAndPolicy,{
            $:0,
            $0:Var1.Get(chosenDestination),
            $1:{
@@ -689,15 +676,15 @@
             }
            }
           });
-          arg002=(tryGiveOrder(platoon))(x);
-          return Concurrency.Start(arg002,{
+          arg001=(tryGiveOrder(platoon))(x1);
+          return Concurrency.Start(arg001,{
            $:0
           });
          };
-         arg207=function()
+         arg203=function()
          {
-          var x,arg002;
-          x=Runtime.New(OrderAndPolicy,{
+          var x1,arg001;
+          x1=Runtime.New(OrderAndPolicy,{
            $:0,
            $0:Runtime.New(Order,{
             $:0
@@ -706,15 +693,15 @@
             $:0
            }
           });
-          arg002=(tryGiveOrder(platoon))(x);
-          return Concurrency.Start(arg002,{
+          arg001=(tryGiveOrder(platoon))(x1);
+          return Concurrency.Start(arg001,{
            $:0
           });
          };
-         arg208=function()
+         arg204=function()
          {
-          var x,arg002;
-          x=Runtime.New(OrderAndPolicy,{
+          var x1,arg001;
+          x1=Runtime.New(OrderAndPolicy,{
            $:0,
            $0:Runtime.New(Order,{
             $:1
@@ -723,131 +710,93 @@
             $:0
            }
           });
-          arg002=(tryGiveOrder(platoon))(x);
-          return Concurrency.Start(arg002,{
+          arg001=(tryGiveOrder(platoon))(x1);
+          return Concurrency.Start(arg001,{
            $:0
           });
          };
-         arg204=List.ofArray([Doc.Button("X",attrs2,function()
+         arg20=List.ofArray([Doc.Button("X",attrs,function()
          {
-          var arg002;
-          arg002=Concurrency.Delay(function()
+          var arg001;
+          arg001=Concurrency.Delay(function()
           {
-           var x;
-           AjaxRemotingProvider.Send("Commander:6",[user4,platoon]);
-           x=AjaxRemotingProvider.Async("Commander:8",[user4]);
-           return Concurrency.Bind(x,function(_arg8)
+           var predicate,list1,underControl,matchValue1,platoons;
+           AjaxRemotingProvider.Send("Commander:7",[user,platoon]);
+           predicate=function(y)
            {
-            var matchValue5,platoons;
-            matchValue5=state.Coalition;
-            platoons=matchValue5.$==0?Runtime.New(T,{
-             $:0
-            }):matchValue5.$0.$==0?axisPlatoons:alliedPlatoons;
-            return Concurrency.Bind(AjaxRemotingProvider.Async("Commander:4",[platoons]),function(_arg9)
-            {
-             var arg10;
-             arg10={
-              User:state.User,
-              Coalition:state.Coalition,
-              Available:_arg9,
-              Platoons:_arg8,
-              LoginMessage:state.LoginMessage,
-              GrabMessage:state.GrabMessage
-             };
-             Var1.Set(rvState,arg10);
-             return Concurrency.Return(null);
+            return!Unchecked.Equals(platoon,y);
+           };
+           list1=state.Platoons;
+           underControl=List.filter(predicate,list1);
+           matchValue1=state.Coalition;
+           platoons=matchValue1.$==0?Runtime.New(T,{
+            $:0
+           }):matchValue1.$0.$==0?axisPlatoons:alliedPlatoons;
+           return Concurrency.Bind(AjaxRemotingProvider.Async("Commander:5",[platoons]),function(_arg7)
+           {
+            Var1.Set(rvState,{
+             User:state.User,
+             Coalition:state.Coalition,
+             Platoons:underControl
             });
+            Var1.Set(rvAvailable,_arg7);
+            return Concurrency.Return(null);
            });
           });
-          return Concurrency.Start(arg002,{
+          return Concurrency.Start(arg001,{
            $:0
           });
          }),Doc.TextNode(" "),Doc.TextNode(platoon.AsString()),Doc.TextNode(" "),Doc.Select(Runtime.New(T,{
           $:0
-         }),function(arg002)
+         }),function(arg001)
          {
-          return Order.Show(arg002);
+          return Order.Show(arg001);
          },orderList,chosenOrder),Doc.TextNode(" "),Doc.Button("Order",Runtime.New(T,{
           $:0
-         }),arg205),Doc.TextNode(" - "),Doc.TextNode("Move towards..."),Doc.Select(Runtime.New(T,{
+         }),arg201),Doc.TextNode(" - "),Doc.TextNode("Move towards..."),Doc.Select(Runtime.New(T,{
           $:0
-         }),function(arg002)
+         }),function(arg001)
          {
-          return Order.Show(arg002);
+          return Order.Show(arg001);
          },moveTo,chosenDestination),Doc.TextNode(" at "),Doc.Select(Runtime.New(T,{
           $:0
-         }),function(arg002)
+         }),function(arg001)
          {
-          return Speed.Show(arg002);
+          return Speed.Show(arg001);
          },speedList,chosenSpeed),Doc.TextNode(", "),Doc.Select(Runtime.New(T,{
           $:0
-         }),function(arg002)
+         }),function(arg001)
          {
-          return FireControl.Show(arg002);
+          return FireControl.Show(arg001);
          },fireList,chosenFire),Doc.Button("Move",Runtime.New(T,{
           $:0
-         }),arg206),Doc.TextNode(" - "),Doc.Button("Stop",Runtime.New(T,{
+         }),arg202),Doc.TextNode(" - "),Doc.Button("Stop",Runtime.New(T,{
           $:0
-         }),arg207),Doc.TextNode(" "),Doc.Button("Continue",Runtime.New(T,{
+         }),arg203),Doc.TextNode(" "),Doc.Button("Continue",Runtime.New(T,{
           $:0
-         }),arg208)]);
-         return Doc.Element("div",[],arg204);
+         }),arg204)]);
+         return Doc.Element("div",[],arg20);
         };
-        arg209=Seq.toList(Seq.delay(function()
+        arg205=Seq.toList(Seq.delay(function()
         {
          return Seq.map(function(platoon)
          {
           return mkRow(platoon);
          },state.Platoons);
         }));
-        _7=Doc.Element("div",[],arg209);
+        _=Doc.Element("div",[],arg205);
        }
-      orderAssignment=_7;
-      matchValue6=state.User;
-      if(matchValue6.$==1)
-       {
-        user5=matchValue6.$0;
-        attrs3=Runtime.New(T,{
-         $:0
-        });
-        _8=Doc.Button("Log out",attrs3,function()
-        {
-         var User,Platoons,Coalition,LoginMessage,arg10;
-         AjaxRemotingProvider.Send("Commander:9",[user5]);
-         User={
-          $:0
-         };
-         Platoons=Runtime.New(T,{
-          $:0
-         });
-         Coalition={
-          $:0
-         };
-         LoginMessage={
-          $:0
-         };
-         arg10={
-          User:User,
-          Coalition:Coalition,
-          Available:state.Available,
-          Platoons:Platoons,
-          LoginMessage:LoginMessage,
-          GrabMessage:state.GrabMessage
-         };
-         return Var1.Set(rvState,arg10);
-        });
-       }
-      else
-       {
-        _8=Doc.get_Empty();
-       }
-      logout=_8;
-      arg20a=List.ofArray([login,platoonSelection,orderAssignment,logout]);
-      return Doc.Element("div",[],arg20a);
+      return _;
      };
+     arg10=rvState.get_View();
+     _arg00_=View.Map(loginSection,arg10);
+     arg101=rvState.get_View();
+     arg207=rvAvailable.get_View();
+     _arg00_1=View.Map2(platoonSelection,arg101,arg207);
      arg102=rvState.get_View();
-     _arg00_=View.Map(commandSection,arg102);
-     return Doc.EmbedView(_arg00_);
+     _arg00_2=View.Map(orderAssignment,arg102);
+     arg206=List.ofArray([Doc.TextView(rvMessage.get_View()),Doc.EmbedView(_arg00_),Doc.EmbedView(_arg00_1),Doc.EmbedView(_arg00_2)]);
+     return Doc.Element("div",[],arg206);
     }
    }
   },
@@ -898,12 +847,13 @@
   Strings=Runtime.Safe(Global.WebSharper.Strings);
   T=Runtime.Safe(List.T);
   Var=Runtime.Safe(Next.Var);
-  Concurrency=Runtime.Safe(Global.WebSharper.Concurrency);
   Remoting=Runtime.Safe(Global.WebSharper.Remoting);
   AjaxRemotingProvider=Runtime.Safe(Remoting.AjaxRemotingProvider);
   Var1=Runtime.Safe(Next.Var1);
+  Concurrency=Runtime.Safe(Global.WebSharper.Concurrency);
   Collections=Runtime.Safe(Global.WebSharper.Collections);
   FSharpMap=Runtime.Safe(Collections.FSharpMap);
+  Unchecked=Runtime.Safe(Global.WebSharper.Unchecked);
   return View=Runtime.Safe(Next.View);
  });
  Runtime.OnLoad(function()

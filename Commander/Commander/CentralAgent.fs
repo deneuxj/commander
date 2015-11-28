@@ -8,6 +8,7 @@ type State =
 
 type Request =
     | UpdateUserDb of forceTeamMessage : bool
+    | RequestPin of userName : string
     | TryLogin of userPwd : string * coalitionPwd : string * AsyncReplyChannel<(Users.User * Users.Coalition) option>
     | FilterAvailable of platoons : Users.Unit list * AsyncReplyChannel<Users.Unit list>
     | TryGrab of user : Users.User * platoon : Users.Unit * AsyncReplyChannel<bool>
@@ -69,6 +70,45 @@ let agent = MailboxProcessor.Start(fun inbox ->
             printfn "Updating user db..."
             let! users = updateUserDb client forceTeamMessage state.UsersDb
             printfn "Done."
+            return! loop client { state with UsersDb = users }
+        | RequestPin userName ->
+            let! users = updateUserDb client true state.UsersDb
+            let user = Users.Named userName
+            match Map.tryFind user state.UsersDb.Passwords, Map.tryFind user state.UsersDb.ClientIds with
+            | Some pin, Some id ->                
+                let! response =
+                    client.MessagePlayer(id, sprintf "Your pin code: %s" pin)
+                do()
+            | _ ->
+                let normalize s =
+                    s
+                    |> Seq.choose (fun c ->
+                        if System.Char.IsLetterOrDigit(c) then
+                            Some(System.Char.ToUpperInvariant(c))
+                        else
+                            None
+                    )
+                    |> Array.ofSeq
+                    |> fun cs -> System.String(cs)
+                let normalized = normalize userName
+                let candidates =
+                    state.UsersDb.ClientIds
+                    |> Map.toSeq
+                    |> Seq.filter (fun (Users.Named k, id) -> normalize k = normalized)
+                    |> List.ofSeq
+                match candidates with
+                | [user, id] ->
+                    match Map.tryFind user state.UsersDb.Passwords with
+                    | Some pin ->
+                        let! response =
+                            client.MessagePlayer(id, sprintf "Your pin code: %s" pin)
+                        do()
+                    | None ->
+                        printfn "Near match for %s with %A, but no PIN" userName user
+                | _ :: _ ->
+                    printfn "Multiple matches for %s" userName
+                | [] ->
+                    printfn "No match for %s" userName
             return! loop client { state with UsersDb = users }
         | TryLogin(userPwd, coalitionPwd, reply) ->
             printfn "Trying to login user with pin code %s..." (coalitionPwd + userPwd)
