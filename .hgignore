@@ -27,5 +27,6 @@ Stalingrad/Static.rus
 Stalingrad/Waypoints.ger
 Stalingrad/Waypoints.pol
 Stalingrad/Waypoints.rus
+Commander/Commander/Configuration.json
 syntax: regexp
 .*[.]msnbin$
