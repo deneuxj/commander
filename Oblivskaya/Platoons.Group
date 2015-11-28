@@ -1,0 +1,391 @@
+Group
+{
+  Name = "Platoons";
+  Index = 1099;
+  Desc = "";
+  Vehicle
+  {
+    Name = "T70-C1";
+    Index = 1097;
+    LinkTrId = 1103;
+    XPos = 123097.367;
+    YPos = 63.266;
+    ZPos = 121751.439;
+    XOri = 359.74;
+    YOri = 261.08;
+    ZOri = 359.95;
+    Script = "LuaScripts\WorldObjects\vehicles\t70.txt";
+    Model = "graphics\vehicles\t70\t70.mgm";
+    Desc = "";
+    Country = 101;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "T70-C2";
+    Index = 1098;
+    LinkTrId = 1105;
+    XPos = 123923.410;
+    YPos = 63.266;
+    ZPos = 121643.375;
+    XOri = 0.22;
+    YOri = 261.08;
+    ZOri = 0.11;
+    Script = "LuaScripts\WorldObjects\vehicles\t70.txt";
+    Model = "graphics\vehicles\t70\t70.mgm";
+    Desc = "";
+    Country = 101;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "ba10m-C2";
+    Index = 1100;
+    LinkTrId = 1104;
+    XPos = 123915.402;
+    YPos = 65.493;
+    ZPos = 121550.859;
+    XOri = 0.53;
+    YOri = 88.87;
+    ZOri = 0.22;
+    Script = "LuaScripts\WorldObjects\vehicles\ba10m.txt";
+    Model = "graphics\vehicles\ba10m\ba10m.mgm";
+    Desc = "";
+    Country = 101;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "ba10m-C1";
+    Index = 1101;
+    LinkTrId = 1102;
+    XPos = 123083.113;
+    YPos = 59.993;
+    ZPos = 121658.414;
+    XOri = 0.79;
+    YOri = 79.05;
+    ZOri = 358.90;
+    Script = "LuaScripts\WorldObjects\vehicles\ba10m.txt";
+    Model = "graphics\vehicles\ba10m\ba10m.mgm";
+    Desc = "";
+    Country = 101;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  MCU_TR_Entity
+  {
+    Index = 1102;
+    Name = "ba10m-C1 entity";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 123083.113;
+    YPos = 60.193;
+    ZPos = 121658.414;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Enabled = 1;
+    MisObjID = 1101;
+  }
+  
+
+  MCU_TR_Entity
+  {
+    Index = 1103;
+    Name = "T70-C1 entity";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 123097.367;
+    YPos = 63.466;
+    ZPos = 121751.439;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Enabled = 1;
+    MisObjID = 1097;
+  }
+  
+
+  MCU_TR_Entity
+  {
+    Index = 1104;
+    Name = "ba10m-C2 entity";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 123915.402;
+    YPos = 65.693;
+    ZPos = 121550.859;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Enabled = 1;
+    MisObjID = 1100;
+  }
+  
+
+  MCU_TR_Entity
+  {
+    Index = 1105;
+    Name = "T70-C2 entity";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 123923.410;
+    YPos = 63.466;
+    ZPos = 121643.375;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Enabled = 1;
+    MisObjID = 1098;
+  }
+  
+
+  Vehicle
+  {
+    Name = "Pz4-C2";
+    Index = 1155;
+    LinkTrId = 1162;
+    XPos = 123584.223;
+    YPos = 85.019;
+    ZPos = 116081.234;
+    XOri = 358.60;
+    YOri = 109.48;
+    ZOri = 0.52;
+    Script = "LuaScripts\WorldObjects\vehicles\pziv-g.txt";
+    Model = "graphics\vehicles\pziv-g\pziv-g.mgm";
+    Desc = "";
+    Country = 201;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "Pz4-C1";
+    Index = 1156;
+    LinkTrId = 1163;
+    XPos = 122947.151;
+    YPos = 91.272;
+    ZPos = 115907.784;
+    XOri = 1.10;
+    YOri = 109.48;
+    ZOri = 355.74;
+    Script = "LuaScripts\WorldObjects\vehicles\pziv-g.txt";
+    Model = "graphics\vehicles\pziv-g\pziv-g.mgm";
+    Desc = "";
+    Country = 201;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  Vehicle
+  {
+    Name = "1c-C1";
+    Index = 1157;
+    LinkTrId = 1158;
+    XPos = 122607.601;
+    YPos = 79.671;
+    ZPos = 115886.955;
+    XOri = 1.40;
+    YOri = 93.05;
+    ZOri = 358.54;
+    Script = "LuaScripts\WorldObjects\vehicles\sdkfz251-1c.txt";
+    Model = "graphics\vehicles\sdkfz251\sdkfz251-1c.mgm";
+    Desc = "";
+    Country = 201;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  MCU_TR_Entity
+  {
+    Index = 1158;
+    Name = "1c-C2 entity";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 122607.601;
+    YPos = 79.871;
+    ZPos = 115886.955;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Enabled = 1;
+    MisObjID = 1157;
+  }
+  
+
+  Vehicle
+  {
+    Name = "1c-C2";
+    Index = 1159;
+    LinkTrId = 1160;
+    XPos = 123786.455;
+    YPos = 79.671;
+    ZPos = 116087.626;
+    XOri = 1.40;
+    YOri = 93.05;
+    ZOri = 358.54;
+    Script = "LuaScripts\WorldObjects\vehicles\sdkfz251-1c.txt";
+    Model = "graphics\vehicles\sdkfz251\sdkfz251-1c.mgm";
+    Desc = "";
+    Country = 201;
+    NumberInFormation = 0;
+    Vulnerable = 1;
+    Engageable = 1;
+    LimitAmmo = 1;
+    AILevel = 2;
+    DamageReport = 50;
+    DamageThreshold = 1;
+    DeleteAfterDeath = 1;
+    CoopStart = 0;
+    Spotter = -1;
+    BeaconChannel = 0;
+    Callsign = 0;
+  }
+  
+
+  MCU_TR_Entity
+  {
+    Index = 1160;
+    Name = "1c-C2 entity";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 123786.455;
+    YPos = 79.871;
+    ZPos = 116087.626;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Enabled = 1;
+    MisObjID = 1159;
+  }
+  
+
+  MCU_TR_Entity
+  {
+    Index = 1162;
+    Name = "Pz4-C2 entity";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 123584.223;
+    YPos = 85.219;
+    ZPos = 116081.234;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Enabled = 1;
+    MisObjID = 1155;
+  }
+  
+
+  MCU_TR_Entity
+  {
+    Index = 1163;
+    Name = "Pz4-C1 entity";
+    Desc = "";
+    Targets = [];
+    Objects = [];
+    XPos = 122947.151;
+    YPos = 91.472;
+    ZPos = 115907.784;
+    XOri = 0.00;
+    YOri = 0.00;
+    ZOri = 0.00;
+    Enabled = 1;
+    MisObjID = 1156;
+  }
+  
+
+}
+

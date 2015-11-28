@@ -517,4 +517,4 @@ let buildMission(outdir, basename) =
         createLcFile (basename + "." + lang) allLcStrings
 
 //buildMission("VLuki", "GroundCommanderMini")
-buildMission("Stalingrad", "GroundCommanderStalingrad")
+buildMission("Oblivskaya", "GroundCommanderOblivskaya")
