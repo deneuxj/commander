@@ -142,7 +142,7 @@ with
         let getSpeedValue =
             function
             | TravelSpeed.Slow -> 20
-            | TravelSpeed.Normal -> 2 * speed / 3
+            | TravelSpeed.Normal -> (20 + speed) / 2
             | TravelSpeed.Fast -> speed
             | _ -> speed
 
