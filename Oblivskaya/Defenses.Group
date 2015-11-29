@@ -1,18 +1,18 @@
 Group
 {
   Name = "Defenses";
-  Index = 1181;
+  Index = 1544;
   Desc = "";
   Vehicle
   {
     Name = "AT";
-    Index = 1180;
+    Index = 1545;
     LinkTrId = 0;
-    XPos = 123094.293;
+    XPos = 121274.906;
     YPos = 41.160;
-    ZPos = 130310.333;
+    ZPos = 129666.243;
     XOri = 0.00;
-    YOri = 276.49;
+    YOri = 319.19;
     ZOri = 0.00;
     Script = "LuaScripts\WorldObjects\vehicles\zis3gun.txt";
     Model = "graphics\artillery\zis3gun\zis3gun.mgm";
@@ -36,13 +36,13 @@ Group
   Vehicle
   {
     Name = "AT";
-    Index = 1177;
+    Index = 1546;
     LinkTrId = 0;
-    XPos = 122173.066;
+    XPos = 121800.963;
     YPos = 41.160;
-    ZPos = 130012.136;
+    ZPos = 130392.387;
     XOri = 0.00;
-    YOri = 254.68;
+    YOri = 344.69;
     ZOri = 0.00;
     Script = "LuaScripts\WorldObjects\vehicles\zis3gun.txt";
     Model = "graphics\artillery\zis3gun\zis3gun.mgm";
@@ -66,10 +66,10 @@ Group
   Vehicle
   {
     Name = "AT";
-    Index = 1178;
+    Index = 1547;
     LinkTrId = 0;
     XPos = 121773.677;
-    YPos = 41.160;
+    YPos = 51.175;
     ZPos = 129734.710;
     XOri = 0.00;
     YOri = 300.19;
@@ -96,10 +96,10 @@ Group
   Vehicle
   {
     Name = "AT";
-    Index = 1179;
+    Index = 1548;
     LinkTrId = 0;
     XPos = 121214.629;
-    YPos = 41.230;
+    YPos = 51.175;
     ZPos = 129081.254;
     XOri = 0.17;
     YOri = 320.66;
@@ -126,10 +126,10 @@ Group
   Vehicle
   {
     Name = "AT";
-    Index = 1182;
+    Index = 1549;
     LinkTrId = 0;
     XPos = 116922.110;
-    YPos = 81.278;
+    YPos = 51.175;
     ZPos = 104630.225;
     XOri = 0.02;
     YOri = 62.04;
@@ -156,14 +156,14 @@ Group
   Vehicle
   {
     Name = "AT";
-    Index = 1183;
+    Index = 1550;
     LinkTrId = 0;
-    XPos = 117472.880;
-    YPos = 81.859;
-    ZPos = 104758.937;
-    XOri = 0.10;
+    XPos = 117348.778;
+    YPos = 51.175;
+    ZPos = 104436.862;
+    XOri = 0.05;
     YOri = 56.45;
-    ZOri = 0.13;
+    ZOri = 0.04;
     Script = "LuaScripts\WorldObjects\vehicles\pak40.txt";
     Model = "graphics\artillery\pak40\pak40.mgm";
     Desc = "";
@@ -186,10 +186,10 @@ Group
   Vehicle
   {
     Name = "AT";
-    Index = 1184;
+    Index = 1551;
     LinkTrId = 0;
     XPos = 117819.345;
-    YPos = 82.087;
+    YPos = 51.175;
     ZPos = 104336.185;
     XOri = 359.81;
     YOri = 62.04;
@@ -216,10 +216,10 @@ Group
   Vehicle
   {
     Name = "AT";
-    Index = 1185;
+    Index = 1552;
     LinkTrId = 0;
     XPos = 118131.664;
-    YPos = 81.278;
+    YPos = 51.175;
     ZPos = 104009.698;
     XOri = 0.02;
     YOri = 62.04;
