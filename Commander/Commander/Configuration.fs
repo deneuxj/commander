@@ -2,7 +2,7 @@
 
 open System.IO
 
-type Config = FSharp.Data.JsonProvider<"SampleConfig.json">
+type Config = FSharp.Data.JsonProvider<"SampleConfig.json", SampleIsList=true>
 
 let values =
     if File.Exists("Configuration.json") then

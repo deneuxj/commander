@@ -419,47 +419,37 @@ module WebCommander =
 
 
 type EndPoint =
-    | [<EndPoint "GET /">] Home
-    | [<EndPoint "GET /players">] Players
+    | [<EndPoint "GET /commands">] Commands
+    | [<EndPoint "GET /master">] Master
     | [<EndPoint "GET /apiPlayerList">] ApiPlayers
+
+/// <summary>
+/// Build a single-page application that shows the interface that allows users
+/// to grab platoons and give them orders.
+/// </summary>
+/// <param name="waypoints">Names of waypoints.</param>
+/// <param name="platoons">Names of platoons.</param>
+let mkCommandsPage(waypoints, axisPlatoons, alliedPlatoons) : Async<Content<EndPoint>> =
+    Content.Page(
+        Title = "Orders",
+        Body = [
+            div [ client <@ WebCommander.TakeOrders(waypoints, axisPlatoons, alliedPlatoons) @> ]
+        ]
+    )
+
+let mkNotAvailablePage() : Async<Content<EndPoint>> =
+    Content.Page(text "Not available")
 
 /// <summary>
 /// Build a WebSharper application.
 /// </summary>
-/// <param name="waypoints">Names of waypoints.</param>
-/// <param name="platoons">Names of platoons.</param>
-let MySite(waypoints, axisPlatoons, alliedPlatoons) =
-
+let MySite(getCommandsPage, getMasterPage) =
     Application.MultiPage(fun ctx ->
         function
-        | Home ->
-            Content.Page(
-                Title = "Orders",
-                Body = [
-                    div [ client <@ WebCommander.TakeOrders(waypoints, axisPlatoons, alliedPlatoons) @> ]
-                ]
-            )
-        | Players ->
-            async {
-                let! players = CentralAgent.agent.PostAndAsyncReply(fun reply -> CentralAgent.GetPlayerList reply)
-                return!
-                    match players with
-                    | Some players ->
-                        let players =
-                            players
-                            |> Array.map (fun data ->
-                                { WebCommander.Name = data.Name
-                                  WebCommander.Ping = data.Ping
-                                })
-                        Content.Page(
-                            Title = "Player list",
-                            Body = [
-                                div [ client <@ WebCommander.ShowPlayers(players) @> ]
-                            ]
-                        )
-                    | None ->
-                        Content.Text "Failed to retrieve list of players from the server"
-            }
+        | Commands ->
+            getCommandsPage()
+        | Master ->
+            getMasterPage()
         | ApiPlayers ->
             async {
                 let! players = CentralAgent.agent.PostAndAsyncReply(fun reply -> CentralAgent.GetPlayerList reply)
@@ -484,21 +474,6 @@ let parseGroup filename =
 let main argv = 
     let config = Configuration.values
 
-    let waypoints =
-        (parseGroup config.WaypointsFilename).ListOfMCU_Waypoint
-        |> List.map (fun wp -> wp.Name.Value)
-        |> List.sort
-
-    let axisPlatoons =
-        (parseGroup config.PlatoonsFilename).ListOfVehicle
-        |> List.filter(fun platoon -> platoon.Country.Value = 201)
-        |> List.map (fun platoon -> Users.Platoon platoon.Name.Value)
-
-    let alliedPlatoons =
-        (parseGroup config.PlatoonsFilename).ListOfVehicle
-        |> List.filter(fun platoon -> platoon.Country.Value = 101)
-        |> List.map (fun platoon -> Users.Platoon platoon.Name.Value)
-
     let rec welcome() =
         async {
             CentralAgent.agent.Post(CentralAgent.UpdateUserDb false)
@@ -508,13 +483,14 @@ let main argv =
         }
 
     try
-        Async.Start(welcome())
         let myConfig = 
             { defaultConfig with
                 logger =
-                    if not Configuration.values.Logging then
+                    match Configuration.values.Logging with
+                    | None
+                    | Some false ->
                         defaultConfig.logger
-                    else
+                    | Some true ->
                         upcast Suave.Logging.Loggers.ConsoleWindowLogger(Suave.Logging.LogLevel.Verbose)
                 bindings =
                     Configuration.values.Bindings
@@ -529,7 +505,30 @@ let main argv =
                     )
                     |> List.ofArray
             }
-        startWebServer myConfig (WebSharperAdapter.ToWebPart <| MySite(waypoints, axisPlatoons, alliedPlatoons))
+        let getCommandsPage =
+            match config.Armies with
+            | Some armies ->
+                Async.Start(welcome())
+                let waypoints =
+                    (parseGroup armies.WaypointsFilename).ListOfMCU_Waypoint
+                    |> List.map (fun wp -> wp.Name.Value)
+                    |> List.sort
+                let platoonsGroupVehicles =
+                    (parseGroup armies.PlatoonsFilename).ListOfVehicle
+                let axisPlatoons =
+                    platoonsGroupVehicles
+                    |> List.filter(fun platoon -> platoon.Country.Value = 201)
+                    |> List.map (fun platoon -> Users.Platoon platoon.Name.Value)
+                let alliedPlatoons =
+                    platoonsGroupVehicles
+                    |> List.filter(fun platoon -> platoon.Country.Value = 101)
+                    |> List.map (fun platoon -> Users.Platoon platoon.Name.Value)
+                fun () -> mkCommandsPage(waypoints, axisPlatoons, alliedPlatoons)
+            | None ->
+                mkNotAvailablePage
+        let getMasterPage =
+            mkNotAvailablePage
+        startWebServer myConfig (WebSharperAdapter.ToWebPart <| MySite(getCommandsPage, getMasterPage))
         0
     with
         | exc ->
