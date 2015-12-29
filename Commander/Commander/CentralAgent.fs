@@ -18,6 +18,7 @@ type Request =
     | SendOrder of serverInput : string * user : Users.User * desc : string
     | Logout of user : Users.User
     | GetPlayerList of AsyncReplyChannel<RemoteConsole.PlayerData [] option>
+    | SendServerInput of pwd : string * input : string
 
 let connect =
     async {
@@ -176,6 +177,16 @@ let agent = MailboxProcessor.Start(fun inbox ->
             let! players = client.GetPlayerList()
             printfn "Done."
             reply.Reply players
+            return! loop client state
+        | SendServerInput(pwd, input) ->
+            match Configuration.values.Events with
+            | Some events when events.Password = pwd ->
+                let! response = client.ServerInput(input)
+                printfn "Server input sent: %s, response is %s" input response
+            | Some _ ->
+                printfn "Server input %s not sent, wrong password %s" input pwd
+            | None ->
+                printfn "Server input %s not sent, no such input configured" input
             return! loop client state
     }
     async {

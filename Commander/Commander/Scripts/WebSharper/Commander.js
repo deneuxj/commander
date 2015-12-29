@@ -1,8 +1,106 @@
 (function()
 {
- var Global=this,Runtime=this.IntelliFactory.Runtime,PrintfHelpers,Commander,WebCommander,OrderAndPolicy,Order,Speed,FireControl,Seq,List,UI,Next,Doc,Strings,T,Var,Remoting,AjaxRemotingProvider,Var1,Concurrency,Collections,FSharpMap,Unchecked,View;
+ var Global=this,Runtime=this.IntelliFactory.Runtime,Commander,GameEvents,State,UI,Next,Var,Doc,List,T,Concurrency,Remoting,AjaxRemotingProvider,Var1,View,PrintfHelpers,WebCommander,OrderAndPolicy,Order,Speed,FireControl,Seq,Strings,Collections,FSharpMap,Unchecked;
  Runtime.Define(Global,{
   Commander:{
+   GameEvents:{
+    State:Runtime.Class({},{
+     get_Default:function()
+     {
+      return Runtime.New(State,{
+       Authenticated:false,
+       Password:""
+      });
+     }
+    }),
+    showEvents:function(events)
+    {
+     var rvState,eventsSection,arg202;
+     rvState=Var.Create(State.get_Default());
+     eventsSection=function(state)
+     {
+      var matchValue,event,item,arg20,arg201;
+      matchValue=[state,events];
+      if(matchValue[0].Authenticated)
+       {
+        if(matchValue[1].$==0)
+         {
+          return Doc.get_Empty();
+         }
+        else
+         {
+          event=matchValue[1].$0;
+          item=Var.Create(event);
+          arg201=function()
+          {
+           return Concurrency.Start(Concurrency.Delay(function()
+           {
+            AjaxRemotingProvider.Send("Commander:12",[state.Password,(Var1.Get(item))[0]]);
+            return Concurrency.Return(null);
+           }),{
+            $:0
+           });
+          };
+          arg20=List.ofArray([Doc.Select(Runtime.New(T,{
+           $:0
+          }),function(tuple)
+          {
+           return tuple[1];
+          },events,item),Doc.TextNode(" "),Doc.Button("Send",Runtime.New(T,{
+           $:0
+          }),arg201)]);
+          return Doc.Element("div",[],arg20);
+         }
+       }
+      else
+       {
+        return Doc.get_Empty();
+       }
+     };
+     arg202=List.ofArray([Doc.EmbedView(View.Map(function(state)
+     {
+      var arg20,arg201,pwd,arg203,arg204;
+      if(state.Authenticated)
+       {
+        arg201=function()
+        {
+         return Var1.Set(rvState,State.get_Default());
+        };
+        arg20=List.ofArray([Doc.Button("Log out",Runtime.New(T,{
+         $:0
+        }),arg201)]);
+        return Doc.Element("div",[],arg20);
+       }
+      else
+       {
+        pwd=Var.Create(state.Password);
+        arg204=function()
+        {
+         return Concurrency.Start(Concurrency.Delay(function()
+         {
+          return Concurrency.Bind(AjaxRemotingProvider.Async("Commander:11",[Var1.Get(pwd)]),function(_arg1)
+          {
+           Var1.Set(rvState,Runtime.New(State,{
+            Authenticated:_arg1,
+            Password:Var1.Get(pwd)
+           }));
+           return Concurrency.Return(null);
+          });
+         }),{
+          $:0
+         });
+        };
+        arg203=List.ofArray([Doc.TextNode("Password: "),Doc.Input(Runtime.New(T,{
+         $:0
+        }),pwd),Doc.TextNode(" "),Doc.Button("Send",Runtime.New(T,{
+         $:0
+        }),arg204)]);
+        return Doc.Element("div",[],arg203);
+       }
+     },rvState.get_View())),Doc.EmbedView(View.Map(eventsSection,rvState.get_View()))]);
+     return Doc.Element("div",[],arg202);
+    }
+   },
    WebCommander:{
     FireControl:Runtime.Class({},{
      Show:function(fire)
@@ -258,9 +356,11 @@
       {
        return Seq.map(function(player)
        {
-        var arg204,arg205,arg206;
-        arg205=List.ofArray([Doc.TextNode(PrintfHelpers.toSafe(player.Name))]);
-        arg206=List.ofArray([Doc.TextNode(Strings.PadLeft(Global.String(player.Ping),3))]);
+        var arg204,arg205,t,arg206,t1;
+        t=PrintfHelpers.toSafe(player.Name);
+        arg205=List.ofArray([Doc.TextNode(t)]);
+        t1=Strings.PadLeft(Global.String(player.Ping),3);
+        arg206=List.ofArray([Doc.TextNode(t1)]);
         arg204=List.ofArray([Doc.Element("td",[],arg205),Doc.Element("td",[],arg206)]);
         return Doc.Element("tr",[],arg204);
        },players);
@@ -832,29 +932,31 @@
  });
  Runtime.OnInit(function()
  {
-  PrintfHelpers=Runtime.Safe(Global.WebSharper.PrintfHelpers);
   Commander=Runtime.Safe(Global.Commander);
+  GameEvents=Runtime.Safe(Commander.GameEvents);
+  State=Runtime.Safe(GameEvents.State);
+  UI=Runtime.Safe(Global.WebSharper.UI);
+  Next=Runtime.Safe(UI.Next);
+  Var=Runtime.Safe(Next.Var);
+  Doc=Runtime.Safe(Next.Doc);
+  List=Runtime.Safe(Global.WebSharper.List);
+  T=Runtime.Safe(List.T);
+  Concurrency=Runtime.Safe(Global.WebSharper.Concurrency);
+  Remoting=Runtime.Safe(Global.WebSharper.Remoting);
+  AjaxRemotingProvider=Runtime.Safe(Remoting.AjaxRemotingProvider);
+  Var1=Runtime.Safe(Next.Var1);
+  View=Runtime.Safe(Next.View);
+  PrintfHelpers=Runtime.Safe(Global.WebSharper.PrintfHelpers);
   WebCommander=Runtime.Safe(Commander.WebCommander);
   OrderAndPolicy=Runtime.Safe(WebCommander.OrderAndPolicy);
   Order=Runtime.Safe(WebCommander.Order);
   Speed=Runtime.Safe(WebCommander.Speed);
   FireControl=Runtime.Safe(WebCommander.FireControl);
   Seq=Runtime.Safe(Global.WebSharper.Seq);
-  List=Runtime.Safe(Global.WebSharper.List);
-  UI=Runtime.Safe(Global.WebSharper.UI);
-  Next=Runtime.Safe(UI.Next);
-  Doc=Runtime.Safe(Next.Doc);
   Strings=Runtime.Safe(Global.WebSharper.Strings);
-  T=Runtime.Safe(List.T);
-  Var=Runtime.Safe(Next.Var);
-  Remoting=Runtime.Safe(Global.WebSharper.Remoting);
-  AjaxRemotingProvider=Runtime.Safe(Remoting.AjaxRemotingProvider);
-  Var1=Runtime.Safe(Next.Var1);
-  Concurrency=Runtime.Safe(Global.WebSharper.Concurrency);
   Collections=Runtime.Safe(Global.WebSharper.Collections);
   FSharpMap=Runtime.Safe(Collections.FSharpMap);
-  Unchecked=Runtime.Safe(Global.WebSharper.Unchecked);
-  return View=Runtime.Safe(Next.View);
+  return Unchecked=Runtime.Safe(Global.WebSharper.Unchecked);
  });
  Runtime.OnLoad(function()
  {

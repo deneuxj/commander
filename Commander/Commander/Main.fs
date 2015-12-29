@@ -56,6 +56,20 @@ module Server =
     let Logout(user) =
         CentralAgent.agent.Post(CentralAgent.Logout user)
 
+    [<Rpc>]
+    let AuthenticateMaster(pwd) =
+        async {
+            match Configuration.values.Events with
+            | Some events ->
+                return events.Password = pwd
+            | None ->
+                return false
+        }
+
+    [<Rpc>]
+    let SendServerInput(pwd, input) =
+        CentralAgent.agent.Post(CentralAgent.SendServerInput(pwd, input))
+
 
 /// Client-side code.
 [<JavaScript>]
@@ -417,6 +431,68 @@ module WebCommander =
                 ] :> Doc
         ]
 
+[<JavaScript>]
+module GameEvents =
+    open WebSharper.JavaScript
+    open WebSharper.UI.Next.Client
+
+    type State =
+        { Authenticated : bool
+          Password : string
+        }
+    with
+        static member Default = { Authenticated = false; Password = "" }
+
+    let showEvents(events : (string * string) list) =
+        let rvState = Var.Create State.Default
+        let loginSection(state) =
+            match state with
+            | { Authenticated = false } ->
+                let pwd = Var.Create state.Password
+                div [
+                    text "Password: "
+                    Doc.Input [] pwd
+                    text " "
+                    Doc.Button "Send" [] (fun () ->
+                        async {
+                            let! auth = Server.AuthenticateMaster pwd.Value
+                            rvState.Value <- {
+                                state with
+                                    Authenticated = auth
+                                    Password = pwd.Value
+                            }
+                        }
+                        |> Async.Start
+                    )
+                ]
+            | { Authenticated = true } ->
+                div [
+                    Doc.Button "Log out" [] (fun () ->
+                        rvState.Value <- State.Default
+                    )
+                ]
+        let eventsSection(state) =
+            match state, events with
+            | { Authenticated = false }, _ ->
+                Doc.Empty
+            | { Authenticated = true }, event :: _ ->
+                let item = Var.Create event
+                div [
+                    Doc.Select [] snd events item
+                    text " "
+                    Doc.Button "Send" [] (fun () ->
+                        async {
+                            Server.SendServerInput(state.Password, fst item.Value)
+                        }
+                        |> Async.Start
+                    ) 
+                ] :> Doc
+            | _, [] ->
+                Doc.Empty
+        div [
+            View.Map loginSection (View.FromVar rvState) |> Doc.EmbedView
+            View.Map eventsSection (View.FromVar rvState) |> Doc.EmbedView
+        ]
 
 type EndPoint =
     | [<EndPoint "GET /commands">] Commands
@@ -439,6 +515,13 @@ let mkCommandsPage(waypoints, axisPlatoons, alliedPlatoons) : Async<Content<EndP
 
 let mkNotAvailablePage() : Async<Content<EndPoint>> =
     Content.Page(text "Not available")
+
+let mkEventsPage(events) : Async<Content<EndPoint>> =
+    Content.Page(
+        Title = "Game events",
+        Body = [
+            div [ client <@ GameEvents.showEvents(events) @> ]
+        ])
 
 /// <summary>
 /// Build a WebSharper application.
@@ -527,7 +610,16 @@ let main argv =
             | None ->
                 mkNotAvailablePage
         let getMasterPage =
-            mkNotAvailablePage
+            match config.Events with
+            | Some events ->
+                let items =
+                    events.Items
+                    |> Seq.map (fun item -> item.Name, item.Label)
+                    |> List.ofSeq
+                fun () ->
+                    mkEventsPage items
+            | None ->
+                mkNotAvailablePage
         startWebServer myConfig (WebSharperAdapter.ToWebPart <| MySite(getCommandsPage, getMasterPage))
         0
     with
