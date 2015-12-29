@@ -32,7 +32,7 @@ Sometimes the editor crashes while loading the mission. That happens when there 
 
 Enable the remote console in your DServer config.
 
-Copy SampleConfig.jso to Configuration.json.
+The file SampleConfig.json contains two examples of configurations. The first is to be used to command platoons, the second to directly trigger ServerInput MCUs in the mission. Copy-paste the relevant entry (which starts and ends with curly braces) to a new file named Configuration.json.
 
 Edit Configuration.json. It needs the IP and console password to DServer. It also needs the path to Platoon.Group and Waypoints.Group.
 Here is a short description of each configuration item:
@@ -43,9 +43,13 @@ Here is a short description of each configuration item:
 * rconPort (integer): port of the remote console.
 * webListeningAddresses (array of strings): URL at which players will access the Ground Commander web app.
 * bindings (array of strings, ip address/port pair): IPs of the network interfaces on which the Ground Commander web app will receive requests.
-* waypointsFilename (array of strings): Path to the group file containing the waypoints.
-* platoonsFilename (array of strings): Path to the group file containing the platoons start positions and names.
-* logging (boolean): Set to true to debug connection problems with players.
+* armies (optional record): Controls the functionality to give commands to troops.
+* waypointsFilename (array of strings), under armies: Path to the group file containing the waypoints.
+* platoonsFilename (array of strings), under armies: Path to the group file containing the platoons start positions and names.
+* events (optional record): Controls the functionality to trigger ServerInput MCUs directly.
+* password (string), under events: Password to access the events page.
+* items (record array), under events: Array or records describing the ServerInput MCUs. Each record has a field "name", which is the name of the MCU in the mission file, and a field "label", which is a human-readable label displayed in the web interface.
+* logging (optional boolean): Set to true to debug connection problems with players.
 
 You will need to restart the program every time the server loads a new mission file (because the waypoints and platoons groups are not the same). You do not need to restart it when the server reloads the same mission file.
 
